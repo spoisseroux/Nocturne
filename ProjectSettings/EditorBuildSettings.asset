@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SewerScene.unity
     guid: 9da52f1419f5aa0488cf93f1cc0fb986
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 07d344dd605ce8843aacd9168a5a1db1, type: 2}

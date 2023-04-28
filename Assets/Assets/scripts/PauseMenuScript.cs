@@ -37,6 +37,10 @@ public class PauseMenuScript : MonoBehaviour
         //AudioListener.pause = true;
         isPaused = true;
 
+        //unlock cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         //pause audio
         foreach (var audioSource in allAudioSources)
         {
@@ -52,6 +56,10 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1f;
         //AudioListener.pause = false;
         isPaused = false;
+
+        //lock cursor for movement
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         foreach (var audioSource in allAudioSources)
         {
