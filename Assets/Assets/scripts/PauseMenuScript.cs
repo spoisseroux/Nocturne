@@ -58,7 +58,7 @@ public class PauseMenuScript : MonoBehaviour
         isPaused = false;
 
         //lock cursor for movement
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
 
         foreach (var audioSource in allAudioSources)
