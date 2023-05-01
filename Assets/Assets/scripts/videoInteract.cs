@@ -32,6 +32,7 @@ public class videoInteract : MonoBehaviour
     [SerializeField] string sceneName;
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject PauseMenu;
     [SerializeField] Transform translatePlayerTo;
 
     private void Awake()
@@ -49,8 +50,8 @@ public class videoInteract : MonoBehaviour
 
         if (isInCollider)
         {
-
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false))
+            //Make sure pause menu is not on to activate
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
                 inScript = true;
                 playerCamScript.isPaused = true;

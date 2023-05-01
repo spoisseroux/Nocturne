@@ -13,6 +13,7 @@ public class audioInteract : MonoBehaviour
     [SerializeField] bool stopPlayerMovement = false;
     public PlayerCam playerCamScript;
     public PlayerMovement playerMovementScript;
+    [SerializeField] GameObject PauseMenu;
 
 
     private void Awake()
@@ -32,7 +33,7 @@ public class audioInteract : MonoBehaviour
     {
         if (isInCollider)
         {
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false))
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
                 StartCoroutine(startAudio());
             }

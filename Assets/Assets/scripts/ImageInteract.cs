@@ -12,6 +12,7 @@ public class ImageInteract : MonoBehaviour
 
     public PlayerMovement playerMovementScript;
     public PlayerCam playerCamScript;
+    [SerializeField] GameObject PauseMenu;
     private bool inScript = false;
 
     public Action onFinishedShowing;
@@ -44,7 +45,8 @@ public class ImageInteract : MonoBehaviour
     {
         if (isInCollider)
         {
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false)){
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
+            {
                 showImage(imageTextures, onFinishedShowing);
             }
             

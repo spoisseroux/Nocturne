@@ -20,6 +20,7 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     public Action onFinishedPrinting;
     public PlayerMovement playerMovementScript;
     public PlayerCam playerCamScript;
+    [SerializeField] GameObject PauseMenu;
     private bool inScript = false;
 
     public bool spriteExists = false;
@@ -53,7 +54,8 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     {
         if (isInCollider)
         {
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false)){
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
+            {
                 Print(pages, onFinishedPrinting);
             }
             
