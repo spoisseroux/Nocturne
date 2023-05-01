@@ -24,6 +24,9 @@ public class videoInteract : MonoBehaviour
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
+    [SerializeField] Animator animatorToAnimate;
+    [SerializeField] string animationName;
+
     public bool crossfadeEnter = false;
     public bool crossfadeExit = false;
 
@@ -121,6 +124,12 @@ public class videoInteract : MonoBehaviour
 
         }
 
+        //play naimation if added
+        if ((animatorToAnimate != null) && (animationName != null))
+        {
+            animatorToAnimate.Play(animationName);
+        }
+
         if (crossfadeExit)
         {
             anim.Play("crossfade_in", -1, 0f);
@@ -163,9 +172,17 @@ public class videoInteract : MonoBehaviour
 
         }
 
+        //play naimation if added
+        if ((animatorToAnimate != null) && (animationName != null))
+        {
+            animatorToAnimate.Play(animationName);
+        }
+
         if (crossfadeExit) {
             anim.Play("crossfade_in", -1, 0f);
         }
+
+        
 
         //NEW TO FIX BUG
         StopAllCoroutines();
