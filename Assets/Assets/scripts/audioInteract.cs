@@ -7,6 +7,7 @@ public class audioInteract : MonoBehaviour
     //NEEDS BOX COLLIDER TO PLAY
     BoxCollider boxCollider;
     AudioSource audioSource;
+    public AudioSource audioSourceToDisable;
     private bool isInCollider = false;
     private bool inScript = false;
 
@@ -42,6 +43,10 @@ public class audioInteract : MonoBehaviour
 
     IEnumerator startAudio() {
         inScript = true;
+
+        if (audioSourceToDisable) {
+            audioSourceToDisable.Stop();
+        }
 
         if (stopPlayerMovement)
         {
