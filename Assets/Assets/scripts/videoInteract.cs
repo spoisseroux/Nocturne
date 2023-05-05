@@ -38,6 +38,9 @@ public class videoInteract : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] Transform translatePlayerTo;
 
+    [SerializeField] GameObject gameObjectToDisable;
+    [SerializeField] GameObject gameObjectToEnable;
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -124,6 +127,16 @@ public class videoInteract : MonoBehaviour
 
         }
 
+
+        if (gameObjectToDisable)
+        {
+            gameObjectToDisable.SetActive(false);
+        }
+        if (gameObjectToEnable)
+        {
+            gameObjectToEnable.SetActive(true);
+        }
+
         //play naimation if added
         if ((animatorToAnimate != null) && (animationName != null))
         {
@@ -172,6 +185,16 @@ public class videoInteract : MonoBehaviour
 
         }
 
+
+        if (gameObjectToDisable)
+        {
+            gameObjectToDisable.SetActive(false);
+        }
+        if (gameObjectToEnable)
+        {
+            gameObjectToEnable.SetActive(true);
+        }
+
         //play naimation if added
         if ((animatorToAnimate != null) && (animationName != null))
         {
@@ -181,8 +204,6 @@ public class videoInteract : MonoBehaviour
         if (crossfadeExit) {
             anim.Play("crossfade_in", -1, 0f);
         }
-
-        
 
         //NEW TO FIX BUG
         StopAllCoroutines();

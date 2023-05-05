@@ -30,6 +30,18 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     private bool isInCollider = false;
     private GameObject sprite;
 
+    [SerializeField] GameObject CameraHolder;
+    [SerializeField] GameObject Player;
+    [SerializeField] Transform translatePlayerTo;
+
+    [SerializeField] Image crossfadeImage;
+    public bool crossfadeExit;
+
+    [SerializeField] Image sunSprite;
+    [SerializeField] Image charSprite;
+
+    private Animator anim;
+
 
     public RawImage textBackground;
     //private bool isImageon = false;
@@ -43,6 +55,7 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     private void Awake()
     {
         textCollider = GetComponent<BoxCollider>();
+        anim = crossfadeImage.GetComponent<Animator>();
 
         if (spriteExists) {
             sprite = this.transform.GetChild(0).gameObject;
@@ -65,11 +78,19 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         isInCollider = true;
+
+        //switch to charSprite when in collider
+        sunSprite.enabled = false;
+        charSprite.enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         isInCollider = false;
+
+        //switch to charSprite when in collider
+        charSprite.enabled = false;
+        sunSprite.enabled = true;
     }
 
     void Start()
@@ -121,6 +142,23 @@ public class TextPrinterMultiLinePages : MonoBehaviour
         isFinished = true;
         if (spriteExists) {
             sprite.SetActive(false);
+        }
+
+        if (crossfadeExit)
+        {
+            anim.Play("crossfade_in", -1, 0f);
+        }
+
+        //translate to gameobject
+        if ((translatePlayerTo != null) && (CameraHolder != null) && (Player != null))
+        {
+            //playerEverything.transform.position = new Vector3(139.48f, 1.772f, 40.245f);
+            Player.transform.position = translatePlayerTo.position;
+            CameraHolder.transform.position = translatePlayerTo.position;
+
+            Player.transform.rotation = translatePlayerTo.rotation;
+            CameraHolder.transform.rotation = translatePlayerTo.rotation;
+
         }
         onFinishedPrinting?.Invoke();
     }
