@@ -22,6 +22,10 @@ public class InventoryMenuScript : MonoBehaviour
     [SerializeField]
     private GameObject inventoryMenu;
 
+    //to stop player movement
+    public PlayerMovement playerMovementScript;
+    public PlayerCam playerCamScript;
+
     // Maintains current activity status of Inventory UI, false by default
     private bool active = false;
 
@@ -78,7 +82,10 @@ public class InventoryMenuScript : MonoBehaviour
                 inventoryMenu.SetActive(false);
                 // Lock cursor for movement
                 Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = true;
+                Cursor.visible = false;
+                //unpause movement
+                playerCamScript.isPaused = false; //pause game
+                playerMovementScript.isPaused = false; //pause movement
             }
             // Menu currently inactive, KeyCode.Tab indicates a request to open InventoryUI
             else
@@ -91,6 +98,9 @@ public class InventoryMenuScript : MonoBehaviour
                 // Unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                //pause movement
+                playerCamScript.isPaused = true; //pause game
+                playerMovementScript.isPaused = true; //pause movement
             }
         }
     }
