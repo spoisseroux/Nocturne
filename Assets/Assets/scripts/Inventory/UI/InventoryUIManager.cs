@@ -1,0 +1,321 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+/* SUMMARY:
+ * The InventoryUIManager manages the entire UI for interfacing with the Inventory. 
+ * Probably the most complex system to try and understand.
+ * 
+ * This script is placed on a UI Canvas GameObject called "InventoryMenu" that is made as a child of the UI Canvas. 
+ * This GameObject has an empty child GameObject called SlotContainer that holds all UISlot in the Carousel
+ * 
+ * It is a Singleton instance, as there should be only one inventory UI in the game: the Player's.
+ * 
+ * Creates UI objects, maintains UI objects, and ensures proper flow of data back to the Player's Inventory,
+ * as well as other relevant GameObjects, upon destruction of UI Carousel and its UI components.
+ * 
+ * TODO: 
+ * 1) Determine how to create Button for Item selection 
+ *        A --> One on center of screen, update to reflect item currently under it?
+ *        B --> A button for each UISlot, activate Button when it is in center
+ * 2) Link it to OnClick events
+ * 3) Disable button upon Button/KeyCode press
+ * 4) Re-enable upon exit from InteractMenu
+ */
+public class InventoryUIManager : MonoBehaviour
+{
+    // Ensuring this Object is a Singleton Instance
+    public static InventoryUIManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    // Event for update of Player inventory, sends an updated List<InventorySlot> to the Player
+    public static event HandleItemRemoved OnUIExit;
+    public delegate void HandleItemRemoved(List<InventorySlot> updatedSlots);
+
+    // Event for reseting the OpenInventory script, invoked upon successful Item usage within Inventory UI
+    public static event HandleItemUsed OnItemUsed;
+    public delegate void HandleItemUsed();
+
+    // UI reference to the Player's Inventory data, updated upon open and closure of Inventory UI
+    List<InventorySlot> playerSlots;
+
+    // Dictionary mapping "under the hood" slot of Inventory to its UISlot equivalent
+    Dictionary<InventorySlot, UISlot> slotDict;
+
+    // Tracks current position on the Carousel
+    [SerializeField] private int currentIndex;
+
+    // Rightmost UI slot, needed for proper positioning of new items upon initialized their UISlot
+    [SerializeField] private UISlot rightmostSlot;
+
+    // List of InventorySlots marked for combination
+    private List<Tuple<UISlot, InventorySlot>> combinationSlots;
+
+    // GameObject designed to be the container of UISlot in Hierarchy
+    [SerializeField] private RectTransform slotContainer;
+
+    // Activity status of the interaction menu, false by default
+    private bool interactMenuActive = false;
+    // Reference to a prefab GameObject menu that appears upon selecting a given UISlot.
+    // Contains optains for Examining, Using, and Combining the selected UISlot
+    [SerializeField] private GameObject interactMenuPrefab;
+
+    // Prefab for creating a UISlot
+    [SerializeField] private GameObject uiSlotPrefab;
+
+
+    void Start()
+    {
+        interactMenuActive = false;
+    }
+
+
+
+    void Update()
+    {
+        // Function to handle input into the UI
+        ScreenCarouselInput();
+    }
+
+
+
+    private void OnEnable()
+    {
+        // Get a reference to the current Inventory of the Player
+        playerSlots = GameObject.Find("Player").GetComponent<InventoryHolder>().GetInventory().GetItemList();
+        if (playerSlots == null)
+        {
+            Debug.Log("InventoryUIManager::Start() --> playerSlots is null");
+        }
+
+        // Setting up data structures
+        slotDict = new Dictionary<InventorySlot, UISlot>();
+        combinationSlots = new List<Tuple<UISlot, InventorySlot>>();
+
+        // display variables
+        currentIndex = 0;
+        rightmostSlot = null;
+    }
+
+
+
+    // When the OpenInventory Script received feedback to Disable the InventoryMenu GameObject, this functions gets called
+    private void OnDisable()
+    {
+        // Upon disabling of the Inventory UI, we trigger an event to rewrite the Player's Inventory
+        // Sends the final List<InventorySlot> created after all user interaction with the Inventory UI has been marked as complete
+        OnUIExit?.Invoke(playerSlots);
+    }
+
+
+
+    // Rewrites the overall list of InventorySlots based on usage data tracked by the UI Manager
+    public void RewriteAllSlots()
+    {
+        // Create a new List<InventorySlot>
+        List<InventorySlot> newSlots = new List<InventorySlot>();
+        // Iterate through all InventorySlot in the old data representation of playerSlots
+        for (int i = 0; i < playerSlots.Count; i++)
+        {
+            // If visible in UI, then it is still in the Player's Inventory
+            if (slotDict[playerSlots[i]].CheckBlackout() == false)
+            {
+                // Add this data to our List
+                newSlots.Add(playerSlots[i]);
+            }
+            // Destroy the UISlot associated with this InventorySlot
+            slotDict[playerSlots[i]].ClearUISlot();
+        }
+
+        // Replace old inventory representation of playerSlots with the newly creating List
+        playerSlots = newSlots;
+    }
+
+
+
+    // Blacks out a UISlot that has been successfully Used or Combined
+    public void BlackOutSlot(UISlot blackedOutSlot)
+    {
+        // Visually and progammatically denote that this UI Slot is no longer available for interaction
+        blackedOutSlot.BlackOut();
+    }
+
+
+
+    // Used in creating any new slot, 1) upon carousel construct & 2) upon combination construct
+    public void AddSlot(InventorySlot newSlot)
+    {
+        // Instantiate a new UISlot, set the UI Manager as its parent, and then fill the UISlot with data
+        UISlot uiSlot = Instantiate(uiSlotPrefab).GetComponent<UISlot>();
+        uiSlot.transform.SetParent(gameObject.transform.GetChild(0).transform, true);
+        uiSlot.Init(newSlot);
+
+        // Add to dictionary
+        slotDict.Add(newSlot, uiSlot);
+
+        // Position the new UISlot on Canvas
+        if (rightmostSlot != null)
+        {
+            uiSlot.SetCanvasPosition(rightmostSlot.transform.localPosition.x + 300f, -150f);
+        }
+        else
+        {
+            // Assigning position of first UISlot
+            uiSlot.SetCanvasPosition(0f, -150f);
+        }
+        // Update positioning variable
+        rightmostSlot = uiSlot;
+    }
+
+
+
+    // Called upon creation of a new item made from Combination recipe, and upon construction of the UI Carousel
+    public void UpdateSlot(InventorySlot updatedSlot)
+    {
+        foreach (var slot in slotDict)
+        {
+            // Check for "under the hood" InventorySlot
+            if (slot.Key == updatedSlot)
+            {
+                // Update the UISlot that maps to under the hood updated place
+                slot.Value.UpdateSlot(updatedSlot);
+                return;
+            }
+        }
+        // If we have reached here, the item being added does not exist in our Inventory
+        // Add a new UISlot
+        AddSlot(updatedSlot);
+    }
+
+
+
+    // Adds a UISlot and its corresponding InventorySlot to a List denoting it has been Selected for Combination
+    public void SlotSelected(UISlot combineSlot, InventorySlot correspondingSlot)
+    {
+        combinationSlots.Add(new Tuple<UISlot, InventorySlot>(combineSlot, correspondingSlot));
+
+        // IN THE FUTURE: Check for Recipe fulfillment here?
+    }
+
+
+
+    #region Carousel Code
+
+    // Constructs the UI Carousel
+    public void ConstructCarousel()
+    {
+        // Positions the SlotContainer GameObject properly
+        slotContainer.localPosition = new Vector2(0f, 0f);
+        // Set the current index of our Carousel
+        currentIndex = 0;
+        // Null check, can maybe remove later
+        if (playerSlots == null)
+        {
+            Debug.Log("InventoryUIManager::ConstructCarousel() --> playerSlots is null");
+            return;
+        }
+        // Loops through each InventorySlot Player's Inventory and creates a UISlot on the Canvas
+        for (int i = 0; i < playerSlots.Count; i++)
+        {
+            AddSlot(playerSlots[i]);
+        }
+    }
+
+    // Move left on the Carousel
+    public void MoveLeft()
+    {
+        if (currentIndex > 0)
+        {
+            // Decrement selected index
+            currentIndex--;
+
+            // Shift carousel
+            slotContainer.localPosition = new Vector2(slotContainer.localPosition.x + 300f, 0f);
+        }
+    }
+
+
+
+    // Move right on the Carousel
+    public void MoveRight()
+    {
+        if (currentIndex < slotDict.Count - 1)
+        {
+            // Increment selected index
+            currentIndex++;
+
+            // Shift carousel
+            slotContainer.localPosition = new Vector2(slotContainer.localPosition.x - 300f, 0f);
+        }
+    }
+
+
+
+    // Function designed to handle all user input on the Carousel view
+    void ScreenCarouselInput()
+    {
+        // If interactMenu is open, we cannot move the Carousel
+        if (interactMenuActive)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            MoveLeft();
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            MoveRight();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ConstructInteractMenu();
+        }
+    }
+
+
+    // Function Designed to check if construct is possible, then instantiate the InteractMenu prefab upon Button press or correct KeyCode press
+    void ConstructInteractMenu()
+    {
+        // Check if there is a UISlot that can be interacted with in the current slot
+        if (slotDict.Count > 0 && !slotContainer.GetChild(currentIndex).GetComponent<UISlot>().CheckBlackout())
+        {
+            // Instantiate the InteractMenu, set its parent to the InventoryMenu, and properly set the appropriate data
+            InteractMenu interactMenu = Instantiate(interactMenuPrefab).GetComponent<InteractMenu>();
+            interactMenu.transform.SetParent(gameObject.transform, true);
+            interactMenu.Init(slotContainer.GetChild(currentIndex).GetComponent<UISlot>());
+            interactMenuActive = true;
+        }
+    }
+
+    // Handle two different cases for destruction of the InteractMenu
+    public void InteractMenuDestroyed(bool exiting)
+    {
+        interactMenuActive = false;
+        // If the InteractMenu is destroyed while exiting is true,
+        // then we are fully quitting out of the Inventory UI due to a successful Item usage.
+        // Handle this case properly
+        if (exiting)
+        {
+            // Update all slots
+            RewriteAllSlots();
+            // Push updated List<InventorySlot> back to the Player's Inventory
+            OnItemUsed?.Invoke();
+        }
+    }
+
+    #endregion Carousel Code
+}
