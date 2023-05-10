@@ -26,9 +26,11 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     public bool spriteExists = false;
 
     public TMP_Text subtitleTextMesh;
-    BoxCollider textCollider;
+    public BoxCollider textCollider;
     private bool isInCollider = false;
     private GameObject sprite;
+
+    [SerializeField] float startDelay;
 
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
@@ -37,10 +39,13 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     [SerializeField] Image crossfadeImage;
     public bool crossfadeExit;
 
+    [SerializeField] GameObject objectToPauseAnim;
+
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
     private Animator anim;
+    private Animator animToPause;
 
 
     public RawImage textBackground;
@@ -54,7 +59,8 @@ public class TextPrinterMultiLinePages : MonoBehaviour
 
     private void Awake()
     {
-        textCollider = GetComponent<BoxCollider>();
+
+        //textCollider = GetComponent<BoxCollider>();
         anim = crossfadeImage.GetComponent<Animator>();
 
         if (spriteExists) {
@@ -65,7 +71,7 @@ public class TextPrinterMultiLinePages : MonoBehaviour
 
     private void Update()
     {
-        if (isInCollider)
+        if ((isInCollider) && (textCollider))
         {
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
@@ -75,13 +81,23 @@ public class TextPrinterMultiLinePages : MonoBehaviour
         }
     }
 
+    public void printOnClick() {
+        if (inScript == false) {
+            Print(pages, onFinishedPrinting);
+        }
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         isInCollider = true;
 
         //switch to charSprite when in collider
-        sunSprite.enabled = false;
-        charSprite.enabled = true;
+        if ((charSprite != null) && (sunSprite != null)) {
+            sunSprite.enabled = false;
+            charSprite.enabled = true;
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -89,8 +105,11 @@ public class TextPrinterMultiLinePages : MonoBehaviour
         isInCollider = false;
 
         //switch to charSprite when in collider
-        charSprite.enabled = false;
-        sunSprite.enabled = true;
+        if ((charSprite != null) && (sunSprite != null))
+        {
+            sunSprite.enabled = true;
+            charSprite.enabled = false;
+        }
     }
 
     void Start()
@@ -104,8 +123,20 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     }
     
     IEnumerator PrintDialogue(List<string> pages, Action onFinishedPrinting) {
-        playerCamScript.isPaused = true; //pause game
-        playerMovementScript.isPaused = true; //pause movement
+
+        subtitleTextMesh.enabled = true;
+
+        if ((playerCamScript != null) && (playerMovementScript != null)) {
+            playerCamScript.isPaused = true; //pause game
+            playerMovementScript.isPaused = true; //pause movement
+        }
+
+        if (objectToPauseAnim) {
+            objectToPauseAnim.GetComponent<Animator>().speed = 0;
+        }
+
+        yield return new WaitForSecondsRealtime(startDelay);
+        
 
         textBackground.texture = backgroundTexture;
         textBackground.color = new Color32(255, 255, 255, backgroundAlpha);
@@ -119,7 +150,7 @@ public class TextPrinterMultiLinePages : MonoBehaviour
         foreach (var page in pages) {
             string newPage = page + "\n";
             //RepositionSentence(sentence);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+            //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
             subtitleTextMesh.text = string.Empty;
 
             foreach (var letter in newPage) {
@@ -129,14 +160,23 @@ public class TextPrinterMultiLinePages : MonoBehaviour
                 yield return new WaitForSecondsRealtime(currentTextSpeed);
             
             }
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
 
         //Clear text on press E when finished
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         subtitleTextMesh.text = string.Empty;
         textBackground.enabled = false;
-        playerCamScript.isPaused = false; //unpause game
-        playerMovementScript.isPaused = false; //unpause movement
+
+        if ((playerCamScript != null) && (playerMovementScript != null)) {
+            playerCamScript.isPaused = false; //unpause game
+            playerMovementScript.isPaused = false; //unpause movement
+        }
+
+        if (objectToPauseAnim)
+        {
+            objectToPauseAnim.GetComponent<Animator>().speed = 1;
+        }
 
         inScript = false;
         isFinished = true;
@@ -160,6 +200,8 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
         }
+
+        subtitleTextMesh.enabled = false;
         onFinishedPrinting?.Invoke();
     }
 

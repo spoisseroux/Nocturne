@@ -29,6 +29,7 @@ public class UISpriteAnimate : MonoBehaviour
     public void Func_PlayUIAnim()
     {
         if (alreadyPlayed == false) {
+            alreadyPlayed = true;
             IsDone = false;
             m_CorotineAnim = StartCoroutine(Func_PlayAnimUI());
         }
