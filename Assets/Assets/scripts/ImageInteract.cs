@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ImageInteract : MonoBehaviour
 {
@@ -37,9 +38,19 @@ public class ImageInteract : MonoBehaviour
 
     [SerializeField] GameObject objectToPauseAnim; //optional
 
+    [SerializeField] string sceneName; //optional
+
+    [SerializeField] Image crossfadeImage;
+    private Animator anim;
+
+    public bool crossfadeEnter = false;
+    public bool crossfadeExit = false;
+    private bool crossfadeEnterBool = true;
+
     private void Awake()
     {
-        //imageCollider = GetComponent<BoxCollider>();
+        imageCollider = GetComponent<BoxCollider>();
+        anim = crossfadeImage.GetComponent<Animator>();
 
         //handle question mark sprite
         if (spriteExists) {
@@ -52,7 +63,7 @@ public class ImageInteract : MonoBehaviour
     {
         if ((isInCollider) && (imageCollider))
         {
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
+            if (Input.GetKeyUp(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
                 showImage(imageTextures, onFinishedShowing);
             }
@@ -73,6 +84,8 @@ public class ImageInteract : MonoBehaviour
     }
     
     IEnumerator PrintImages(List<Texture> imageTextures, Action onFinishedShowing) {
+        crossfadeEnterBool = true;
+
         if ((playerCamScript != null) && (playerMovementScript != null))
         {
             playerCamScript.isPaused = true; //pause game
@@ -87,6 +100,13 @@ public class ImageInteract : MonoBehaviour
         if (objectToPauseAnim)
         {
             objectToPauseAnim.GetComponent<Animator>().speed = 0;
+        }
+
+        if (crossfadeEnter)
+        {
+            anim.Play("crossfade_out", -1, 0f);
+            float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+            yield return new WaitForSecondsRealtime(animationLength);
         }
 
         yield return new WaitForSecondsRealtime(startDelay);
@@ -104,6 +124,14 @@ public class ImageInteract : MonoBehaviour
         foreach (var imageTexture in imageTextures)
         {
             imageUI.texture = imageTexture;
+
+            if ((crossfadeEnter) && (crossfadeEnterBool)) {
+                anim.Play("crossfade_in", -1, 0f);
+                float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+                yield return new WaitForSecondsRealtime(animationLength);
+                crossfadeEnterBool = false;
+            }
+
             yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0));
             //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
@@ -111,6 +139,13 @@ public class ImageInteract : MonoBehaviour
         //Clear text on press E when finished
         //yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
         //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+
+        if (crossfadeExit)
+        {
+            anim.Play("crossfade_out", -1, 0f);
+            float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+            yield return new WaitForSecondsRealtime(animationLength);
+        }
 
         if ((playerCamScript != null) && (playerMovementScript != null))
         {
@@ -135,6 +170,13 @@ public class ImageInteract : MonoBehaviour
         if (spriteExists) {
             sprite.SetActive(false);
         }
+
+        //go to next scene
+        if (sceneName != "")
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+
         onFinishedShowing?.Invoke();
         StopAllCoroutines(); //NEW
     }

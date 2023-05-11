@@ -1,0 +1,1443 @@
+fileFormatVersion: 2
+guid: 71f36c6efed900343a4677160a0df463
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 410218f843585b449a343ec5aeafac52
+      internalID: -75318929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f891961e0fba7cb42b04b2cdecbb966d
+      internalID: 773621807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100bbb818fde2c34aabb6fe5960ac435
+      internalID: 1002145270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7350e54836205c4e8277a1359d0889d
+      internalID: 1772026968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 867a66065b64c6a43b2ef3dd7434c35d
+      internalID: -59850331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_5
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b051ac81a89d02d4f9536118ab7b67ab
+      internalID: -669579268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_6
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694c609c509bb1f47a841f01f6f87ad8
+      internalID: 1995606775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_7
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7c9d37ea2deb594d9beb83c6fab29fa
+      internalID: 1118348750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2114767b40b777649ac5b45413f54ce6
+      internalID: -1698983166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_9
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0908769304fc3243bae88ed0f891d5e
+      internalID: -1988342489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_10
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8c2897a21332b498321fbe8fe30550
+      internalID: 475893497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_11
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1cc2761c36958841b8591e86d257987
+      internalID: -597508186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_12
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f520e5e1fa04e454fa69bd680443d630
+      internalID: 1442179783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_13
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e1d996e828a774b9981415f563b369
+      internalID: 1117450668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_14
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec6e98df4261cc84dabdc0a2e2747c60
+      internalID: -909691531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_15
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 478f38400fa52104b8cba897c72dce79
+      internalID: 1486114751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d508fa4da5acc44d8f58ad14085128c
+      internalID: -435887270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_17
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5327d5a22d19c194cb3530c030202952
+      internalID: 570667516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_18
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ee271acd3ac2a49a8f7c4e905b4dcc
+      internalID: 102310040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_19
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be5f3f4b7c39a344b9e05e7da74295d4
+      internalID: -57531123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_20
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35fbeaec62dc8554db99b64367138d1f
+      internalID: -1148758378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_21
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0fad39e63f59f746bc3feb6f7fda299
+      internalID: -1702761314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_22
+      rect:
+        serializedVersion: 2
+        x: 4224
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85a641e523a3f44d8c57caa8af180c3
+      internalID: -1759730357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_23
+      rect:
+        serializedVersion: 2
+        x: 4416
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d937ebe7e69ba8041bfa6ca5c098cbe1
+      internalID: -1931186082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_24
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 473eeb09ceca1e243bff4758b2633480
+      internalID: -240938316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_25
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17cb28598d28f694184d26638880a5f0
+      internalID: -702550872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_26
+      rect:
+        serializedVersion: 2
+        x: 4992
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d4952b091b289a45ad0c293dc0dbbf3
+      internalID: -1744937500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_27
+      rect:
+        serializedVersion: 2
+        x: 5184
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6abe3cd6ab3e7184da388b3fdbd2c771
+      internalID: -1594621080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_28
+      rect:
+        serializedVersion: 2
+        x: 5376
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0691551275edc9f448efe48aed871020
+      internalID: 1901730397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_29
+      rect:
+        serializedVersion: 2
+        x: 5568
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b983e54b5b692d449b4bc640b95dd8d
+      internalID: 1338792260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_30
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d2b595641e2fc342835a3c0e2d67ded
+      internalID: -1153058364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_31
+      rect:
+        serializedVersion: 2
+        x: 5952
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89764a13667f6d944a14fd4b99be9ed8
+      internalID: 2075814371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_32
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cb94005a3ad0a54d85b73b7426e8dd7
+      internalID: -2145713046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_33
+      rect:
+        serializedVersion: 2
+        x: 6336
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c601778dbc682a42a4fc9ae92484021
+      internalID: 1526557401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_34
+      rect:
+        serializedVersion: 2
+        x: 6528
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23ee8772e64cd304498f96158bb35e6c
+      internalID: 1177448376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_35
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf291e150dc76714dbb4c6fec5168d82
+      internalID: 1597999578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_36
+      rect:
+        serializedVersion: 2
+        x: 6912
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edde59c8e5c5809408be8167e5e3404d
+      internalID: -1495183354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_37
+      rect:
+        serializedVersion: 2
+        x: 7104
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0337dbff35174648828824e698dc515
+      internalID: 1315462731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_38
+      rect:
+        serializedVersion: 2
+        x: 7296
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40dad0e5a29ee75419ba3feb6eb57a02
+      internalID: 1589327181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_39
+      rect:
+        serializedVersion: 2
+        x: 7488
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b4d0ef941859e24e8a2b63d0d552dcf
+      internalID: -104225549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_40
+      rect:
+        serializedVersion: 2
+        x: 7680
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547ad10a0d594f2499efe8a29f540f14
+      internalID: -1691375539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_41
+      rect:
+        serializedVersion: 2
+        x: 7872
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8492d05cf3e3114db3e9ad18a5270c1
+      internalID: -737479407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_42
+      rect:
+        serializedVersion: 2
+        x: 8064
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cae4dc5583bf57f4f980e7b9844b325f
+      internalID: 523591143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_43
+      rect:
+        serializedVersion: 2
+        x: 8256
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ded6c5125bd32bb47afbccd724ed5abf
+      internalID: 1456547949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_44
+      rect:
+        serializedVersion: 2
+        x: 8448
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e21e8543c3ab31a4b80696ef8c1734e8
+      internalID: 302754461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_45
+      rect:
+        serializedVersion: 2
+        x: 8640
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 925d7d3b2d206694c905d16da58af367
+      internalID: -952626943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_46
+      rect:
+        serializedVersion: 2
+        x: 8832
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 893bf23703f40364cb02352d51a50f82
+      internalID: -1243563183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_47
+      rect:
+        serializedVersion: 2
+        x: 9024
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 823ac419e1c962447ad27daa29db7d23
+      internalID: -1477878409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_48
+      rect:
+        serializedVersion: 2
+        x: 9216
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc9b239514952874bbeb8fff522e8eca
+      internalID: -677524942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_49
+      rect:
+        serializedVersion: 2
+        x: 9408
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b9254ae38f8cc0419398d0258b77039
+      internalID: -550876307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_50
+      rect:
+        serializedVersion: 2
+        x: 9600
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927c47bc3dd4fa84caf2c6a1dfeb2419
+      internalID: -622841273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_51
+      rect:
+        serializedVersion: 2
+        x: 9792
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99f604427007fc64eb0dac2be6113475
+      internalID: -664146182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_52
+      rect:
+        serializedVersion: 2
+        x: 9984
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22f2a793a11bf3f49a7f16c146443b09
+      internalID: -683674351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_53
+      rect:
+        serializedVersion: 2
+        x: 10176
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 946e3556e429e754080c678deb912a22
+      internalID: -1587002099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_54
+      rect:
+        serializedVersion: 2
+        x: 10368
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e05b750ea93ff554d9524fb61abb2657
+      internalID: -291655156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_55
+      rect:
+        serializedVersion: 2
+        x: 10560
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 530ee96436a1bd14085f5e58e69dd3dd
+      internalID: -2082502452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_56
+      rect:
+        serializedVersion: 2
+        x: 10752
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a49bdcb820f229d4eb2706c476f91871
+      internalID: 374949121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_57
+      rect:
+        serializedVersion: 2
+        x: 10944
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 986ff77705a124a4a85b7c3b4e7ab251
+      internalID: -881125493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_58
+      rect:
+        serializedVersion: 2
+        x: 11136
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea3e8ca4186be0f49b3e9b6537f59dba
+      internalID: -1426024103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIButtonIdlePulseWhiteLarge_59
+      rect:
+        serializedVersion: 2
+        x: 11328
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82f551835d64a144984573b00392ab86
+      internalID: -848006592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 8e05d7ccf4f705547be5eb38f3a32836
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      UIButtonIdlePulseWhiteLarge_40: -1691375539
+      UIButtonIdlePulseWhiteLarge_33: 1526557401
+      UIButtonIdlePulseWhiteLarge_20: -1148758378
+      UIButtonIdlePulseWhiteLarge_26: -1744937500
+      UIButtonIdlePulseWhiteLarge_10: 475893497
+      UIButtonIdlePulseWhiteLarge_37: 1315462731
+      UIButtonIdlePulseWhiteLarge_28: 1901730397
+      UIButtonIdlePulseWhiteLarge_23: -1931186082
+      UIButtonIdlePulseWhiteLarge_43: 1456547949
+      UIButtonIdlePulseWhiteLarge_30: -1153058364
+      UIButtonIdlePulseWhiteLarge_58: -1426024103
+      UIButtonIdlePulseWhiteLarge_16: -435887270
+      UIButtonIdlePulseWhiteLarge_15: 1486114751
+      UIButtonIdlePulseWhiteLarge_0: -75318929
+      UIButtonIdlePulseWhiteLarge_46: -1243563183
+      UIButtonIdlePulseWhiteLarge_8: -1698983166
+      UIButtonIdlePulseWhiteLarge_42: 523591143
+      UIButtonIdlePulseWhiteLarge_18: 102310040
+      UIButtonIdlePulseWhiteLarge_3: 1772026968
+      UIButtonIdlePulseWhiteLarge_14: -909691531
+      UIButtonIdlePulseWhiteLarge_1: 773621807
+      UIButtonIdlePulseWhiteLarge_7: 1118348750
+      UIButtonIdlePulseWhiteLarge_19: -57531123
+      UIButtonIdlePulseWhiteLarge_53: -1587002099
+      UIButtonIdlePulseWhiteLarge_44: 302754461
+      UIButtonIdlePulseWhiteLarge_55: -2082502452
+      UIButtonIdlePulseWhiteLarge_17: 570667516
+      UIButtonIdlePulseWhiteLarge_38: 1589327181
+      UIButtonIdlePulseWhiteLarge_6: 1995606775
+      UIButtonIdlePulseWhiteLarge_5: -669579268
+      UIButtonIdlePulseWhiteLarge_32: -2145713046
+      UIButtonIdlePulseWhiteLarge_52: -683674351
+      UIButtonIdlePulseWhiteLarge_50: -622841273
+      UIButtonIdlePulseWhiteLarge_59: -848006592
+      UIButtonIdlePulseWhiteLarge_45: -952626943
+      UIButtonIdlePulseWhiteLarge_21: -1702761314
+      UIButtonIdlePulseWhiteLarge_57: -881125493
+      UIButtonIdlePulseWhiteLarge_9: -1988342489
+      UIButtonIdlePulseWhiteLarge_13: 1117450668
+      UIButtonIdlePulseWhiteLarge_51: -664146182
+      UIButtonIdlePulseWhiteLarge_35: 1597999578
+      UIButtonIdlePulseWhiteLarge_22: -1759730357
+      UIButtonIdlePulseWhiteLarge_49: -550876307
+      UIButtonIdlePulseWhiteLarge_39: -104225549
+      UIButtonIdlePulseWhiteLarge_2: 1002145270
+      UIButtonIdlePulseWhiteLarge_27: -1594621080
+      UIButtonIdlePulseWhiteLarge_29: 1338792260
+      UIButtonIdlePulseWhiteLarge_54: -291655156
+      UIButtonIdlePulseWhiteLarge_34: 1177448376
+      UIButtonIdlePulseWhiteLarge_48: -677524942
+      UIButtonIdlePulseWhiteLarge_4: -59850331
+      UIButtonIdlePulseWhiteLarge_36: -1495183354
+      UIButtonIdlePulseWhiteLarge_31: 2075814371
+      UIButtonIdlePulseWhiteLarge_12: 1442179783
+      UIButtonIdlePulseWhiteLarge_47: -1477878409
+      UIButtonIdlePulseWhiteLarge_25: -702550872
+      UIButtonIdlePulseWhiteLarge_41: -737479407
+      UIButtonIdlePulseWhiteLarge_56: 374949121
+      UIButtonIdlePulseWhiteLarge_11: -597508186
+      UIButtonIdlePulseWhiteLarge_24: -240938316
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
