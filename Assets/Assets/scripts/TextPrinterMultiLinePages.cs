@@ -20,6 +20,7 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     public Action onFinishedPrinting;
     public PlayerMovement playerMovementScript;
     public PlayerCam playerCamScript;
+    public MoveAroundObject moveAroundObjectScript;
     [SerializeField] GameObject PauseMenu;
     private bool inScript = false;
 
@@ -44,15 +45,13 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
-    private Animator anim;
-    private Animator animToPause;
-
-
     public RawImage textBackground;
     //private bool isImageon = false;
 
     //public Texture texture;
     //TODO: add texture?
+
+    private Animator anim;
 
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
@@ -131,6 +130,10 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             playerMovementScript.isPaused = true; //pause movement
         }
 
+        if (moveAroundObjectScript != null) {
+            moveAroundObjectScript.isPaused = true;
+        }
+
         if (objectToPauseAnim) {
             objectToPauseAnim.GetComponent<Animator>().speed = 0;
         }
@@ -160,11 +163,11 @@ public class TextPrinterMultiLinePages : MonoBehaviour
                 yield return new WaitForSecondsRealtime(currentTextSpeed);
             
             }
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
         }
 
         //Clear text on press E when finished
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
         subtitleTextMesh.text = string.Empty;
         textBackground.enabled = false;
 
@@ -172,6 +175,12 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             playerCamScript.isPaused = false; //unpause game
             playerMovementScript.isPaused = false; //unpause movement
         }
+
+        if (moveAroundObjectScript != null)
+        {
+            moveAroundObjectScript.isPaused = false;
+        }
+
 
         if (objectToPauseAnim)
         {

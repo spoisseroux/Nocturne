@@ -10,29 +10,36 @@ public class ImageInteract : MonoBehaviour
     [SerializeField] List<Texture> imageTextures;
     [SerializeField] [Range(0, 255)] Byte backgroundAlpha = 255;
 
-    public PlayerMovement playerMovementScript;
-    public PlayerCam playerCamScript;
+    public PlayerMovement playerMovementScript; //optional
+    public PlayerCam playerCamScript; //optional
+
+    public MoveAroundObject moveAroundObjectScript; //optional 
+
     [SerializeField] GameObject PauseMenu;
     private bool inScript = false;
 
     public Action onFinishedShowing;
 
-    public bool spriteExists = false;
+    public bool spriteExists = false; //optional
 
-    BoxCollider imageCollider;
+    [SerializeField] float startDelay;
+
+    BoxCollider imageCollider; //optional
     private bool isInCollider = false;
-    private GameObject sprite;
+    private GameObject sprite; //optional
 
     public RawImage imageUI;
-    public AudioSource beginAudio;
+    public AudioSource beginAudio; //optional
     [HideInInspector] public bool isFinished = false;
 
-    [SerializeField] Image sunSprite;
-    [SerializeField] Image charSprite;
+    [SerializeField] Image sunSprite; //optional
+    [SerializeField] Image charSprite; //optional
+
+    [SerializeField] GameObject objectToPauseAnim; //optional
 
     private void Awake()
     {
-        imageCollider = GetComponent<BoxCollider>();
+        //imageCollider = GetComponent<BoxCollider>();
 
         //handle question mark sprite
         if (spriteExists) {
@@ -43,13 +50,19 @@ public class ImageInteract : MonoBehaviour
 
     private void Update()
     {
-        if (isInCollider)
+        if ((isInCollider) && (imageCollider))
         {
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
                 showImage(imageTextures, onFinishedShowing);
             }
             
+        }
+    }
+
+    public void ShowImageOnClick() {
+        if (inScript == false) {
+            showImage(imageTextures, onFinishedShowing);
         }
     }
     
@@ -60,8 +73,23 @@ public class ImageInteract : MonoBehaviour
     }
     
     IEnumerator PrintImages(List<Texture> imageTextures, Action onFinishedShowing) {
-        playerCamScript.isPaused = true; //pause game
-        playerMovementScript.isPaused = true; //pause movement
+        if ((playerCamScript != null) && (playerMovementScript != null))
+        {
+            playerCamScript.isPaused = true; //pause game
+            playerMovementScript.isPaused = true; //pause movement
+        }
+
+        if (moveAroundObjectScript != null)
+        {
+            moveAroundObjectScript.isPaused = true;
+        }
+
+        if (objectToPauseAnim)
+        {
+            objectToPauseAnim.GetComponent<Animator>().speed = 0;
+        }
+
+        yield return new WaitForSecondsRealtime(startDelay);
 
         imageUI.color = new Color32(255, 255, 255, backgroundAlpha);
         imageUI.enabled = true; //enable black background
@@ -76,15 +104,29 @@ public class ImageInteract : MonoBehaviour
         foreach (var imageTexture in imageTextures)
         {
             imageUI.texture = imageTexture;
-            yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+            yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0));
+            //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
 
         //Clear text on press E when finished
         //yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
-        playerCamScript.isPaused = false; //unpause game
-        playerMovementScript.isPaused = false; //unpause movement
+        //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+
+        if ((playerCamScript != null) && (playerMovementScript != null))
+        {
+            playerCamScript.isPaused = false; //pause game
+            playerMovementScript.isPaused = false; //pause movement
+        }
+
+        if (moveAroundObjectScript != null)
+        {
+            moveAroundObjectScript.isPaused = false;
+        }
+
+        if (objectToPauseAnim)
+        {
+            objectToPauseAnim.GetComponent<Animator>().speed = 1;
+        }
 
         imageUI.enabled = false; //enable black background
 
@@ -101,18 +143,25 @@ public class ImageInteract : MonoBehaviour
     {
         isInCollider = true;
 
-        //switch to charSprite when in collider
-        sunSprite.enabled = false;
-        charSprite.enabled = true;
+        if ((charSprite != null) && (sunSprite != null)){
+            //switch to charSprite when in collider
+            sunSprite.enabled = false;
+            charSprite.enabled = true;
+        }
+
+            
     }
 
     private void OnTriggerExit(Collider other)
     {
         isInCollider = false;
 
-        //switch to charSprite when in collider
-        charSprite.enabled = false;
-        sunSprite.enabled = true;
+        if ((charSprite != null) && (sunSprite != null)) {
+            //switch to charSprite when in collider
+            charSprite.enabled = false;
+            sunSprite.enabled = true;
+        }
+            
     }
 
     void Start()
