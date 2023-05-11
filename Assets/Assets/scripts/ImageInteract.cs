@@ -47,6 +47,9 @@ public class ImageInteract : MonoBehaviour
     public bool crossfadeExit = false;
     private bool crossfadeEnterBool = true;
 
+    public AllCardInteractedWith cardCollectedCount;
+    private bool cardCollectOnce = false;
+
     private void Awake()
     {
         imageCollider = GetComponent<BoxCollider>();
@@ -133,6 +136,7 @@ public class ImageInteract : MonoBehaviour
             }
 
             yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
             //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
 
@@ -169,6 +173,11 @@ public class ImageInteract : MonoBehaviour
         isFinished = true;
         if (spriteExists) {
             sprite.SetActive(false);
+        }
+
+        if ((cardCollectOnce == false) && (cardCollectedCount)) {
+            cardCollectedCount.collectedCards += 1;
+            cardCollectOnce = true;
         }
 
         //go to next scene

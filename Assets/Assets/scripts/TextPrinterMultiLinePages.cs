@@ -56,6 +56,11 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
 
+    public AllCardInteractedWith cardCollectedCount;
+    private bool cardCollectOnce = false;
+
+    public ImageInteract imageToTrigger;
+
     private void Awake()
     {
 
@@ -198,6 +203,10 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             anim.Play("crossfade_in", -1, 0f);
         }
 
+        if (imageToTrigger) {
+            imageToTrigger.ShowImageOnClick();
+        }
+
         //translate to gameobject
         if ((translatePlayerTo != null) && (CameraHolder != null) && (Player != null))
         {
@@ -208,6 +217,12 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             Player.transform.rotation = translatePlayerTo.rotation;
             CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
+        }
+
+        if ((cardCollectOnce == false) && (cardCollectedCount))
+        {
+            cardCollectedCount.collectedCards += 1;
+            cardCollectOnce = true;
         }
 
         subtitleTextMesh.enabled = false;
