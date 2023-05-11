@@ -61,7 +61,7 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private UISlot rightmostSlot;
 
     // List of InventorySlots marked for combination
-    private List<Tuple<UISlot, InventorySlot>> combinationSlots;
+    private List<UISlot> combinationSlots;
 
     // GameObject designed to be the container of UISlot in Hierarchy
     [SerializeField] private RectTransform slotContainer;
@@ -75,10 +75,14 @@ public class InventoryUIManager : MonoBehaviour
     // Prefab for creating a UISlot
     [SerializeField] private GameObject uiSlotPrefab;
 
+    // Instance of the Combination system
+    [SerializeField] private CombineSystem combineSystem;
+
 
     void Start()
     {
         interactMenuActive = false;
+        combineSystem = new CombineSystem();
     }
 
 
@@ -102,7 +106,7 @@ public class InventoryUIManager : MonoBehaviour
 
         // Setting up data structures
         slotDict = new Dictionary<InventorySlot, UISlot>();
-        combinationSlots = new List<Tuple<UISlot, InventorySlot>>();
+        combinationSlots = new List<UISlot>();
 
         // display variables
         currentIndex = 0;
@@ -201,14 +205,50 @@ public class InventoryUIManager : MonoBehaviour
 
 
 
-    // Adds a UISlot and its corresponding InventorySlot to a List denoting it has been Selected for Combination
-    public void SlotSelected(UISlot combineSlot, InventorySlot correspondingSlot)
+    // Adds a UISlot to the list of Slots designated for Combination
+    public void SlotSelected(UISlot combineSlot)
     {
-        combinationSlots.Add(new Tuple<UISlot, InventorySlot>(combineSlot, correspondingSlot));
+        combinationSlots.Add(combineSlot);
 
-        // IN THE FUTURE: Check for Recipe fulfillment here?
+        // Check for item count
+        if (combinationSlots.Count == 2)
+        {
+            // Gather data
+            Tuple<ItemData, int> item1 = new Tuple<ItemData, int>(
+                combinationSlots[0].GetCorrespondingSlot().item,
+                combinationSlots[0].GetCorrespondingSlot().amount
+                );
+
+            Tuple<ItemData, int> item2 = new Tuple<ItemData, int>(
+                combinationSlots[1].GetCorrespondingSlot().item,
+                combinationSlots[1].GetCorrespondingSlot().amount
+                );
+
+            // Package data needed to use the Combine System
+            List<Tuple<ItemData, int>> recipeComponents = new List<Tuple<ItemData, int>> { item1, item2 };
+
+            // Check for recipe fulfillment
+            Tuple<ItemData, int> recipe = combineSystem.GetRecipeOutput(recipeComponents);
+            if (recipe != null)
+            {
+                // Add slot
+                InventorySlot newSlot = new InventorySlot(recipe.Item1, recipe.Item2);
+                AddSlot(newSlot);
+                playerSlots.Add(newSlot);
+
+                // No other stuff to be done, maybe animation for adding new items ?
+
+            }
+            // Display textbox saying something about how the items won't go together
+            // METHOD HERE
+
+            // Turn of selection for first selected slot
+            // METHOD HERE
+
+            // Clear slots, since we either failed and don't want them in our combination list or succeeded and they're gone
+            combinationSlots.Clear();
+        }
     }
-
 
 
     #region Carousel Code

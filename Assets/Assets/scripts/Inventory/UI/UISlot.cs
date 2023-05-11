@@ -127,7 +127,7 @@ public class UISlot : MonoBehaviour
     public void OnSlotSelect()
     {
         UISlot combineSlot = this;
-        parentDisplay?.SlotSelected(combineSlot, correspondingSlot);
+        parentDisplay?.SlotSelected(combineSlot);
     }
 
     // Make this slot unable to be interacted with, and obscure its presentation in the UI
