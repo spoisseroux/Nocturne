@@ -11,6 +11,7 @@ public class TransformScript : MonoBehaviour
     private BoxCollider boxCollider;
     [SerializeField] Image crossfadeImage;
     private Animator anim;
+    [SerializeField] UIDissolveHandler uiDissolve;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class TransformScript : MonoBehaviour
         Player.transform.rotation = translatePlayerTo.rotation;
         CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
-        anim.Play("crossfade_in", -1, 0f);
+        //anim.Play("crossfade_in", -1, 0f);
+        uiDissolve.DissolveOut();
     }
 }

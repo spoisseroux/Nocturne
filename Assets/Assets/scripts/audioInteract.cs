@@ -23,6 +23,7 @@ public class audioInteract : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
 
     [SerializeField] Image crossfadeImage;
+    [SerializeField] UIDissolveHandler crossfadeDissolve;
     private Animator anim;
 
     [SerializeField] Image sunSprite;
@@ -77,7 +78,8 @@ public class audioInteract : MonoBehaviour
             Player.transform.rotation = translatePlayerTo.rotation;
             CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
-            anim.Play("crossfade_in", -1, 0f);
+            crossfadeDissolve.DissolveOut();
+            //anim.Play("crossfade_in", -1, 0f);
         }
 
         //wait until finish then can play again

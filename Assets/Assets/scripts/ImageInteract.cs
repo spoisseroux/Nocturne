@@ -40,10 +40,13 @@ public class ImageInteract : MonoBehaviour
 
     [SerializeField] string sceneName; //optional
 
-    [SerializeField] Image crossfadeImage;
-    private Animator anim;
+    //[SerializeField] Image crossfadeImage;
+    //private Animator anim;
+
+    [SerializeField] UIDissolveHandler crossfadeDissolve;
 
     public bool crossfadeEnter = false;
+    public bool crossfadeBetween = false;
     public bool crossfadeExit = false;
     private bool crossfadeEnterBool = true;
 
@@ -53,7 +56,7 @@ public class ImageInteract : MonoBehaviour
     private void Awake()
     {
         imageCollider = GetComponent<BoxCollider>();
-        anim = crossfadeImage.GetComponent<Animator>();
+        //anim = crossfadeImage.GetComponent<Animator>();
 
         //handle question mark sprite
         if (spriteExists) {
@@ -88,6 +91,7 @@ public class ImageInteract : MonoBehaviour
     
     IEnumerator PrintImages(List<Texture> imageTextures, Action onFinishedShowing) {
         crossfadeEnterBool = true;
+        inScript = true;
 
         if ((playerCamScript != null) && (playerMovementScript != null))
         {
@@ -107,9 +111,12 @@ public class ImageInteract : MonoBehaviour
 
         if (crossfadeEnter)
         {
-            anim.Play("crossfade_out", -1, 0f);
-            float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
-            yield return new WaitForSecondsRealtime(animationLength);
+            //anim.Play("crossfade_out", -1, 0f);
+            //float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+            //yield return new WaitForSecondsRealtime(animationLength);
+
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+
         }
 
         yield return new WaitForSecondsRealtime(startDelay);
@@ -120,23 +127,46 @@ public class ImageInteract : MonoBehaviour
         if (beginAudio != null) {
             beginAudio.Play(0);
         }
-        
-        inScript = true; //cant interact twice while printing
+
+        //keep track of num image we are one
+        int i = 1;
 
         //Handle showing each image
         foreach (var imageTexture in imageTextures)
         {
+            
             imageUI.texture = imageTexture;
 
-            if ((crossfadeEnter) && (crossfadeEnterBool)) {
-                anim.Play("crossfade_in", -1, 0f);
-                float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
-                yield return new WaitForSecondsRealtime(animationLength);
+            if ((imageTextures.Count > 1) && (crossfadeBetween) && (i <= imageTextures.Count) && (crossfadeEnterBool == false))
+            {
+                yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
+            }
+
+            if ((crossfadeEnter) && (crossfadeEnterBool)) { //only fade in on first image
                 crossfadeEnterBool = false;
+                //anim.Play("crossfade_in", -1, 0f);
+                //float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+                //yield return new WaitForSecondsRealtime(animationLength);
+                
+                //fade into first image
+                yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
             }
 
             yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0));
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
+
+
+            if ((imageTextures.Count > 1) && (crossfadeBetween) && (i < imageTextures.Count))
+            {
+                yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+            }
+            //Debug.Log("hello" + i + ". Count is:" + imageTextures.Count);
+
+            //next
+            i = i + 1;
+
+
+
             //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
 
@@ -146,12 +176,14 @@ public class ImageInteract : MonoBehaviour
 
         if (crossfadeExit)
         {
-            anim.Play("crossfade_out", -1, 0f);
-            float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
-            yield return new WaitForSecondsRealtime(animationLength);
+            //anim.Play("crossfade_out", -1, 0f);
+            //float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+            //yield return new WaitForSecondsRealtime(animationLength);
+
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
         }
 
-        if ((playerCamScript != null) && (playerMovementScript != null))
+            if ((playerCamScript != null) && (playerMovementScript != null))
         {
             playerCamScript.isPaused = false; //pause game
             playerMovementScript.isPaused = false; //pause movement
@@ -184,6 +216,15 @@ public class ImageInteract : MonoBehaviour
         if (sceneName != "")
         {
             SceneManager.LoadScene(sceneName);
+        }
+
+        if (crossfadeExit)
+        {
+            //anim.Play("crossfade_out", -1, 0f);
+            //float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+            //yield return new WaitForSecondsRealtime(animationLength);
+
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
         }
 
         onFinishedShowing?.Invoke();

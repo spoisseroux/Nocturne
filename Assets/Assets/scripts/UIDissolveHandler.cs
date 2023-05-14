@@ -27,7 +27,7 @@ public class UIDissolveHandler : MonoBehaviour
         StartCoroutine(StartDissolveIn());
     }
 
-    IEnumerator StartDissolveOut()
+    public IEnumerator StartDissolveOut()
     {
         inScript = true;
         dissolveAmount = 0f;
@@ -41,10 +41,11 @@ public class UIDissolveHandler : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
             Debug.Log(dissolveAmount);
         }
+
         inScript = false;
     }
 
-    IEnumerator StartDissolveIn()
+    public IEnumerator StartDissolveIn()
     {
         inScript = true;
         dissolveAmount = 1f;
@@ -55,6 +56,7 @@ public class UIDissolveHandler : MonoBehaviour
             img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
             yield return new WaitForEndOfFrame();
         }
+
         inScript = false;
     }
 
