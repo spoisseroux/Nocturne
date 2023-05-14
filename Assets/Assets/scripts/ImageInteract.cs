@@ -152,7 +152,7 @@ public class ImageInteract : MonoBehaviour
                 yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
             }
 
-            yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0));
+            //yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0));
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
 
 
@@ -201,7 +201,6 @@ public class ImageInteract : MonoBehaviour
 
         imageUI.enabled = false; //enable black background
 
-        inScript = false;
         isFinished = true;
         if (spriteExists) {
             sprite.SetActive(false);
@@ -226,7 +225,7 @@ public class ImageInteract : MonoBehaviour
 
             yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
         }
-
+        inScript = false;
         onFinishedShowing?.Invoke();
         StopAllCoroutines(); //NEW
     }

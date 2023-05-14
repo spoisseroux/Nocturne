@@ -29,35 +29,44 @@ public class UIDissolveHandler : MonoBehaviour
 
     public IEnumerator StartDissolveOut()
     {
-        inScript = true;
-        dissolveAmount = 0f;
-        img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
-        yield return new WaitForSeconds(0.75f);
-        while ((dissolveAmount < 1f) && (inScript == true))
-        {
-            dissolveAmount = Mathf.Clamp01((dissolveAmount + Time.deltaTime));
+        if (inScript == false) {
+            img.enabled = true;
+            inScript = true;
+            dissolveAmount = 0f;
             img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(0.005f);
-            Debug.Log(dissolveAmount);
+            yield return new WaitForSeconds(0.75f);
+            while ((dissolveAmount < 1f) && (inScript == true))
+            {
+                dissolveAmount = Mathf.Clamp01((dissolveAmount + Time.deltaTime));
+                img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
+                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.005f);
+                //Debug.Log(dissolveAmount);
+            }
+            img.enabled = false;
+            inScript = false;
         }
 
-        inScript = false;
     }
 
     public IEnumerator StartDissolveIn()
     {
-        inScript = true;
-        dissolveAmount = 1f;
-        img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
-        while ((dissolveAmount > 0f) && (inScript == true))
+        if (inScript == false)
         {
-            dissolveAmount = Mathf.Clamp01(dissolveAmount + -Time.deltaTime);
+            img.enabled = true;
+            inScript = true;
+            dissolveAmount = 1f;
             img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
-            yield return new WaitForEndOfFrame();
+            while ((dissolveAmount > 0f) && (inScript == true))
+            {
+                dissolveAmount = Mathf.Clamp01(dissolveAmount + -Time.deltaTime);
+                img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
+                yield return new WaitForEndOfFrame();
+            }
+            img.enabled = true;
+            inScript = false;
         }
 
-        inScript = false;
     }
 
     private void Update()
