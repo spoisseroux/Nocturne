@@ -75,14 +75,6 @@ public class InteractMenu : MonoBehaviour
     // Function to signal an Item has been selected for Combination from the InteractMenu
     public void CombineUISlot()
     {
-        // TO DO:
-        // Implement Combinations of Items
-        //          1) Recipe class (Dictionary of [ <ItemData, ItemData, ItemData(?)> , ItemData ] )
-        //          2) Recipe fulfillment criteria & fulfillment procedures
-        //          3) Ensuring recipe invariance, only 2 items per combo for now to keep it simple (i.e. AB == BA) 
-        //          4) Recipe Cancellation in Menu (?)
-        //          5) UI Accents for Combination
-
         // Send a selection signal back to parent display, which then checks for recipe fulfillment
         slot.OnSlotSelect();
         inventoryMenu.InteractMenuDestroyed(false);
@@ -104,7 +96,7 @@ public class InteractMenu : MonoBehaviour
         correspondingSlot = slot.GetCorrespondingSlot();
         inventoryMenu = GetComponentInParent<InventoryUIManager>();
         // May need to update according to Game
-        rect.anchoredPosition = new Vector2(-400f, -250f);
+        rect.anchoredPosition = new Vector2(0f, -250f);
         if (inventoryMenu == null)
         {
             Debug.Log("InteractMenu::Awake() --> inventoryMenu is null");
