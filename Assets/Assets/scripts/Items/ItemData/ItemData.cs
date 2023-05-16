@@ -36,10 +36,7 @@ public abstract class ItemData : ScriptableObject
     [SerializeField]
     public Sprite inventoryIcon; // inventory representation
 
-    public abstract void Examine();
     public abstract bool Use();
-    public abstract void Combine();
-
 
     // need getters for data?
 }

@@ -163,7 +163,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         // Instantiate a new UISlot, set the UI Manager as its parent, and then fill the UISlot with data
         UISlot uiSlot = Instantiate(uiSlotPrefab).GetComponent<UISlot>();
-        uiSlot.transform.SetParent(gameObject.transform.GetChild(0).transform, true);
+        uiSlot.transform.SetParent(GameObject.Find("slotContainer").transform, true);
         uiSlot.Init(newSlot);
 
         // Add to dictionary
@@ -172,12 +172,12 @@ public class InventoryUIManager : MonoBehaviour
         // Position the new UISlot on Canvas
         if (rightmostSlot != null)
         {
-            uiSlot.SetCanvasPosition(rightmostSlot.transform.localPosition.x + 300f, -150f);
+            uiSlot.SetCanvasPosition(rightmostSlot.transform.localPosition.x + 300f, -65f);
         }
         else
         {
             // Assigning position of first UISlot
-            uiSlot.SetCanvasPosition(0f, -150f);
+            uiSlot.SetCanvasPosition(0f, -65f);
         }
         // Update positioning variable
         rightmostSlot = uiSlot;
@@ -282,7 +282,10 @@ public class InventoryUIManager : MonoBehaviour
             currentIndex--;
 
             // Shift carousel
-            slotContainer.localPosition = new Vector2(slotContainer.localPosition.x + 300f, 0f);
+            StartCoroutine(LerpObject(slotContainer.localPosition, new Vector2(slotContainer.localPosition.x + 300f, 0)));
+
+            // Shift carousel
+            // slotContainer.localPosition = new Vector2(slotContainer.localPosition.x + 300f, 0f);
         }
     }
 
@@ -297,7 +300,22 @@ public class InventoryUIManager : MonoBehaviour
             currentIndex++;
 
             // Shift carousel
-            slotContainer.localPosition = new Vector2(slotContainer.localPosition.x - 300f, 0f);
+            StartCoroutine(LerpObject(slotContainer.localPosition, new Vector2(slotContainer.localPosition.x - 300f, 0)));
+
+            
+            //slotContainer.localPosition = new Vector2(slotContainer.localPosition.x - 300f, 0f);
+        }
+    }
+
+
+    IEnumerator LerpObject(Vector2 from, Vector2 to)
+    {
+        var t = 0f;
+        while (t < 1f)
+        {
+            t += 3 * Time.deltaTime;
+            slotContainer.localPosition = Vector2.Lerp(from, to, t);
+            yield return null;
         }
     }
 
@@ -328,7 +346,7 @@ public class InventoryUIManager : MonoBehaviour
 
 
     // Function Designed to check if construct is possible, then instantiate the InteractMenu prefab upon Button press or correct KeyCode press
-    void ConstructInteractMenu()
+    public void ConstructInteractMenu()
     {
         // Check if there is a UISlot that can be interacted with in the current slot
         if (slotDict.Count > 0 && !slotContainer.GetChild(currentIndex).GetComponent<UISlot>().CheckBlackout())

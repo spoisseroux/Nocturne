@@ -96,7 +96,7 @@ public class InteractMenu : MonoBehaviour
         correspondingSlot = slot.GetCorrespondingSlot();
         inventoryMenu = GetComponentInParent<InventoryUIManager>();
         // May need to update according to Game
-        rect.anchoredPosition = new Vector2(-400f, -250f);
+        rect.anchoredPosition = new Vector2(0f, -250f);
         if (inventoryMenu == null)
         {
             Debug.Log("InteractMenu::Awake() --> inventoryMenu is null");

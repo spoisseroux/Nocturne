@@ -17,12 +17,11 @@ using System;
  */
 public class UISlot : MonoBehaviour
 {
-    [SerializeField] Sprite slotIcon;
+    [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI itemAmount;
     [SerializeField] TextMeshProUGUI itemName;
     // [SerializeField] Sprite selectionHighlight;
 
-    private Image image;
     private bool blackedOut = false;
 
     // Reference to the parent container of all UISlot on Canvas
@@ -53,7 +52,6 @@ public class UISlot : MonoBehaviour
         }
 
         // image
-        image = GetComponent<Image>();
         if (image == null)
         {
             Debug.Log("UISlot::Awake() --> image is null");
@@ -85,8 +83,7 @@ public class UISlot : MonoBehaviour
     {
         if (slot != null)
         {
-            slotIcon = slot.item.inventoryIcon;
-            image.sprite = slotIcon;
+            image.sprite = slot.item.inventoryIcon;
 
             itemName.text = slot.item.itemName;
 
