@@ -27,6 +27,15 @@ public class UIDissolveHandler : MonoBehaviour
         StartCoroutine(StartDissolveIn());
     }
 
+    public void MakeTransparent()
+    {
+        img.color = new Color32(255, 255, 225, 0);
+    }
+
+    public void MakeSolid()
+    {
+        img.color = new Color32(255, 255, 225, 100);
+    }
     public IEnumerator StartDissolveOut()
     {
         if (inScript == false) {

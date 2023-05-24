@@ -18,8 +18,8 @@ public class videoInteract : MonoBehaviour
     public PlayerCam playerCamScript;
 
     [SerializeField] RawImage videoImage;
-    [SerializeField] Image crossfadeImage;
-    private Animator anim;
+
+    [SerializeField] UIDissolveHandler crossfadeDissolve;
 
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
@@ -45,7 +45,6 @@ public class videoInteract : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         videoPlayer = GetComponent<VideoPlayer>();
-        anim = crossfadeImage.GetComponent<Animator>();
         
     }
 
@@ -59,41 +58,55 @@ public class videoInteract : MonoBehaviour
             //Make sure pause menu is not on to activate
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
-                inScript = true;
-                playerCamScript.isPaused = true;
-                playerMovementScript.isPaused = true; //pause movement
-
-                if (crossfadeEnter)
-                {
-                    anim.Play("crossfade_out", -1, 0f);
-                }
-
-                //play video
-                videoImage.enabled = true;
-                videoPlayer.Play();
-
-                if (canExit)
-                {
-                    StartCoroutine(exitOnE());
-
-                    //if the video player is not looping stop at end of video
-                    if (videoPlayer.isLooping == false) {
-                        videoPlayer.loopPointReached += endReached;
-                    }
-                }
-                else {
-                    //wait until finish then go to end reached
-                    videoPlayer.loopPointReached += endReached;
-                }
+                StartCoroutine(playVideo());
             }
 
         }
 
     }
 
+    IEnumerator playVideo() {
+        inScript = true;
+        playerCamScript.isPaused = true;
+        playerMovementScript.isPaused = true; //pause movement
+
+        if (crossfadeEnter)
+        {    
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+            Debug.Log("In if");
+        }
+
+        //play video
+        videoImage.enabled = true;
+        videoPlayer.Play();
+        yield return new WaitForSeconds(0.3f);
+
+        if (crossfadeEnter)
+        {
+            crossfadeDissolve.MakeTransparent();
+        }
+
+        if (canExit)
+        {
+            StartCoroutine(exitOnE());
+
+            //if the video player is not looping stop at end of video
+            if (videoPlayer.isLooping == false)
+            {
+                videoPlayer.loopPointReached += endReached;
+            }
+        }
+        else
+        {
+            //wait until finish then go to end reached
+            videoPlayer.loopPointReached += endReached;
+        }
+    }
+
+
     IEnumerator exitOnE() {
         //wait until E is unpressed
-        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
+        //yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
         //wait until E is pressed
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
 
@@ -145,7 +158,9 @@ public class videoInteract : MonoBehaviour
 
         if (crossfadeExit)
         {
-            anim.Play("crossfade_in", -1, 0f);
+            crossfadeDissolve.MakeSolid();
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
+
         }
 
         //NEW TO FIX BUG
@@ -201,13 +216,19 @@ public class videoInteract : MonoBehaviour
             animatorToAnimate.Play(animationName);
         }
 
-        if (crossfadeExit) {
-            anim.Play("crossfade_in", -1, 0f);
+        if (crossfadeExit)
+        {
+            StartCoroutine(exitingCrossfadeWithoutE());
         }
 
-        //NEW TO FIX BUG
-        StopAllCoroutines();
+        
 
+    }
+
+    IEnumerator exitingCrossfadeWithoutE() {
+        crossfadeDissolve.MakeSolid();
+        yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
+        StopAllCoroutines();
     }
 
     private void OnTriggerEnter(Collider other)
