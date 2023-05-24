@@ -909,7 +909,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 8f53e87cd6735464385c668e2c14de20, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1108,6 +1108,10 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 3493371123441981588, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6928688519582720916, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -1115,6 +1119,10 @@ PrefabInstance:
     - target: {fileID: 6928688519582720916, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273836056602786283, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7896529568662757875, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
       propertyPath: m_Type
@@ -1140,7 +1148,12 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8669784652553918406, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7910233617065962417, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
 --- !u!1 &1558019926
 GameObject:
