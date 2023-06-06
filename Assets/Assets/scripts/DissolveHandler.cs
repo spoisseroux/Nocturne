@@ -8,6 +8,11 @@ public class DissolveHandler : MonoBehaviour
     private bool inScript = false;
     private float dissolveAmount;
     [SerializeField] bool test = true;
+    [SerializeField] bool customPingPong = false;
+    [Range(0f, 1f)] public float pingPongValStart;
+    [Range(0f, 1f)] public float pingPongValEnd;
+
+
 
     void Start()
     {
@@ -47,11 +52,24 @@ public class DissolveHandler : MonoBehaviour
         inScript = false;
     }
 
+    public void PingPongBetween() {
+        dissolveAmount = Mathf.PingPong((pingPongValStart * Time.time), (pingPongValEnd));
+        rend.material.SetFloat("_Dissolve", dissolveAmount);
+    }
+
+    public void Test() {
+        dissolveAmount = Mathf.PingPong(Time.time, 1.0f);
+        rend.material.SetFloat("_Dissolve", dissolveAmount);
+    }
+
     private void Update()
     {
         if (test) {
-            dissolveAmount = Mathf.PingPong(Time.time, 1.0f);
-            rend.material.SetFloat("_Dissolve", dissolveAmount);
+            Test();
         }
+        if (customPingPong) {
+            PingPongBetween();
+        }
+
     }
 }
