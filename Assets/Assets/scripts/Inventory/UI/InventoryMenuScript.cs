@@ -66,6 +66,9 @@ public class InventoryMenuScript : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
+
+        playerCamScript.isPaused = false; //pause game
+        playerMovementScript.isPaused = false; //pause movement
     }
 
     void Update()

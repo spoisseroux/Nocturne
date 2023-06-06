@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 /* SUMMARY:
@@ -17,12 +18,10 @@ using UnityEngine;
  * as well as other relevant GameObjects, upon destruction of UI Carousel and its UI components.
  * 
  * TODO: 
- * 1) Determine how to create Button for Item selection 
- *        A --> One on center of screen, update to reflect item currently under it?
- *        B --> A button for each UISlot, activate Button when it is in center
- * 2) Link it to OnClick events
- * 3) Disable button upon Button/KeyCode press
- * 4) Re-enable upon exit from InteractMenu
+ * 1) Disable buttons upon Button/KeyCode press
+ * 2) Re-enable upon exit from InteractMenu
+ * 3) Refactor to disable key press input (MAYBE???)
+ * 4) Add sounds for interactions (scrolling, opening/closing menus, combining objects)
  */
 public class InventoryUIManager : MonoBehaviour
 {
@@ -78,11 +77,22 @@ public class InventoryUIManager : MonoBehaviour
     // Instance of the Combination system
     [SerializeField] private CombineSystem combineSystem;
 
+    // Buttons on the UI
+    [SerializeField] private Button centerButton;
+    [SerializeField] private Button rightButton;
+    [SerializeField] private Button leftButton;
+
+    // UI sounds & sound manager
+    private AudioSource UISoundManager;
+    [SerializeField] private AudioClip closeMenu;
+    [SerializeField] private AudioClip openMenu;
+    [SerializeField] private AudioClip scroll;
 
     void Start()
     {
         interactMenuActive = false;
         combineSystem = new CombineSystem();
+        UISoundManager = GetComponent<AudioSource>();
     }
 
 
@@ -90,7 +100,7 @@ public class InventoryUIManager : MonoBehaviour
     void Update()
     {
         // Function to handle input into the UI
-        ScreenCarouselInput();
+        // ScreenCarouselInput();
     }
 
 
@@ -172,7 +182,7 @@ public class InventoryUIManager : MonoBehaviour
         // Position the new UISlot on Canvas
         if (rightmostSlot != null)
         {
-            uiSlot.SetCanvasPosition(rightmostSlot.transform.localPosition.x + 300f, -65f);
+            uiSlot.SetCanvasPosition(rightmostSlot.transform.localPosition.x + 450f, -65f);
         }
         else
         {
@@ -273,6 +283,7 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
+
     // Move left on the Carousel
     public void MoveLeft()
     {
@@ -281,14 +292,13 @@ public class InventoryUIManager : MonoBehaviour
             // Decrement selected index
             currentIndex--;
 
-            // Shift carousel
-            StartCoroutine(LerpObject(slotContainer.localPosition, new Vector2(slotContainer.localPosition.x + 300f, 0)));
+            // Play scroll sound
+            UISoundManager.PlayOneShot(scroll);
 
             // Shift carousel
-            // slotContainer.localPosition = new Vector2(slotContainer.localPosition.x + 300f, 0f);
+            StartCoroutine(LerpObject(slotContainer.localPosition, new Vector2(slotContainer.localPosition.x + 450f, 0)));
         }
     }
-
 
 
     // Move right on the Carousel
@@ -299,17 +309,19 @@ public class InventoryUIManager : MonoBehaviour
             // Increment selected index
             currentIndex++;
 
-            // Shift carousel
-            StartCoroutine(LerpObject(slotContainer.localPosition, new Vector2(slotContainer.localPosition.x - 300f, 0)));
+            // Play scroll sound
+            UISoundManager.PlayOneShot(scroll);
 
-            
-            //slotContainer.localPosition = new Vector2(slotContainer.localPosition.x - 300f, 0f);
+            // Shift carousel
+            StartCoroutine(LerpObject(slotContainer.localPosition, new Vector2(slotContainer.localPosition.x - 450f, 0)));
         }
     }
 
 
     IEnumerator LerpObject(Vector2 from, Vector2 to)
     {
+        // Disable buttons
+        DisableButtons();
         var t = 0f;
         while (t < 1f)
         {
@@ -317,31 +329,26 @@ public class InventoryUIManager : MonoBehaviour
             slotContainer.localPosition = Vector2.Lerp(from, to, t);
             yield return null;
         }
+        // Reenable buttons
+        ReenableButtons();
     }
 
 
-
-    // Function designed to handle all user input on the Carousel view
-    void ScreenCarouselInput()
+    // Function to disable button input while certain methods are taking place
+    public void DisableButtons()
     {
-        // If interactMenu is open, we cannot move the Carousel
-        if (interactMenuActive)
-        {
-            return;
-        }
+        centerButton.interactable = false;
+        rightButton.interactable = false;
+        leftButton.interactable = false;
+    }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            MoveLeft();
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            MoveRight();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ConstructInteractMenu();
-        }
+
+    // Function to re-enable button input
+    public void ReenableButtons()
+    {
+        centerButton.interactable = true;
+        rightButton.interactable = true;
+        leftButton.interactable = true;
     }
 
 
@@ -351,6 +358,12 @@ public class InventoryUIManager : MonoBehaviour
         // Check if there is a UISlot that can be interacted with in the current slot
         if (slotDict.Count > 0 && !slotContainer.GetChild(currentIndex).GetComponent<UISlot>().CheckBlackout())
         {
+            // Disable buttons
+            DisableButtons();
+
+            // Play menu opening sound
+            UISoundManager.PlayOneShot(openMenu);
+
             // Instantiate the InteractMenu, set its parent to the InventoryMenu, and properly set the appropriate data
             InteractMenu interactMenu = Instantiate(interactMenuPrefab).GetComponent<InteractMenu>();
             interactMenu.transform.SetParent(gameObject.transform, true);
@@ -359,10 +372,18 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
+
     // Handle two different cases for destruction of the InteractMenu
     public void InteractMenuDestroyed(bool exiting)
     {
         interactMenuActive = false;
+
+        // reactivate the carousel buttons ?
+        ReenableButtons();
+
+        // Play menu opening sound
+        UISoundManager.PlayOneShot(closeMenu);
+
         // If the InteractMenu is destroyed while exiting is true,
         // then we are fully quitting out of the Inventory UI due to a successful Item usage.
         // Handle this case properly
