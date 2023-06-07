@@ -73,6 +73,7 @@ public class audioInteract : MonoBehaviour
 
         if (translatePlayerTo)
         {
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
             Player.transform.position = translatePlayerTo.position;
             CameraHolder.transform.position = translatePlayerTo.position;
             Player.transform.rotation = translatePlayerTo.rotation;
@@ -82,15 +83,17 @@ public class audioInteract : MonoBehaviour
             //anim.Play("crossfade_in", -1, 0f);
         }
 
-        //wait until finish then can play again
-        yield return new WaitWhile(() => audioSource.isPlaying);
-        inScript = false;
-
         if (stopPlayerMovement)
         {
             playerCamScript.isPaused = false;
             playerMovementScript.isPaused = false;
         }
+
+        //wait until finish then can play again
+        yield return new WaitWhile(() => audioSource.isPlaying);
+        inScript = false;
+
+
 
         
     }
