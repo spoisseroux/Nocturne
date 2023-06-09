@@ -9,13 +9,14 @@ using System;
  * This class is not designed to be attached to any GameObject, and instead functions as a helper within the InventoryUI class,
  * as all combination work is completed within the Inventory UI Manager.
  * 
- * FIGURE OUT HOW TO INITIALIZE THE LIST OF RECIPES
- * 
  * At the moment, the system only supports combinations involving 2 different instances of ItemData. 
  * 3 instances introduces many more cases and checks, which for the scope of the game would not be work implementing.
  * 
  * TODO:
- * 1) Test functionality
+ * 1) Make Recipes scriptable objects
+ * 2) Figure out how to load in the list of recipes into this class
+ * 3) Test functionality
+ * 
  */
 
 public class CombineSystem

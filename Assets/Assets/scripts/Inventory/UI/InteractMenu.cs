@@ -69,6 +69,10 @@ public class InteractMenu : MonoBehaviour
             // destroy menu
             Destroy(this.gameObject);
         }
+        else
+        {
+            // print "this item doesn't seem useful yet"
+        }
     }
 
 
