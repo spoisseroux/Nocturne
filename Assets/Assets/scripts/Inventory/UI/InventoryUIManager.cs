@@ -248,6 +248,8 @@ public class InventoryUIManager : MonoBehaviour
 
                 // No other stuff to be done, maybe animation for adding new items ?
 
+                // Black out the other two slots !!!
+
             }
             // Display textbox saying something about how the items won't go together
             // METHOD HERE
