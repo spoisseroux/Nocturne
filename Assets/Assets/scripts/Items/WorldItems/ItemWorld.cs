@@ -40,5 +40,10 @@ public class ItemWorld : MonoBehaviour, IItem
     {
         return transform.position;
     }
+
+    public ItemData GetItemData()
+    {
+        return data;
+    }
 }
 
