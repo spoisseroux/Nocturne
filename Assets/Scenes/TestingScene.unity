@@ -482,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505039447}
   m_LocalRotation: {x: -0, y: -0.74134797, z: -0, w: 0.6711209}
-  m_LocalPosition: {x: 139.25, y: 1.778, z: 39.8}
+  m_LocalPosition: {x: 139.25, y: 1.778, z: 39.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1112,6 +1112,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5372200282304159371, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
+      propertyPath: m_Name
+      value: Crossfader
+      objectReference: {fileID: 0}
     - target: {fileID: 6928688519582720916, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -1147,6 +1151,14 @@ PrefabInstance:
     - target: {fileID: 7896529568662757875, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896730069623857756, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910233617065962419, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
+      propertyPath: uiDissolve
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8669784652553918406, guid: d0d90b0b9dc1c3944ba7fd6f8c7998d3, type: 3}
       propertyPath: m_RootOrder

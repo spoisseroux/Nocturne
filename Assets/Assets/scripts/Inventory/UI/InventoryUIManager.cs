@@ -88,11 +88,20 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private AudioClip openMenu;
     [SerializeField] private AudioClip scroll;
 
+    // Dissovlve handling
+    [SerializeField] UIDissolveHandler uiDissolve;
+
     void Start()
     {
         interactMenuActive = false;
         combineSystem = new CombineSystem();
         UISoundManager = GetComponent<AudioSource>();
+        uiDissolve = GameObject.Find("Crossfader").GetComponent<UIDissolveHandler>();
+
+        if (uiDissolve == null)
+        {
+            Debug.Log("InventoryUIManager::Start() --> uiDissolve is null");
+        }
     }
 
 
@@ -391,10 +400,14 @@ public class InventoryUIManager : MonoBehaviour
         // Handle this case properly
         if (exiting)
         {
+            // Dissolve UI
+            uiDissolve.DissolveOut();
             // Update all slots
             RewriteAllSlots();
             // Push updated List<InventorySlot> back to the Player's Inventory
             OnItemUsed?.Invoke();
+            // Redissolve UI
+            uiDissolve.DissolveIn();
         }
     }
 
