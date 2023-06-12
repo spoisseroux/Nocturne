@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Clown Cousin's Note
   examineDescription: A note from a distant cousin. Found by his old computer. Scribbled
     in shoddy handwriting is clownmode69.
-  inventoryIcon: {fileID: 767705171, guid: ee3be25fd163d2c42a924817d415a5d5, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: 9e3de01e7b4314fcdaf2598b386d337e, type: 3}

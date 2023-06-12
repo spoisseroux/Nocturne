@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Wires
   examineDescription: A bundle of electrical wiring.
-  inventoryIcon: {fileID: 21300000, guid: 874d8401331ede14087e8d8d486ddda6, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: 373e59297dfd94dd695f970e0a4615f2, type: 3}

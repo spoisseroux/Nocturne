@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Old Clown Boots
   examineDescription: These have obviously been through quite a lot.
-  inventoryIcon: {fileID: 21300000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: ef6d969fd95254b4597e051c6cad28fb, type: 3}
