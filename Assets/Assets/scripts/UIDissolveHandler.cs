@@ -9,12 +9,16 @@ public class UIDissolveHandler : MonoBehaviour
     private bool inScript = false;
     private float dissolveAmount;
     [SerializeField] bool test = false;
+    [SerializeField] bool fadeFromBlackOnStart = false;
 
     void Start()
     {
         img = GetComponent<Image>();
+
         //Fade in on awake
-        DissolveOut();
+        if (fadeFromBlackOnStart) {
+            DissolveOut();
+        }
     }
 
     public void DissolveOut()
@@ -38,6 +42,7 @@ public class UIDissolveHandler : MonoBehaviour
     }
     public IEnumerator StartDissolveOut()
     {
+        img = GetComponent<Image>();
         if (inScript == false) {
             img.enabled = true;
             inScript = true;
@@ -60,6 +65,7 @@ public class UIDissolveHandler : MonoBehaviour
 
     public IEnumerator StartDissolveIn()
     {
+        //img = GetComponent<Image>();
         if (inScript == false)
         {
             img.enabled = true;

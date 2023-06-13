@@ -20,6 +20,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
     [SerializeField] AudioClip computerIdleAudio;
     [SerializeField] AudioClip computerSuccessAudio;
     [SerializeField] AudioClip computerFailureAudio;
+    [SerializeField] UIDissolveHandler windowDissolveHandler;
     private bool completed = false;
     private bool isInCollider = false;
     private bool inScript = false;
@@ -32,13 +33,17 @@ public class SewerComputerPasswordScript : MonoBehaviour
       if ((isInCollider) && (colliderToBeIn))
       {
           if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false))
-          {
-              openMenu();
+          {              
+                openMenu();
           }
       }
     }
 
     void openMenu(){
+        StartCoroutine(openMenuRoutine());
+    }
+
+    IEnumerator openMenuRoutine() {
         inScript = true;
         playerCamScript.isPaused = true;
         passwordUI.SetActive(true);
@@ -46,6 +51,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(startAudio());
         inScript = false;
+        yield return StartCoroutine(windowDissolveHandler.StartDissolveOut());
     }
 
     IEnumerator startAudio() {
@@ -60,6 +66,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
 
     public void closeMenu() {
         StartCoroutine(closeMenuRoutine());
+        //StopAllCoroutines();
     }
     
     public void closeMenuOnSuccess() {
@@ -67,12 +74,15 @@ public class SewerComputerPasswordScript : MonoBehaviour
         playerCamScript.isPaused = false;
         completed = true;
         passwordUI.SetActive(false);
+        StopAllCoroutines();
     }
 
     IEnumerator closeMenuRoutine() {
         if (inScript == false) {
             inScript = true;
+            
             yield return StartCoroutine(playOffAudio());
+            yield return StartCoroutine(windowDissolveHandler.StartDissolveIn());
             passwordUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             playerCamScript.isPaused = false;
