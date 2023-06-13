@@ -10,11 +10,17 @@ public class SewerComputerPasswordScript : MonoBehaviour
     [SerializeField] BoxCollider colliderToBeIn;
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
-    [SerializeField] AudioSource audioToPlay;
     [SerializeField] GameObject PauseMenu;
     [SerializeField] PlayerCam playerCamScript;
     [SerializeField] GameObject inputField;
     [SerializeField] string password;
+    [SerializeField] AudioSource audioToPlayNotifcation;
+    [SerializeField] AudioClip computerStartAudio;
+    [SerializeField] AudioClip computerEndAudio;
+    [SerializeField] AudioClip computerIdleAudio;
+    [SerializeField] AudioClip computerSuccessAudio;
+    [SerializeField] AudioClip computerFailureAudio;
+    private bool completed = false;
     private bool isInCollider = false;
     private bool inScript = false;
     private string inputText;
@@ -25,7 +31,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
     {
       if ((isInCollider) && (colliderToBeIn))
       {
-          if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (PauseMenu.activeSelf == false))
+          if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false))
           {
               openMenu();
           }
@@ -33,40 +39,92 @@ public class SewerComputerPasswordScript : MonoBehaviour
     }
 
     void openMenu(){
-      inScript = true;
-      playerCamScript.isPaused = true;
-      passwordUI.SetActive(true);
-      Cursor.visible = true;
-      Cursor.lockState = CursorLockMode.None;
-      audioToPlay.loop = true;
-      audioToPlay.Play();
-      inScript = false;
+        inScript = true;
+        playerCamScript.isPaused = true;
+        passwordUI.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        StartCoroutine(startAudio());
+        inScript = false;
+    }
+
+    IEnumerator startAudio() {
+        audioToPlayNotifcation.clip = computerStartAudio;
+        audioToPlayNotifcation.Play();
+        yield return new WaitWhile (()=> audioToPlayNotifcation.isPlaying); //wait until computer start audio is finished
+
+        audioToPlayNotifcation.clip = computerIdleAudio;
+        audioToPlayNotifcation.loop = true;
+        audioToPlayNotifcation.Play();
     }
 
     public void closeMenu() {
-      passwordUI.SetActive(false);
-      audioToPlay.Pause();
-      Cursor.lockState = CursorLockMode.Locked;
-      playerCamScript.isPaused = false;
+        StartCoroutine(closeMenuRoutine());
+    }
+    
+    public void closeMenuOnSuccess() {
+        Cursor.lockState = CursorLockMode.Locked;
+        playerCamScript.isPaused = false;
+        completed = true;
+        passwordUI.SetActive(false);
+    }
+
+    IEnumerator closeMenuRoutine() {
+        if (inScript == false) {
+            inScript = true;
+            yield return StartCoroutine(playOffAudio());
+            passwordUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            playerCamScript.isPaused = false;
+            inScript = false;
+        }
     }
 
     public void checkPassword() {
         inputText = inputField.GetComponent<TMP_InputField>().text;
         if (inputText == password) {
-            //DO SOMETHING HERE IF CORRECT PASSWORD
-            closeMenu();
+            StartCoroutine(playSuccessAudio());
+            //TODO: SOMETHING HERE IF CORRECT PASSWORD
+            //HERE
+            closeMenuOnSuccess();
         } else {
-            //clear field if incorrect
-            //play audio?
+            StartCoroutine(playFailureAudio());
             inputField.GetComponent<TMP_InputField>().text = "";
         }
+    }
+
+    IEnumerator playSuccessAudio() {
+        audioToPlayNotifcation.Pause();
+        audioToPlayNotifcation.clip = computerSuccessAudio;
+        audioToPlayNotifcation.loop = false;
+        audioToPlayNotifcation.Play();
+        yield return new WaitWhile (()=> audioToPlayNotifcation.isPlaying); //wait until computer start audio is finished
+    }
+
+    IEnumerator playFailureAudio() {
+        audioToPlayNotifcation.Pause();
+        audioToPlayNotifcation.clip = computerFailureAudio;
+        audioToPlayNotifcation.loop = false;
+        audioToPlayNotifcation.Play();
+        yield return new WaitWhile (()=> audioToPlayNotifcation.isPlaying); //wait until computer start audio is finished
+
+        audioToPlayNotifcation.clip = computerIdleAudio;
+        audioToPlayNotifcation.loop = true;
+        audioToPlayNotifcation.Play();
+    }
+
+    IEnumerator playOffAudio() {
+        audioToPlayNotifcation.Pause();
+        audioToPlayNotifcation.clip = computerEndAudio;
+        audioToPlayNotifcation.loop = false;
+        audioToPlayNotifcation.Play();
+        yield return new WaitWhile (()=> audioToPlayNotifcation.isPlaying); //wait until computer start audio is finished
     }
 
     private void OnTriggerEnter(Collider other)
     {
         isInCollider = true;
 
-        //switch to charSprite when in collider
         if ((charSprite != null) && (sunSprite != null)) {
             sunSprite.enabled = false;
             charSprite.enabled = true;
@@ -78,7 +136,6 @@ public class SewerComputerPasswordScript : MonoBehaviour
     {
         isInCollider = false;
 
-        //switch to charSprite when in collider
         if ((charSprite != null) && (sunSprite != null))
         {
             sunSprite.enabled = true;
