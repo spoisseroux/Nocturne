@@ -7,6 +7,6 @@ public class Flashlight : ItemData
 {
     public override bool Use()
     {
-        return true;
+        return false;
     }
 }
