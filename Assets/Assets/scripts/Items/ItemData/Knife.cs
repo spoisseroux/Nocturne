@@ -16,11 +16,11 @@ public class Knife : ItemData
         Transform playerTransform = GameObject.Find("PlayerObj").transform;
 
         // check in Tether collider
-        ItemWorld tether = FindTether(playerTransform);
+        TetherCollector tether = FindTether(playerTransform);
         if (tether != null)
         {
             // we're in the Tether object collider
-            tether.Collect();
+            tether.DestroyTether();
             return true;
         }
 
@@ -28,22 +28,21 @@ public class Knife : ItemData
         return false;
     }
 
-    private ItemWorld FindTether(Transform player)
+    private TetherCollector FindTether(Transform player)
     {
-        // grab all colliders
+        // grab all overlapping colliders
         Collider[] colliders = Physics.OverlapSphere(player.position, 2.0f);
 
         // go through all
         foreach (Collider col in colliders)
         {
             // check if there's an ItemWorld nearby
-            if (col.TryGetComponent(out ItemWorld item))
+            if (col.TryGetComponent(out TetherCollector tether))
             {
-                // check if current ItemWorld is a Tether
-                if (item.GetItemData() == tetherExample)
-                {
-                    return item;
-                }
+                // add tether data to UIManager for game doesn't break :/
+                InventoryUIManager UI = GameObject.Find("InventoryMenu").GetComponent<InventoryUIManager>();
+                UI.UpdateSlot(new InventorySlot(tetherExample, 1));
+                return tether;
             }
         }
 

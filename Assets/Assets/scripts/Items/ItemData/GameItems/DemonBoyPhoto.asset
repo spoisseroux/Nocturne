@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Photo
   examineDescription: A photo of two happy clowns embracing each other
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: 5022dd5f024d14fb5a9c80c2cffed6f8, type: 3}
+  blackoutInRecipe: 0
