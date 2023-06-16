@@ -12,6 +12,11 @@ public class audioInteract : MonoBehaviour
     private bool isInCollider = false;
     private bool inScript = false;
 
+    [SerializeField] bool onlyUseOnce = false;
+    private bool onceBool = false;
+
+    [SerializeField] bool AudioOnlyUIDissolve;
+
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
 
@@ -28,6 +33,8 @@ public class audioInteract : MonoBehaviour
 
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
+
+    [SerializeField] GameObject gameObjectToEnable;
 
 
     private void Awake()
@@ -48,7 +55,7 @@ public class audioInteract : MonoBehaviour
     {
         if (isInCollider)
         {
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (onceBool == false))
             {
                 StartCoroutine(startAudio());
             }
@@ -68,11 +75,16 @@ public class audioInteract : MonoBehaviour
             playerMovementScript.isPaused = true; //pause movement
         }
 
-        //play audio
-        audioSource.Play();
+        if (AudioOnlyUIDissolve) {
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+            audioSource.Play();
+            yield return new WaitWhile(() => audioSource.isPlaying);
+            crossfadeDissolve.DissolveOut();
+        }
 
         if (translatePlayerTo)
         {
+            audioSource.Play();
             yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
             Player.transform.position = translatePlayerTo.position;
             CameraHolder.transform.position = translatePlayerTo.position;
@@ -91,10 +103,17 @@ public class audioInteract : MonoBehaviour
 
         //wait until finish then can play again
         yield return new WaitWhile(() => audioSource.isPlaying);
+
+        if (gameObjectToEnable) {
+            gameObjectToEnable.SetActive(true);
+        }
+
+        if (onlyUseOnce) {
+            onceBool = true;
+            this.enabled = false;
+        }
+        
         inScript = false;
-
-
-
         
     }
 
