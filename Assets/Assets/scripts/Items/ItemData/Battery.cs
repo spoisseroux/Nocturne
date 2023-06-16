@@ -5,10 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Battery")]
 public class Battery : ItemData
 {
-    // HOW DO WE DELETE THIS FROM INVENTORY AFTER USE?
-    // COULD USE AN EVENT THAT IS SUBSCRIBED TO IN THE UI MANAGER???
-
-
     // AudioClip
     public AudioClip useBatterySound;
 

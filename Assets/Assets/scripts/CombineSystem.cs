@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 
 /* SUMMARY:
@@ -21,24 +22,40 @@ using System;
 
 public class CombineSystem
 {
-    [SerializeField] private List<RecipeScriptableObject> recipeList;
+    [SerializeField]
+    private List<RecipeScriptableObject> recipeList;
 
+    // Construct and load all RecipeScriptableObjects into the CombineSystem class
     public CombineSystem()
     {
+        // Full list of all the recipe names to be loaded
+        List<string> recipeNames = new List<string>()
+        {
+            "BatteryRecipe"
+        };
+
+        // Create and populate the list of Recipes
         recipeList = new List<RecipeScriptableObject>();
+        foreach (string recipeName in recipeNames)
+        {
+            RecipeScriptableObject asset = Resources.Load<RecipeScriptableObject>("Recipes/" + recipeName);
+            if (asset != null)
+            {
+                recipeList.Add(asset);
+            }
+        }
+        
     }
 
-    // Constructor for the CombineSystem class
-    public CombineSystem(List<RecipeScriptableObject> recipes)
+    public int CheckRecipeCount()
     {
-        recipeList = recipes;
+        return recipeList.Count;
     }
 
     // Check fulfillment of and then return the output of a given Recipe
-    public Tuple<ItemData, int> GetRecipeOutput(List<Tuple<ItemData, int>> items)
+    public ItemData GetRecipeOutput(List<ItemData> items)
     {
-        // How to return a leftover amount in an item with more than recipe requirements?
-        // Could just simplify and say the max amount you find in the level is the exact amount needed for a recipe
+        // CURRENTLY DOES NOT SUPPORT AMOUNT-SPECIFIC RETURNS
 
         foreach (RecipeScriptableObject recipe in recipeList)
         {
@@ -57,14 +74,11 @@ public class CombineSystem
         return null;
     }
 
-    private bool Matches(Tuple<ItemData, int> recipeItem, Tuple<ItemData, int> inputItem)
+    private bool Matches(ItemData recipeItem, ItemData inputItem)
     {
-        if (recipeItem.Item1 == inputItem.Item1)
+        if (recipeItem == inputItem)
         {
-            if (recipeItem.Item2 <= inputItem.Item2)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }

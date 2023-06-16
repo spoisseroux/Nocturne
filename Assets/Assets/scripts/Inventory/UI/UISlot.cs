@@ -87,15 +87,7 @@ public class UISlot : MonoBehaviour
 
             itemName.text = slot.item.itemName;
 
-            if (slot.amount > 1)
-            {
-                //slotIcon = ;
-                itemAmount.text = slot.amount.ToString();
-            }
-            else
-            {
-                itemAmount.text = "";
-            }
+            itemAmount.text = "";
         }
     }
 
@@ -131,6 +123,8 @@ public class UISlot : MonoBehaviour
     public void BlackOut()
     {
         // revert to a transparent image
+        StartCoroutine(FadeToTransparent());
+
         itemAmount.text = "";
         itemName.text = "";
         blackedOut = true;
@@ -140,6 +134,18 @@ public class UISlot : MonoBehaviour
     public bool CheckBlackout()
     {
         return blackedOut;
+    }
+
+    IEnumerator FadeToTransparent()
+    {
+        Color color = image.color;
+        float fadespeed = 5f;
+        while (color.a > 0f)
+        {
+            color.a -= (0.01f * fadespeed);
+            image.color = color;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
 

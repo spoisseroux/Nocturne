@@ -91,12 +91,17 @@ public class InventoryUIManager : MonoBehaviour
     // Dissovlve handling
     [SerializeField] UIDissolveHandler uiDissolve;
 
+    #region MonoBehavior Functionality
+
+    // Start function... yeah
     void Start()
     {
         interactMenuActive = false;
         combineSystem = new CombineSystem();
+        Debug.Log("CombineSystem instance has" + combineSystem.CheckRecipeCount() + " recipes loaded");
+
         UISoundManager = GetComponent<AudioSource>();
-        uiDissolve = GameObject.Find("Crossfader").GetComponent<UIDissolveHandler>();
+        uiDissolve = GameObject.Find("Crossfade").GetComponent<UIDissolveHandler>();
 
         if (uiDissolve == null)
         {
@@ -105,15 +110,7 @@ public class InventoryUIManager : MonoBehaviour
     }
 
 
-
-    void Update()
-    {
-        // Function to handle input into the UI
-        // ScreenCarouselInput();
-    }
-
-
-
+    // Triggering necessary information updates upon Enable of the Inventory canvas
     private void OnEnable()
     {
         // Get a reference to the current Inventory of the Player
@@ -142,6 +139,7 @@ public class InventoryUIManager : MonoBehaviour
         OnUIExit?.Invoke(playerSlots);
     }
 
+    #endregion MonoBehavior Functionality
 
 
     // Rewrites the overall list of InventorySlots based on usage data tracked by the UI Manager
@@ -220,6 +218,7 @@ public class InventoryUIManager : MonoBehaviour
         // If we have reached here, the item being added does not exist in our Inventory
         // Add a new UISlot
         AddSlot(updatedSlot);
+        playerSlots.Add(updatedSlot);
     }
 
 
@@ -227,44 +226,56 @@ public class InventoryUIManager : MonoBehaviour
     // Adds a UISlot to the list of Slots designated for Combination
     public void SlotSelected(UISlot combineSlot)
     {
+        // Check if already exists
+        if (combinationSlots.Contains(combineSlot))
+        {
+            return;
+        }
+
+        // Add to list
         combinationSlots.Add(combineSlot);
 
         // Check for item count
         if (combinationSlots.Count == 2)
         {
-            // Gather data
-            Tuple<ItemData, int> item1 = new Tuple<ItemData, int>(
-                combinationSlots[0].GetCorrespondingSlot().item,
-                combinationSlots[0].GetCorrespondingSlot().amount
-                );
-
-            Tuple<ItemData, int> item2 = new Tuple<ItemData, int>(
-                combinationSlots[1].GetCorrespondingSlot().item,
-                combinationSlots[1].GetCorrespondingSlot().amount
-                );
-
-            // Package data needed to use the Combine System
-            List<Tuple<ItemData, int>> recipeComponents = new List<Tuple<ItemData, int>> { item1, item2 };
+            // Gather & package data needed to use the Combine System
+            ItemData item1 = combinationSlots[0].GetCorrespondingSlot().item;
+            ItemData item2 = combinationSlots[1].GetCorrespondingSlot().item;
+            List<ItemData> recipeComponents = new List<ItemData> { item1, item2};
 
             // Check for recipe fulfillment
-            Tuple<ItemData, int> recipe = combineSystem.GetRecipeOutput(recipeComponents);
+            ItemData recipe = combineSystem.GetRecipeOutput(recipeComponents);
             if (recipe != null)
             {
+                // Create tuple
+                int amount = 1;
+
                 // Add slot
-                InventorySlot newSlot = new InventorySlot(recipe.Item1, recipe.Item2);
+                InventorySlot newSlot = new InventorySlot(recipe, amount);
                 AddSlot(newSlot);
                 playerSlots.Add(newSlot);
 
                 // No other stuff to be done, maybe animation for adding new items ?
 
                 // Black out the other two slots !!!
+                if (item1.blackoutInRecipe == true)
+                {
+                    combinationSlots[0].BlackOut();
+                }
+                if (item2.blackoutInRecipe == true)
+                {
+                    combinationSlots[1].BlackOut();
+                }
 
             }
-            // Display textbox saying something about how the items won't go together
-            // METHOD HERE
+            else
+            {
+                // Display textbox saying something about how the items won't go together
+                // METHOD HERE
 
-            // Turn of selection for first selected slot
-            // METHOD HERE
+                // Turn of selection for first selected slot
+                // METHOD HERE
+            }
 
             // Clear slots, since we either failed and don't want them in our combination list or succeeded and they're gone
             combinationSlots.Clear();
@@ -405,7 +416,9 @@ public class InventoryUIManager : MonoBehaviour
             // Update all slots
             RewriteAllSlots();
             // Push updated List<InventorySlot> back to the Player's Inventory
+            Debug.Log("Calling OnItemUsed");
             OnItemUsed?.Invoke();
+            Debug.Log("Called OnItemUsed");
             // Redissolve UI
             uiDissolve.DissolveIn();
         }

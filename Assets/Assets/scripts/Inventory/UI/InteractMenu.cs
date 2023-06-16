@@ -62,8 +62,11 @@ public class InteractMenu : MonoBehaviour
 
         if (correspondingSlot.item.Use())
         {
-            // send signal up to InventoryUIManager that this UISlot is to be destroyed
-            slot.BlackOut();
+            // check if this UISlot is to be destroyed
+            if (correspondingSlot.item.blackoutInRecipe == true)
+            {
+                slot.BlackOut();
+            }
             // send signal that interact menu is being destroyed
             inventoryMenu.InteractMenuDestroyed(true);
             // destroy menu

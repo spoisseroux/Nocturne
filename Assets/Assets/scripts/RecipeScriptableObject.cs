@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 /* SUMMARY:
@@ -14,14 +15,19 @@ using System;
  * 
  * TODO:
  * 1) Create Recipes
+ * 2) Figure out how to package multiple output ItemData effectively
  */
-[CreateAssetMenu(menuName = "Recipes")]
+
+[CreateAssetMenu(menuName = "Recipe")]
 public class RecipeScriptableObject : ScriptableObject
 {
     // Output object
-    public Tuple<ItemData, int> output;
+    [SerializeField]
+    public ItemData output;
 
-    // Recipe Objects
-    public Tuple<ItemData, int> item1;
-    public Tuple<ItemData, int> item2;
+    // Input Objects
+    [SerializeField]
+    public ItemData item1;
+    [SerializeField]
+    public ItemData item2;
 }

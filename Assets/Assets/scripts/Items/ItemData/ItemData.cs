@@ -35,6 +35,8 @@ public abstract class ItemData : ScriptableObject
     public string examineDescription; // item's description upon examination
     [SerializeField]
     public Sprite inventoryIcon; // inventory representation
+    [SerializeField]
+    public bool blackoutInRecipe = true;
 
     public abstract bool Use();
 

@@ -9,6 +9,8 @@ using UnityEngine;
  * 
  * Screens for nearest Item by creating a Sphere around the Player, collecting all colliders of GameObjects that have an IItem component,
  * and then calling the Collect method on the nearest IItem
+ * 
+ * MAYBE WE EDIT THIS TO BE THE NEAREST COLLIDER??? IF IT'S AN IITEM THEN WE PICK IT UP, OTHERWISE IGNORE ???
  */
 public class ItemPickup : MonoBehaviour
 {
