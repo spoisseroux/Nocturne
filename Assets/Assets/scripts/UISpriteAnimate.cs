@@ -15,6 +15,7 @@ public class UISpriteAnimate : MonoBehaviour
     public bool playOnAwake = false;
     public bool triggerNewOnOneShot = false;
     public UISpriteAnimate spriteAnimToTriggerOnFinish;
+    public bool playOnce = true;
     private bool alreadyPlayed = false;
 
     public void Start()
@@ -28,8 +29,16 @@ public class UISpriteAnimate : MonoBehaviour
 
     public void Func_PlayUIAnim()
     {
-        if (alreadyPlayed == false) {
-            alreadyPlayed = true;
+        if (playOnce)
+        {
+            if (alreadyPlayed == false)
+            {
+                alreadyPlayed = true;
+                IsDone = false;
+                m_CorotineAnim = StartCoroutine(Func_PlayAnimUI());
+            }
+        }
+        else if (!playOnce) {
             IsDone = false;
             m_CorotineAnim = StartCoroutine(Func_PlayAnimUI());
         }

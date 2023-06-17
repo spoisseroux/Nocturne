@@ -34,7 +34,8 @@ public class audioInteract : MonoBehaviour
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
-    [SerializeField] GameObject gameObjectToEnable;
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
 
 
     private void Awake()
@@ -104,8 +105,18 @@ public class audioInteract : MonoBehaviour
         //wait until finish then can play again
         yield return new WaitWhile(() => audioSource.isPlaying);
 
-        if (gameObjectToEnable) {
-            gameObjectToEnable.SetActive(true);
+        if (gameObjectsToDisable.Length != 0) {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++) {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
         }
 
         if (onlyUseOnce) {
