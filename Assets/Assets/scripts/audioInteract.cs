@@ -16,6 +16,7 @@ public class audioInteract : MonoBehaviour
     private bool onceBool = false;
 
     [SerializeField] bool AudioOnlyUIDissolve;
+    [SerializeField] bool AudioOnlyNoDissolve = false;
 
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
@@ -79,6 +80,12 @@ public class audioInteract : MonoBehaviour
             audioSource.Play();
             yield return new WaitWhile(() => audioSource.isPlaying);
             crossfadeDissolve.DissolveOut();
+        }
+
+        if (AudioOnlyNoDissolve)
+        {
+            audioSource.Play();
+            yield return new WaitWhile(() => audioSource.isPlaying);
         }
 
         if (translatePlayerTo)

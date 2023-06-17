@@ -40,6 +40,9 @@ public class DialogueTextPrinter : MonoBehaviour
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
+    [SerializeField] DialogueTextPrinter printerToDisable;
+    [SerializeField] DialogueTextPrinter printerToEnable;
+
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
     private object firstCharPos;
@@ -173,6 +176,11 @@ public class DialogueTextPrinter : MonoBehaviour
         }
 
         inScript = false;
+
+        if ((printerToDisable) && (printerToEnable)) {
+            printerToEnable.enabled = true;
+            printerToDisable.enabled = false;
+        }
     }
 
     IEnumerator WaitAnimation()

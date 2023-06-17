@@ -22,6 +22,8 @@ public class SewerComputerPasswordScript : MonoBehaviour
     [SerializeField] AudioClip computerFailureAudio;
     [SerializeField] UIDissolveHandler windowDissolveHandler;
     [SerializeField] CameraZoom cameraZoomPause;
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
     private bool completed = false;
     private bool isInCollider = false;
     private bool inScript = false;
@@ -77,6 +79,23 @@ public class SewerComputerPasswordScript : MonoBehaviour
         completed = true;
         passwordUI.SetActive(false);
         cameraZoomPause.enabled = true;
+
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
+        }
+
         StopAllCoroutines();
     }
 
@@ -96,7 +115,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
 
     public void checkPassword() {
         inputText = inputField.GetComponent<TMP_InputField>().text;
-        if (inputText == password) {
+        if ((inputText == password) || (inputText == password.ToUpper())) {
             StartCoroutine(playSuccessAudio());
             //TODO: SOMETHING HERE IF CORRECT PASSWORD
             //HERE
