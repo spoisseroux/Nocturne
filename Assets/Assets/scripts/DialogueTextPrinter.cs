@@ -10,6 +10,10 @@ public class DialogueTextPrinter : MonoBehaviour
 
     [SerializeField] [Range(0, 0.1f)] float normalTextSpeed = 0.05f;
     [SerializeField] [Range(0, 0.05f)] float skipTextSpeed = 0.025f;
+    [SerializeField] bool runOnColliderEnter = false;
+    [SerializeField] int runOnColliderDelay= 0;
+    [SerializeField] bool runOnce = false;
+    private bool ranOnce = false;
 
     [TextArea(3,10)]
     public List<string> pages;
@@ -23,13 +27,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
     public Image TextBackgroundAnimationImage;
 
-    public bool spriteExists = false;
-
     public TMP_Text subtitleTextMesh;
     public BoxCollider textCollider;
     private bool isInCollider = false;
 
-    [SerializeField] int startDelay = 1;
+    [SerializeField] int textStartDelay = 1;
 
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
@@ -40,11 +42,15 @@ public class DialogueTextPrinter : MonoBehaviour
 
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
+    private object firstCharPos;
 
     private void Update()
     {
-        if ((isInCollider) && (textCollider))
+        if ((isInCollider) && (textCollider) && (!ranOnce))
         {
+            if (runOnColliderEnter && (!inScript)) {
+                Print(pages, onFinishedPrinting);
+            }
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
                 Print(pages, onFinishedPrinting);
@@ -94,6 +100,10 @@ public class DialogueTextPrinter : MonoBehaviour
 
         inScript = true; //cant interact twice while printing
 
+        if ((runOnColliderEnter) && (runOnColliderDelay != 0)) {
+            yield return new WaitForSecondsRealtime(runOnColliderDelay);
+        }
+
         TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
         
         subtitleTextMesh.enabled = true;
@@ -103,7 +113,7 @@ public class DialogueTextPrinter : MonoBehaviour
             playerMovementScript.isPaused = true; //pause movement
         }
 
-        yield return new WaitForSecondsRealtime(startDelay);
+        yield return new WaitForSecondsRealtime(textStartDelay);
 
         if (beginAudio != null) {
             beginAudio.Play(0);
@@ -158,6 +168,10 @@ public class DialogueTextPrinter : MonoBehaviour
 
         yield return StartCoroutine(WaitAnimation());
 
+        if (runOnce) {
+            ranOnce = true;
+        }
+
         inScript = false;
     }
 
@@ -188,6 +202,33 @@ public class DialogueTextPrinter : MonoBehaviour
 
     //Recenter text based on sentence
     void RepositionSentence(string sentence) {
+        int longestLine = 0;
+        subtitleTextMesh.text = sentence;
+        subtitleTextMesh.ForceMeshUpdate();
+        if (subtitleTextMesh.textInfo.lineInfo.Length == 1) {
+            longestLine = 0;   
+        }
+        else {
+            for (int i = 0; i < subtitleTextMesh.textInfo.lineInfo.Length; i++)
+            {
+                if (subtitleTextMesh.textInfo.lineInfo[i].visibleCharacterCount > subtitleTextMesh.textInfo.lineInfo[longestLine].visibleCharacterCount)
+                {
+                    longestLine = i;
+                }
+            }
+        }
+        var firstChar = subtitleTextMesh.textInfo.lineInfo[longestLine].firstVisibleCharacterIndex;
+        var lastChar = subtitleTextMesh.textInfo.lineInfo[longestLine].lastVisibleCharacterIndex;
+        var firstCharPos = subtitleTextMesh.textInfo.characterInfo[firstChar].topLeft;
+        var lastCharPos = subtitleTextMesh.textInfo.characterInfo[lastChar].topRight;
+
+        subtitleTextMesh.rectTransform.anchoredPosition = new Vector2(0 - ((firstCharPos.x + lastCharPos.x) / 2), subtitleTextMesh.rectTransform.anchoredPosition.y);
+        subtitleTextMesh.text = string.Empty;
+    }
+
+    //Recenter text based on sentence //BACKUP
+    void RepositionSentenceBACKUP(string sentence)
+    {
         subtitleTextMesh.text = sentence;
         subtitleTextMesh.ForceMeshUpdate();
         var firstChar = subtitleTextMesh.textInfo.lineInfo[0].firstVisibleCharacterIndex;
