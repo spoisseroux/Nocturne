@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIDissolveHandler : MonoBehaviour
 {
     private Image img;
-    private bool inScript = false;
+    public bool inScript = false;
     private float dissolveAmount;
     [SerializeField] bool test = false;
     [SerializeField] bool fadeFromBlackOnStart = false;

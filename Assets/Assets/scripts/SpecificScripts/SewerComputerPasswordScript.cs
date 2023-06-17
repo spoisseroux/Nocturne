@@ -21,6 +21,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
     [SerializeField] AudioClip computerSuccessAudio;
     [SerializeField] AudioClip computerFailureAudio;
     [SerializeField] UIDissolveHandler windowDissolveHandler;
+    [SerializeField] CameraZoom cameraZoomPause;
     private bool completed = false;
     private bool isInCollider = false;
     private bool inScript = false;
@@ -45,6 +46,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
 
     IEnumerator openMenuRoutine() {
         inScript = true;
+        cameraZoomPause.enabled = false;
         playerCamScript.isPaused = true;
         passwordUI.SetActive(true);
         Cursor.visible = true;
@@ -74,6 +76,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
         playerCamScript.isPaused = false;
         completed = true;
         passwordUI.SetActive(false);
+        cameraZoomPause.enabled = true;
         StopAllCoroutines();
     }
 
@@ -86,6 +89,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
             passwordUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             playerCamScript.isPaused = false;
+            cameraZoomPause.enabled = true;
             inScript = false;
         }
     }
