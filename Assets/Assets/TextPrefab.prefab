@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &284378146318403640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284378146318403643}
+  - component: {fileID: 284378146318403642}
+  - component: {fileID: 284378146318403641}
+  m_Layer: 0
+  m_Name: TextPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &284378146318403643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284378146318403640}
+  m_LocalRotation: {x: -0.000000009865562, y: 0.00749316, z: 0.0000011062863, w: 0.9999719}
+  m_LocalPosition: {x: 135.52, y: 102.102295, z: 38.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &284378146318403642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284378146318403640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5758668, y: 3.125627, z: 1.6544873}
+  m_Center: {x: 0.2879333, y: -1.0628088, z: 0.32724315}
+--- !u!114 &284378146318403641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284378146318403640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalTextSpeed: 0.05
+  skipTextSpeed: 0.025
+  runOnColliderEnter: 0
+  runOnColliderDelay: 0
+  runOnce: 0
+  pages:
+  - lorem1 lorem1 lorem1 lorem1 lorem1
+  - lorem2 lorem2 lorem2 lorem2 lorem2 lorem2 lorem2 lorem2 lorem2
+  playerMovementScript: {fileID: 0}
+  playerCamScript: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  TextBackgroundAnimationImage: {fileID: 0}
+  subtitleTextMesh: {fileID: 0}
+  textCollider: {fileID: 284378146318403642}
+  textStartDelay: 1
+  CameraHolder: {fileID: 0}
+  Player: {fileID: 0}
+  translatePlayerTo: {fileID: 0}
+  sunSprite: {fileID: 0}
+  charSprite: {fileID: 0}
+  beginAudio: {fileID: 0}
+  isFinished: 0

@@ -29,7 +29,6 @@ public class audioInteract : MonoBehaviour
 
     [SerializeField] Image crossfadeImage;
     [SerializeField] UIDissolveHandler crossfadeDissolve;
-    private Animator anim;
 
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
@@ -42,7 +41,6 @@ public class audioInteract : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         audioSource = GetComponent<AudioSource>();
-        anim = crossfadeImage.GetComponent<Animator>();
 
         //if we dont want to stop player movement set the scripts as null
         if (!stopPlayerMovement) {
@@ -56,7 +54,7 @@ public class audioInteract : MonoBehaviour
     {
         if (isInCollider)
         {
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (onceBool == false))
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (onceBool == false) && (crossfadeDissolve.inScript == false))
             {
                 StartCoroutine(startAudio());
             }
