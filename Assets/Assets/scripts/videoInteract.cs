@@ -56,7 +56,7 @@ public class videoInteract : MonoBehaviour
         if (isInCollider)
         {
             //Make sure pause menu is not on to activate
-            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
+            if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (crossfadeDissolve.inScript == false))
             {
                 StartCoroutine(playVideo());
             }
