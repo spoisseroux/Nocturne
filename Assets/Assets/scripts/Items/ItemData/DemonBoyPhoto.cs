@@ -15,6 +15,6 @@ public class DemonBoyPhoto : ItemData
     {
         // display Image
 
-        return true;
+        return false;
     }
 }
