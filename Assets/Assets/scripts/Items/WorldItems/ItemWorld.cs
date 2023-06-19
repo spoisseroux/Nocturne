@@ -25,11 +25,17 @@ public class ItemWorld : MonoBehaviour, IItem
     [SerializeField]
     private int amount;
 
+    // SerializeField --> TextPrefab
+    // Execute the text script upon collecting, then do last two lines of Collect() functionality ??
+
     // Function that determines how the Item GameObject behaves upon Player collection
     public void Collect()
     {
+        // Tri
+
         // Trigger an Event that passes along this collected Item's data to the Player InventoryHolder
         OnCollected?.Invoke(data, amount);
+
         // Destroy the object in Scene
         Destroy(gameObject);
     }

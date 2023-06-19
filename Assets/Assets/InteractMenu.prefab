@@ -97,6 +97,10 @@ MonoBehaviour:
   inventoryMenu: {fileID: 0}
   rect: {fileID: 0}
   selectionImage: {fileID: 0}
+  examineButton: {fileID: 1347419103667122893}
+  useButton: {fileID: 953135558694064910}
+  combineButton: {fileID: 6391663306482154479}
+  closeButton: {fileID: 9118962770392704504}
 --- !u!1 &2063632563681467631
 GameObject:
   m_ObjectHideFlags: 0
