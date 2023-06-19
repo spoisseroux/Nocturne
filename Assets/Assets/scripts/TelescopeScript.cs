@@ -43,6 +43,8 @@ public class TelescopeScript : MonoBehaviour
     public Camera mainCamera;
     public Camera telescopeCamera;
 
+    [SerializeField] DialogueTextPrinter dialogueToTrigger;
+
     private void Awake()
     {
         imageCollider = GetComponent<BoxCollider>();
@@ -128,7 +130,16 @@ public class TelescopeScript : MonoBehaviour
             yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
         }
 
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
+        if (dialogueToTrigger)
+        {
+            dialogueToTrigger.enabled = true;
+            yield return StartCoroutine(dialogueToTrigger.PrintDialogue());
+            dialogueToTrigger.enabled = false;
+        }
+
+        if (!dialogueToTrigger) {
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
+        }
 
         if (crossfadeExit)
         {

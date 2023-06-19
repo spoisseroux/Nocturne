@@ -23,6 +23,8 @@ public class TransformScript : MonoBehaviour
         playerCamScript.isPaused = true; //pause game
         playerMovementScript.isPaused = true; //pause movement
 
+        playerMovementScript.rb.velocity = new Vector3(0, 0, 0);
+
         Player.transform.position = translatePlayerTo.position;
         CameraHolder.transform.position = translatePlayerTo.position;
         Player.transform.rotation = translatePlayerTo.rotation;

@@ -58,11 +58,11 @@ public class DialogueTextPrinter : MonoBehaviour
         if ((isInCollider) && (textCollider) && (!ranOnce) && (crossfadeDissolve.inScript == false))
         {
             if (runOnColliderEnter && (!inScript)) {
-                Print(pages, onFinishedPrinting);
+                Print();
             }
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
-                Print(pages, onFinishedPrinting);
+                Print();
             }
 
         }
@@ -70,10 +70,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
     public void printOnClick() {
         if (inScript == false) {
-            Print(pages, onFinishedPrinting);
+            Print();
         }
 
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -100,12 +101,12 @@ public class DialogueTextPrinter : MonoBehaviour
     }
 
     //Start Print
-    public void Print(List<string> pages, Action onFinishedPrinting)
+    public void Print()
     {
-        StartCoroutine(PrintDialogue(pages, onFinishedPrinting));
+        StartCoroutine(PrintDialogue());
     }
 
-    IEnumerator PrintDialogue(List<string> pages, Action onFinishedPrinting) {
+    public IEnumerator PrintDialogue() {
 
         inScript = true; //cant interact twice while printing
 
