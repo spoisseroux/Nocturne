@@ -41,6 +41,8 @@ public class DialogueTextPrinter : MonoBehaviour
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
+    [SerializeField] UIDissolveHandler crossfadeDissolve;
+
     [SerializeField] DialogueTextPrinter printerToDisable;
     [SerializeField] DialogueTextPrinter printerToEnable;
 
