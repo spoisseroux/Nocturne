@@ -27,11 +27,13 @@ public class FuseboxScript : MonoBehaviour
     [SerializeField]
     private GameObject lighthouseIslandDoor;
 
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
+
     // Start is called before the first frame update
     void Start()
     {
         batteryModel.SetActive(false);
-        lighthouseIslandDoor.GetComponent<BoxCollider>().enabled = false;
     }
 
     void OnEnable()
@@ -42,10 +44,23 @@ public class FuseboxScript : MonoBehaviour
 
     public void OnBatteryUse()
     {
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
+        }
         // Activate the battery model
         batteryModel.SetActive(true);
 
-        // Activate the trigger for the lighthouseIslandDoor
-        lighthouseIslandDoor.GetComponent<BoxCollider>().enabled = true;
     }
 }
