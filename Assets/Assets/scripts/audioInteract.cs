@@ -20,7 +20,6 @@ public class audioInteract : MonoBehaviour
 
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
-    [SerializeField] GameObject Orientation;
 
     [SerializeField] Transform translatePlayerTo;
 
@@ -99,13 +98,8 @@ public class audioInteract : MonoBehaviour
             Player.transform.position = translatePlayerTo.position;
             CameraHolder.transform.position = translatePlayerTo.position;
 
-            //Orientation.transform.rotation = new Quaternion(0, translatePlayerTo.transform.rotation.y, 0, 0);
-
-            //Player.transform.rotation = new Quaternion(0,0,0,0);
-            //CameraHolder.transform.rotation = new Quaternion(0, 0, 0, 0);
-
-            //Player.transform.rotation = translatePlayerTo.rotation;
-            //CameraHolder.transform.rotation = translatePlayerTo.rotation;
+            Player.transform.rotation = translatePlayerTo.rotation;
+            CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
             crossfadeDissolve.DissolveOut();
             //anim.Play("crossfade_in", -1, 0f);

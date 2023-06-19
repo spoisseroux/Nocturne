@@ -107,106 +107,115 @@ public class DialogueTextPrinter : MonoBehaviour
     }
 
     public IEnumerator PrintDialogue() {
+        if (inScript == false)
+        {
+            inScript = true; //cant interact twice while printing
 
-        inScript = true; //cant interact twice while printing
+            if ((playerCamScript != null) && (playerMovementScript != null))
+            {
+                playerCamScript.isPaused = true; //pause game
+                playerMovementScript.isPaused = true; //pause movement
+            }
 
-        if ((playerCamScript != null) && (playerMovementScript != null)) {
-            playerCamScript.isPaused = true; //pause game
-            playerMovementScript.isPaused = true; //pause movement
-        }
+            yield return new WaitForSecondsRealtime(beginStartDelay);
 
-        yield return new WaitForSecondsRealtime(beginStartDelay);
+            TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
 
-        TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
-
-        subtitleTextMesh.enabled = true;
-
-
-
-        yield return new WaitForSecondsRealtime(textStartDelay);
-
-        if (beginAudio != null) {
-            beginAudio.Play(0);
-        }
+            subtitleTextMesh.enabled = true;
 
 
-        foreach (var page in pages) {
-            string newPage = page + "\n";
-            RepositionSentence(page);
-            //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+
+            yield return new WaitForSecondsRealtime(textStartDelay);
+
+            if (beginAudio != null)
+            {
+                beginAudio.Play(0);
+            }
+
+
+            foreach (var page in pages)
+            {
+                string newPage = page + "\n";
+                RepositionSentence(page);
+                //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+                subtitleTextMesh.text = string.Empty;
+
+                foreach (var letter in newPage)
+                {
+                    HandleTextSpeed();
+                    subtitleTextMesh.text += letter;
+                    if (letter == ' ') continue;
+                    yield return new WaitForSecondsRealtime(currentTextSpeed);
+
+                }
+                yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
+            }
+
+            //Clear text on press E when finished
+            yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
             subtitleTextMesh.text = string.Empty;
 
-            foreach (var letter in newPage) {
-                HandleTextSpeed();
-                subtitleTextMesh.text += letter;
-                if (letter == ' ') continue;
-                yield return new WaitForSecondsRealtime(currentTextSpeed);
-
-            }
-            yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
-        }
-
-        //Clear text on press E when finished
-        yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
-        subtitleTextMesh.text = string.Empty;
-
-        if ((playerCamScript != null) && (playerMovementScript != null)) {
-            playerCamScript.isPaused = false; //unpause game
-            playerMovementScript.isPaused = false; //unpause movement
-        }
-
-        TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().idleIsDone = true;
-
-        subtitleTextMesh.enabled = false;
-
-        isFinished = true;
-
-        //translate to gameobject
-        if ((translatePlayerTo != null) && (CameraHolder != null) && (Player != null))
-        {
-            //playerEverything.transform.position = new Vector3(139.48f, 1.772f, 40.245f);
-            Player.transform.position = translatePlayerTo.position;
-            CameraHolder.transform.position = translatePlayerTo.position;
-
-            Player.transform.rotation = translatePlayerTo.rotation;
-            CameraHolder.transform.rotation = translatePlayerTo.rotation;
-
-        }
-
-        subtitleTextMesh.enabled = false;
-        onFinishedPrinting?.Invoke();
-
-        yield return StartCoroutine(WaitAnimation());
-
-        if (runOnce) {
-            ranOnce = true;
-        }
-
-        inScript = false;
-
-        if ((printerToDisable) && (printerToEnable)) {
-            printerToEnable.enabled = true;
-            printerToDisable.enabled = false;
-        }
-
-        //gameobjects
-        if (gameObjectsToDisable.Length != 0)
-        {
-            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            if ((playerCamScript != null) && (playerMovementScript != null))
             {
-                gameObjectsToDisable[i].SetActive(false);
+                playerCamScript.isPaused = false; //unpause game
+                playerMovementScript.isPaused = false; //unpause movement
             }
-        }
 
-        if (gameObjectsToEnable.Length != 0)
-        {
-            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().idleIsDone = true;
+
+            subtitleTextMesh.enabled = false;
+
+            isFinished = true;
+
+            //translate to gameobject
+            if ((translatePlayerTo != null) && (CameraHolder != null) && (Player != null))
             {
-                gameObjectsToEnable[j].SetActive(true);
-            }
-        }
+                //playerEverything.transform.position = new Vector3(139.48f, 1.772f, 40.245f);
+                Player.transform.position = translatePlayerTo.position;
+                CameraHolder.transform.position = translatePlayerTo.position;
 
-        subtitleTextMesh.text = string.Empty;
+                Player.transform.rotation = translatePlayerTo.rotation;
+                CameraHolder.transform.rotation = translatePlayerTo.rotation;
+
+            }
+
+            subtitleTextMesh.enabled = false;
+            onFinishedPrinting?.Invoke();
+
+            yield return StartCoroutine(WaitAnimation());
+
+            if (runOnce)
+            {
+                ranOnce = true;
+            }
+
+            inScript = false;
+
+            if ((printerToDisable) && (printerToEnable))
+            {
+                printerToEnable.enabled = true;
+                printerToDisable.enabled = false;
+            }
+
+            //gameobjects
+            if (gameObjectsToDisable.Length != 0)
+            {
+                for (int i = 0; i < gameObjectsToDisable.Length; i++)
+                {
+                    gameObjectsToDisable[i].SetActive(false);
+                }
+            }
+
+            if (gameObjectsToEnable.Length != 0)
+            {
+                for (int j = 0; j < gameObjectsToEnable.Length; j++)
+                {
+                    gameObjectsToEnable[j].SetActive(true);
+                }
+            }
+
+            subtitleTextMesh.text = string.Empty;
+        }
     }
 
     IEnumerator WaitAnimation()

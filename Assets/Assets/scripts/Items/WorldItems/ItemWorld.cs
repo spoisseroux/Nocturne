@@ -27,25 +27,49 @@ public class ItemWorld : MonoBehaviour, IItem
 
     [SerializeField] DialogueTextPrinter dialogueToTrigger;
 
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
+
+    private bool inScript = false;
     // SerializeField --> TextPrefab
     // Execute the text script upon collecting, then do last two lines of Collect() functionality ??
 
     // Function that determines how the Item GameObject behaves upon Player collection
     public void Collect()
     {
-        // Tri
-
-        // Trigger an Event that passes along this collected Item's data to the Player InventoryHolder
-        OnCollected?.Invoke(data, amount);
-
-        if (dialogueToTrigger)
+        if (inScript == false)
         {
-            StartCoroutine(dialogueOnPickUp());
-        }
+            inScript = true;
+            // Trigger an Event that passes along this collected Item's data to the Player InventoryHolder
+            OnCollected?.Invoke(data, amount);
 
-        // Destroy the object in Scene
-        else {
-            Destroy(gameObject);
+            if (dialogueToTrigger)
+            {
+                StartCoroutine(dialogueOnPickUp());
+            }
+
+            // Destroy the object in Scene
+            else
+            {
+                //gameobjects
+                if (gameObjectsToDisable.Length != 0)
+                {
+                    for (int i = 0; i < gameObjectsToDisable.Length; i++)
+                    {
+                        gameObjectsToDisable[i].SetActive(false);
+                    }
+                }
+
+                if (gameObjectsToEnable.Length != 0)
+                {
+                    for (int j = 0; j < gameObjectsToEnable.Length; j++)
+                    {
+                        gameObjectsToEnable[j].SetActive(true);
+                    }
+                }
+                inScript = false;
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -53,6 +77,23 @@ public class ItemWorld : MonoBehaviour, IItem
         dialogueToTrigger.enabled = true;
         yield return StartCoroutine(dialogueToTrigger.PrintDialogue());
         dialogueToTrigger.enabled = false;
+        //gameobjects
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
+        }
+        inScript = false;
         Destroy(gameObject);
     }
 
