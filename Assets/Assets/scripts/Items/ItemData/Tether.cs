@@ -21,6 +21,6 @@ public class Tether : ItemData
         //CameraHolder.transform.position = translatePlayerTo.position;
         //Player.transform.rotation = translatePlayerTo.rotation;
         //CameraHolder.transform.rotation = translatePlayerTo.rotation;
-        return true;
+        return false;
     }
 }

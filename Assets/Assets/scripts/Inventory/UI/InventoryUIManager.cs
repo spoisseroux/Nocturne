@@ -87,6 +87,7 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private AudioClip closeMenu;
     [SerializeField] private AudioClip openMenu;
     [SerializeField] private AudioClip scroll;
+    [SerializeField] private AudioClip unsuccessfulUsage;
 
     // Dissovlve handling
     [SerializeField] UIDissolveHandler uiDissolve;
@@ -422,6 +423,13 @@ public class InventoryUIManager : MonoBehaviour
             // Redissolve UI
             uiDissolve.DissolveIn();
         }
+    }
+
+
+    // Play unsuccessful usage sound
+    public void UnsuccessfulUsage()
+    {
+        UISoundManager.PlayOneShot(unsuccessfulUsage);
     }
 
     #endregion Carousel Code
