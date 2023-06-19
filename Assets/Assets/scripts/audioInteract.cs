@@ -20,6 +20,7 @@ public class audioInteract : MonoBehaviour
 
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject Orientation;
 
     [SerializeField] Transform translatePlayerTo;
 
@@ -94,10 +95,17 @@ public class audioInteract : MonoBehaviour
         {
             audioSource.Play();
             yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+
             Player.transform.position = translatePlayerTo.position;
             CameraHolder.transform.position = translatePlayerTo.position;
-            Player.transform.rotation = translatePlayerTo.rotation;
-            CameraHolder.transform.rotation = translatePlayerTo.rotation;
+
+            //Orientation.transform.rotation = new Quaternion(0, translatePlayerTo.transform.rotation.y, 0, 0);
+
+            //Player.transform.rotation = new Quaternion(0,0,0,0);
+            //CameraHolder.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+            //Player.transform.rotation = translatePlayerTo.rotation;
+            //CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
             crossfadeDissolve.DissolveOut();
             //anim.Play("crossfade_in", -1, 0f);
@@ -135,6 +143,8 @@ public class audioInteract : MonoBehaviour
 
         if (onlyUseOnce) {
             onceBool = true;
+            charSprite.enabled = false;
+            sunSprite.enabled = true;
             this.enabled = false;
         }
         
@@ -147,8 +157,11 @@ public class audioInteract : MonoBehaviour
         isInCollider = true;
 
         //switch to charSprite when in collider
-        sunSprite.enabled = false;
-        charSprite.enabled = true;
+        if (onceBool == false) {
+            sunSprite.enabled = false;
+            charSprite.enabled = true;
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -156,8 +169,11 @@ public class audioInteract : MonoBehaviour
         isInCollider = false;
 
         //switch to charSprite when in collider
-        charSprite.enabled = false;
-        sunSprite.enabled = true;
+        if (onceBool == false) {
+            charSprite.enabled = false;
+            sunSprite.enabled = true;
+        }
+        
     }
 
 }

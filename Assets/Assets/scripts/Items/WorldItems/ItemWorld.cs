@@ -25,6 +25,8 @@ public class ItemWorld : MonoBehaviour, IItem
     [SerializeField]
     private int amount;
 
+    [SerializeField] DialogueTextPrinter dialogueToTrigger;
+
     // SerializeField --> TextPrefab
     // Execute the text script upon collecting, then do last two lines of Collect() functionality ??
 
@@ -36,7 +38,21 @@ public class ItemWorld : MonoBehaviour, IItem
         // Trigger an Event that passes along this collected Item's data to the Player InventoryHolder
         OnCollected?.Invoke(data, amount);
 
+        if (dialogueToTrigger)
+        {
+            StartCoroutine(dialogueOnPickUp());
+        }
+
         // Destroy the object in Scene
+        else {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator dialogueOnPickUp() {
+        dialogueToTrigger.enabled = true;
+        yield return StartCoroutine(dialogueToTrigger.PrintDialogue());
+        dialogueToTrigger.enabled = false;
         Destroy(gameObject);
     }
 

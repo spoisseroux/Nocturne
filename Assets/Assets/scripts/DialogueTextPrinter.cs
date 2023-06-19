@@ -205,6 +205,8 @@ public class DialogueTextPrinter : MonoBehaviour
                 gameObjectsToEnable[j].SetActive(true);
             }
         }
+
+        subtitleTextMesh.text = string.Empty;
     }
 
     IEnumerator WaitAnimation()
