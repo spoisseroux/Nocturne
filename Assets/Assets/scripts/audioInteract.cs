@@ -37,6 +37,8 @@ public class audioInteract : MonoBehaviour
     [SerializeField] GameObject[] gameObjectsToDisable;
     [SerializeField] GameObject[] gameObjectsToEnable;
 
+    [SerializeField] DialogueTextPrinter dialogueToTrigger;
+
 
     private void Awake()
     {
@@ -108,7 +110,7 @@ public class audioInteract : MonoBehaviour
         }
 
         //wait until finish then can play again
-        yield return new WaitWhile(() => audioSource.isPlaying);
+        //yield return new WaitWhile(() => audioSource.isPlaying);
 
         if (gameObjectsToDisable.Length != 0) {
             for (int i = 0; i < gameObjectsToDisable.Length; i++) {
@@ -122,6 +124,13 @@ public class audioInteract : MonoBehaviour
             {
                 gameObjectsToEnable[j].SetActive(true);
             }
+        }
+
+        if (dialogueToTrigger)
+        {
+            dialogueToTrigger.enabled = true;
+            yield return StartCoroutine(dialogueToTrigger.PrintDialogue());
+            dialogueToTrigger.enabled = false;
         }
 
         if (onlyUseOnce) {

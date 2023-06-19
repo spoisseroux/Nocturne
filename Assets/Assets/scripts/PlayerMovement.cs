@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
     // Start is called before the first frame update
     private void Start()

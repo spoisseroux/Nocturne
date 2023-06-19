@@ -41,10 +41,13 @@ public class DialogueTextPrinter : MonoBehaviour
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
 
+    [SerializeField] UIDissolveHandler crossfadeDissolve;
+
     [SerializeField] DialogueTextPrinter printerToDisable;
     [SerializeField] DialogueTextPrinter printerToEnable;
 
-    [SerializeField] UIDissolveHandler crossfadeDissolve; 
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
 
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
@@ -55,22 +58,23 @@ public class DialogueTextPrinter : MonoBehaviour
         if ((isInCollider) && (textCollider) && (!ranOnce) && (crossfadeDissolve.inScript == false))
         {
             if (runOnColliderEnter && (!inScript)) {
-                Print(pages, onFinishedPrinting);
+                Print();
             }
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
-                Print(pages, onFinishedPrinting);
+                Print();
             }
-            
+
         }
     }
 
     public void printOnClick() {
         if (inScript == false) {
-            Print(pages, onFinishedPrinting);
+            Print();
         }
-        
+
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -81,7 +85,7 @@ public class DialogueTextPrinter : MonoBehaviour
             sunSprite.enabled = false;
             charSprite.enabled = true;
         }
-        
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -95,14 +99,14 @@ public class DialogueTextPrinter : MonoBehaviour
             charSprite.enabled = false;
         }
     }
-    
+
     //Start Print
-    public void Print(List<string> pages, Action onFinishedPrinting)
+    public void Print()
     {
-        StartCoroutine(PrintDialogue(pages, onFinishedPrinting));
+        StartCoroutine(PrintDialogue());
     }
-    
-    IEnumerator PrintDialogue(List<string> pages, Action onFinishedPrinting) {
+
+    public IEnumerator PrintDialogue() {
 
         inScript = true; //cant interact twice while printing
 
@@ -114,7 +118,7 @@ public class DialogueTextPrinter : MonoBehaviour
         yield return new WaitForSecondsRealtime(beginStartDelay);
 
         TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
-        
+
         subtitleTextMesh.enabled = true;
 
 
@@ -124,8 +128,8 @@ public class DialogueTextPrinter : MonoBehaviour
         if (beginAudio != null) {
             beginAudio.Play(0);
         }
-        
-        
+
+
         foreach (var page in pages) {
             string newPage = page + "\n";
             RepositionSentence(page);
@@ -137,7 +141,7 @@ public class DialogueTextPrinter : MonoBehaviour
                 subtitleTextMesh.text += letter;
                 if (letter == ' ') continue;
                 yield return new WaitForSecondsRealtime(currentTextSpeed);
-            
+
             }
             yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
         }
@@ -184,6 +188,23 @@ public class DialogueTextPrinter : MonoBehaviour
             printerToEnable.enabled = true;
             printerToDisable.enabled = false;
         }
+
+        //gameobjects
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
+        }
     }
 
     IEnumerator WaitAnimation()
@@ -217,7 +238,7 @@ public class DialogueTextPrinter : MonoBehaviour
         subtitleTextMesh.text = sentence;
         subtitleTextMesh.ForceMeshUpdate();
         if (subtitleTextMesh.textInfo.lineInfo.Length == 1) {
-            longestLine = 0;   
+            longestLine = 0;
         }
         else {
             for (int i = 0; i < subtitleTextMesh.textInfo.lineInfo.Length; i++)
