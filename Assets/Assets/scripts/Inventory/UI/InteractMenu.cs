@@ -29,8 +29,12 @@ public class InteractMenu : MonoBehaviour
 
     [SerializeField] private RectTransform rect;
 
-    [SerializeField]
-    private Sprite selectionImage;
+    [SerializeField] private Sprite selectionImage;
+
+    [SerializeField] private Button examineButton;
+    [SerializeField] private Button useButton;
+    [SerializeField] private Button combineButton;
+    [SerializeField] private Button closeButton;
 
     void Awake()
     {
@@ -74,8 +78,31 @@ public class InteractMenu : MonoBehaviour
         }
         else
         {
-            // print "this item doesn't seem useful yet"
+            // Lock input briefly (CHANGE TO LENGTH OF SOUND)
+            StartCoroutine(LockButtons(0.5f));
+
+            // Play unsuccessful usage sound in parent display
+            inventoryMenu.UnsuccessfulUsage();
         }
+    }
+
+
+    IEnumerator LockButtons(float timeToLock)
+    {
+        // turn off all buttons
+        examineButton.interactable = false;
+        useButton.interactable = false;
+        combineButton.interactable = false;
+        closeButton.interactable = false;
+
+        // wait for length of sound
+        yield return new WaitForSeconds(timeToLock);
+
+        // turn buttons back on
+        examineButton.interactable = true;
+        useButton.interactable = true;
+        combineButton.interactable = true;
+        closeButton.interactable = true;
     }
 
 
