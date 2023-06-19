@@ -43,6 +43,9 @@ public class DialogueTextPrinter : MonoBehaviour
     [SerializeField] DialogueTextPrinter printerToDisable;
     [SerializeField] DialogueTextPrinter printerToEnable;
 
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
+
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
     private object firstCharPos;
@@ -180,6 +183,23 @@ public class DialogueTextPrinter : MonoBehaviour
         if ((printerToDisable) && (printerToEnable)) {
             printerToEnable.enabled = true;
             printerToDisable.enabled = false;
+        }
+
+        //gameobjects
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
         }
     }
 

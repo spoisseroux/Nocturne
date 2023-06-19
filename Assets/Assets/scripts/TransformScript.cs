@@ -8,25 +8,30 @@ public class TransformScript : MonoBehaviour
     [SerializeField] GameObject CameraHolder;
     [SerializeField] GameObject Player;
     [SerializeField] Transform translatePlayerTo;
-    private BoxCollider boxCollider;
-    [SerializeField] Image crossfadeImage;
-    private Animator anim;
     [SerializeField] UIDissolveHandler uiDissolve;
+    [SerializeField] PlayerMovement playerMovementScript;
+    [SerializeField] PlayerCam playerCamScript;
+    private BoxCollider boxCollider;
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
-        anim = crossfadeImage.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        playerCamScript.isPaused = true; //pause game
+        playerMovementScript.isPaused = true; //pause movement
+
         Player.transform.position = translatePlayerTo.position;
         CameraHolder.transform.position = translatePlayerTo.position;
         Player.transform.rotation = translatePlayerTo.rotation;
         CameraHolder.transform.rotation = translatePlayerTo.rotation;
 
-        //anim.Play("crossfade_in", -1, 0f);
-        uiDissolve.DissolveOut();
+        playerCamScript.isPaused = false; //pause game
+        playerMovementScript.isPaused = false; //pause movement
+
+        StartCoroutine(uiDissolve.StartDissolveOut());
     }
+
 }
