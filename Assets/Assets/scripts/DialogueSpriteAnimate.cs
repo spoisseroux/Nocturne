@@ -13,8 +13,8 @@ public class DialogueSpriteAnimate : MonoBehaviour
     private int spriteIndex = 0;
     [HideInInspector] public bool isActive = false;
     [HideInInspector] public bool idleIsDone = false;
-    [SerializeField] Image sunSprite;
-    [SerializeField] Image charSprite;
+    [SerializeField] GameObject sunSprite;
+    [SerializeField] GameObject charSprite;
     [SerializeField] [Range(0, 255)] byte Alpha = 180;
 
 
@@ -47,8 +47,8 @@ public class DialogueSpriteAnimate : MonoBehaviour
 
         isActive = true;
 
-        sunSprite.enabled = false;
-        charSprite.enabled = false;
+        sunSprite.SetActive(false);
+        charSprite.SetActive(false);
 
         image.enabled = true;
         spriteIndex = 0;
@@ -74,8 +74,11 @@ public class DialogueSpriteAnimate : MonoBehaviour
             yield return new WaitForSeconds(m_Speed);
         }
 
-        sunSprite.enabled = false;
-        charSprite.enabled = true;
+        sunSprite.SetActive(true);
+        sunSprite.GetComponent<UISpriteAnimate>().Func_PlayUIAnim();
+        charSprite.SetActive(true);
+        charSprite.GetComponent<UISpriteAnimate>().Func_PlayUIAnim();
+        
 
         spriteIndex = 0;
         idleIsDone = false;

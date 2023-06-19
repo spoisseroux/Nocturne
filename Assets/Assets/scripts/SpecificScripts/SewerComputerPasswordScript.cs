@@ -21,9 +21,12 @@ public class SewerComputerPasswordScript : MonoBehaviour
     [SerializeField] AudioClip computerSuccessAudio;
     [SerializeField] AudioClip computerFailureAudio;
     [SerializeField] UIDissolveHandler windowDissolveHandler;
+    [SerializeField] UIDissolveHandler crossfade;
     [SerializeField] CameraZoom cameraZoomPause;
     [SerializeField] GameObject[] gameObjectsToDisable;
     [SerializeField] GameObject[] gameObjectsToEnable;
+
+    [SerializeField] DialogueTextPrinter dialogueToTrigger;
     private bool completed = false;
     private bool isInCollider = false;
     private bool inScript = false;
@@ -35,7 +38,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
     {
       if ((isInCollider) && (colliderToBeIn))
       {
-          if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false))
+          if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false) && (crossfade.inScript == false))
           {              
                 openMenu();
           }
@@ -95,6 +98,9 @@ public class SewerComputerPasswordScript : MonoBehaviour
                 gameObjectsToEnable[j].SetActive(true);
             }
         }
+
+        dialogueToTrigger.enabled = true;
+        dialogueToTrigger.printOnClick();
 
         StopAllCoroutines();
     }

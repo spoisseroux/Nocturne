@@ -69,7 +69,7 @@ public class ImageInteract : MonoBehaviour
     {
         if ((isInCollider) && (imageCollider))
         {
-            if (Input.GetKeyUp(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
+            if (Input.GetKeyUp(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (crossfadeDissolve.inScript == false))
             {
                 showImage(imageTextures, onFinishedShowing);
             }

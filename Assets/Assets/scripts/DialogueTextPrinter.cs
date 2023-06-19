@@ -11,7 +11,6 @@ public class DialogueTextPrinter : MonoBehaviour
     [SerializeField] [Range(0, 0.1f)] float normalTextSpeed = 0.05f;
     [SerializeField] [Range(0, 0.05f)] float skipTextSpeed = 0.025f;
     [SerializeField] bool runOnColliderEnter = false;
-    [SerializeField] int runOnColliderDelay= 0;
     [SerializeField] bool runOnce = false;
     private bool ranOnce = false;
 
@@ -31,6 +30,8 @@ public class DialogueTextPrinter : MonoBehaviour
     public BoxCollider textCollider;
     private bool isInCollider = false;
 
+
+    [SerializeField] int beginStartDelay = 0;
     [SerializeField] int textStartDelay = 1;
 
     [SerializeField] GameObject CameraHolder;
@@ -52,7 +53,7 @@ public class DialogueTextPrinter : MonoBehaviour
 
     private void Update()
     {
-        if ((isInCollider) && (textCollider) && (!ranOnce))
+        if ((isInCollider) && (textCollider) && (!ranOnce) && (crossfadeDissolve.inScript == false))
         {
             if (runOnColliderEnter && (!inScript)) {
                 Print(pages, onFinishedPrinting);
@@ -61,7 +62,7 @@ public class DialogueTextPrinter : MonoBehaviour
             {
                 Print(pages, onFinishedPrinting);
             }
-            
+
         }
     }
 
@@ -69,7 +70,7 @@ public class DialogueTextPrinter : MonoBehaviour
         if (inScript == false) {
             Print(pages, onFinishedPrinting);
         }
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,7 +82,7 @@ public class DialogueTextPrinter : MonoBehaviour
             sunSprite.enabled = false;
             charSprite.enabled = true;
         }
-        
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -95,37 +96,37 @@ public class DialogueTextPrinter : MonoBehaviour
             charSprite.enabled = false;
         }
     }
-    
+
     //Start Print
     public void Print(List<string> pages, Action onFinishedPrinting)
     {
         StartCoroutine(PrintDialogue(pages, onFinishedPrinting));
     }
-    
+
     IEnumerator PrintDialogue(List<string> pages, Action onFinishedPrinting) {
 
         inScript = true; //cant interact twice while printing
-
-        if ((runOnColliderEnter) && (runOnColliderDelay != 0)) {
-            yield return new WaitForSecondsRealtime(runOnColliderDelay);
-        }
-
-        TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
-        
-        subtitleTextMesh.enabled = true;
 
         if ((playerCamScript != null) && (playerMovementScript != null)) {
             playerCamScript.isPaused = true; //pause game
             playerMovementScript.isPaused = true; //pause movement
         }
 
+        yield return new WaitForSecondsRealtime(beginStartDelay);
+
+        TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
+
+        subtitleTextMesh.enabled = true;
+
+
+
         yield return new WaitForSecondsRealtime(textStartDelay);
 
         if (beginAudio != null) {
             beginAudio.Play(0);
         }
-        
-        
+
+
         foreach (var page in pages) {
             string newPage = page + "\n";
             RepositionSentence(page);
@@ -137,13 +138,13 @@ public class DialogueTextPrinter : MonoBehaviour
                 subtitleTextMesh.text += letter;
                 if (letter == ' ') continue;
                 yield return new WaitForSecondsRealtime(currentTextSpeed);
-            
+
             }
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
         }
 
         //Clear text on press E when finished
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
+        yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
         subtitleTextMesh.text = string.Empty;
 
         if ((playerCamScript != null) && (playerMovementScript != null)) {
@@ -234,7 +235,7 @@ public class DialogueTextPrinter : MonoBehaviour
         subtitleTextMesh.text = sentence;
         subtitleTextMesh.ForceMeshUpdate();
         if (subtitleTextMesh.textInfo.lineInfo.Length == 1) {
-            longestLine = 0;   
+            longestLine = 0;
         }
         else {
             for (int i = 0; i < subtitleTextMesh.textInfo.lineInfo.Length; i++)
