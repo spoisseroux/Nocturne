@@ -22,6 +22,7 @@ public class DialogueTextPrinter : MonoBehaviour
     public PlayerMovement playerMovementScript;
     public PlayerCam playerCamScript;
     [SerializeField] GameObject PauseMenu;
+    [SerializeField] GameObject InventoryMenu;
     private bool inScript = false;
 
     public Image TextBackgroundAnimationImage;
@@ -52,6 +53,9 @@ public class DialogueTextPrinter : MonoBehaviour
     public AudioSource beginAudio;
     [HideInInspector] public bool isFinished = false;
     private object firstCharPos;
+
+    // TRYING TO BLOCK CALLS TO INVENTORY MENU DURING PRINT
+    [SerializeField] InventoryMenuScript invMenuScript;
 
     private void Update()
     {
@@ -111,15 +115,21 @@ public class DialogueTextPrinter : MonoBehaviour
         {
             inScript = true; //cant interact twice while printing
 
-            if ((playerCamScript != null) && (playerMovementScript != null))
+            if ((playerCamScript != null) && (playerMovementScript != null) && (invMenuScript != null))
             {
                 playerCamScript.isPaused = true; //pause game
                 playerMovementScript.isPaused = true; //pause movement
+
+                // TRYING TO BLOCK CALLS TO OPEN INVENTORY MENU DURING TEXT PRINTING
+                invMenuScript.ChangeAbleToOpenStatus();
             }
 
             yield return new WaitForSecondsRealtime(beginStartDelay);
 
-            TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
+            if (TextBackgroundAnimationImage != null)
+            {
+                TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
+            }
 
             subtitleTextMesh.enabled = true;
 
@@ -155,13 +165,19 @@ public class DialogueTextPrinter : MonoBehaviour
             yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
             subtitleTextMesh.text = string.Empty;
 
-            if ((playerCamScript != null) && (playerMovementScript != null))
+            if ((playerCamScript != null) && (playerMovementScript != null) && (invMenuScript != null))
             {
                 playerCamScript.isPaused = false; //unpause game
                 playerMovementScript.isPaused = false; //unpause movement
+
+                // TRYING TO BLOCK INVENTORY MENU CALLS DURING PRINT
+                invMenuScript.ChangeAbleToOpenStatus();
             }
 
-            TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().idleIsDone = true;
+            if (TextBackgroundAnimationImage != null)
+            {
+                TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().idleIsDone = true;
+            }
 
             subtitleTextMesh.enabled = false;
 
@@ -220,14 +236,22 @@ public class DialogueTextPrinter : MonoBehaviour
 
     IEnumerator WaitAnimation()
     {
-        Debug.Log("WaitAnimation started");
-
-        while (TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().isActive == true)
+        
+        if (TextBackgroundAnimationImage == null)
         {
+            Debug.Log("TextBackgroundAnimationImage is null");
             yield return null;
         }
 
-        Debug.Log("WaitAnimation complete");
+        else
+        {
+            Debug.Log("WaitAnimation started");
+            while (TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().isActive == true)
+            {
+                yield return null;
+            }
+            Debug.Log("WaitAnimation complete");
+        }
     }
 
 
@@ -267,6 +291,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
         subtitleTextMesh.rectTransform.anchoredPosition = new Vector2(0 - ((firstCharPos.x + lastCharPos.x) / 2), subtitleTextMesh.rectTransform.anchoredPosition.y);
         subtitleTextMesh.text = string.Empty;
+    }
+
+    public void SetPages(List<string> newPages)
+    {
+        pages = newPages;
     }
 
     //Recenter text based on sentence //BACKUP
