@@ -21,12 +21,12 @@ public class InteractMenu : MonoBehaviour
     public static event HandleItemUsed OnItemUsed;
     public delegate void HandleItemUsed();
 
-
+    // UISlot, InventorySlot & InventoryMenu references
     [SerializeField] private UISlot slot;
     private InventorySlot correspondingSlot;
     [SerializeField] private InventoryUIManager inventoryMenu;
 
-
+    // Position rectangle
     [SerializeField] private RectTransform rect;
 
     [SerializeField] private Sprite selectionImage;
@@ -36,9 +36,13 @@ public class InteractMenu : MonoBehaviour
     [SerializeField] private Button combineButton;
     [SerializeField] private Button closeButton;
 
+    // Text printer
+    [SerializeField] private DialogueTextPrinter printer;
+
     void Awake()
     {
         rect = GetComponent<RectTransform>();
+
     }
 
     // CLEAN THIS UP LATER I GUESS
@@ -51,10 +55,8 @@ public class InteractMenu : MonoBehaviour
     // Function to signal the Player has Examined a UISlot
     public void ExamineUISlot()
     {
-        // TO DO:
-        // 1) Create a examination box prefab
-        // 2) Instantiate it with the proper text
-        // 3) Animate using text printer logic (?)
+        // Run dialogue printer
+        StartCoroutine(PrintItemExamine());
     }
 
 
@@ -73,13 +75,13 @@ public class InteractMenu : MonoBehaviour
             }
             // send signal that interact menu is being destroyed
             inventoryMenu.InteractMenuDestroyed(true);
-            // destroy menu
-            Destroy(this.gameObject);
+            // deactivate the menu
+            this.gameObject.SetActive(false);
         }
         else
         {
             // Lock input briefly (CHANGE TO LENGTH OF SOUND)
-            StartCoroutine(LockButtons(0.5f));
+            StartCoroutine(LockButtonsTimed(0.5f));
 
             // Play unsuccessful usage sound in parent display
             inventoryMenu.UnsuccessfulUsage();
@@ -87,7 +89,7 @@ public class InteractMenu : MonoBehaviour
     }
 
 
-    IEnumerator LockButtons(float timeToLock)
+    IEnumerator LockButtonsTimed(float timeToLock)
     {
         // turn off all buttons
         examineButton.interactable = false;
@@ -105,6 +107,24 @@ public class InteractMenu : MonoBehaviour
         closeButton.interactable = true;
     }
 
+    public void LockButtons()
+    {
+        // turn off all buttons
+        examineButton.interactable = false;
+        useButton.interactable = false;
+        combineButton.interactable = false;
+        closeButton.interactable = false;
+    }
+
+    public void UnlockButtons()
+    {
+        // turn buttons back on
+        examineButton.interactable = true;
+        useButton.interactable = true;
+        combineButton.interactable = true;
+        closeButton.interactable = true;
+    }
+
 
     // Function to signal an Item has been selected for Combination from the InteractMenu
     public void CombineUISlot()
@@ -113,15 +133,15 @@ public class InteractMenu : MonoBehaviour
         slot.OnSlotSelect();
         inventoryMenu.InteractMenuDestroyed(false);
 
-        // Close the window
-        Destroy(this.gameObject);
+        // Deactivate the window
+        this.gameObject.SetActive(false);
     }
 
     // Function to close the interaction menu on Button press
     public void CloseMenu()
     {
         inventoryMenu.InteractMenuDestroyed(false);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public void Init(UISlot uiSlot)
@@ -135,5 +155,22 @@ public class InteractMenu : MonoBehaviour
         {
             Debug.Log("InteractMenu::Awake() --> inventoryMenu is null");
         }
+    }
+
+    IEnumerator PrintItemExamine()
+    {
+        // Lock buttons and enable printer
+        LockButtons();
+        //printer.enabled = true;
+
+        // Set new pages in the printer object
+        printer.SetPages(new List<string>() { correspondingSlot.item.examineDescription });
+
+        // Printer coroutine
+        yield return StartCoroutine(printer.PrintDialogue());
+
+        // Disable printer and unlock the buttons
+        //printer.enabled = false;
+        UnlockButtons();
     }
 }

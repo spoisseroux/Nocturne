@@ -29,6 +29,10 @@ public class InventoryMenuScript : MonoBehaviour
     // Maintains current activity status of Inventory UI, false by default
     private bool active = false;
 
+    // Determines whether we can interrupt what is currently going on to open the Inventory UI
+    [SerializeField]
+    private bool ableToOpen = true;
+
     // Reference to the InventoryUIManager script
     [SerializeField]
     private InventoryUIManager inventoryManager;
@@ -76,7 +80,7 @@ public class InventoryMenuScript : MonoBehaviour
     void Update()
     {
         // React to Player's request to interact with Inventory
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && ableToOpen)
         {
             // If the menu is currently active, then KeyCode.Tab means we are closing it
             if (active)
@@ -108,5 +112,10 @@ public class InventoryMenuScript : MonoBehaviour
                 playerMovementScript.isPaused = true; //pause movement
             }
         }
+    }
+
+    public void ChangeAbleToOpenStatus()
+    {
+        ableToOpen = !ableToOpen;
     }
 }

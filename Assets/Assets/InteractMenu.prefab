@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7961260147546646867}
   - component: {fileID: 6570645851864374102}
   - component: {fileID: 7469385877161135158}
+  - component: {fileID: 585111099424144852}
   m_Layer: 5
   m_Name: InteractMenu
   m_TagString: Untagged
@@ -101,6 +102,44 @@ MonoBehaviour:
   useButton: {fileID: 953135558694064910}
   combineButton: {fileID: 6391663306482154479}
   closeButton: {fileID: 9118962770392704504}
+  printer: {fileID: 585111099424144852}
+--- !u!114 &585111099424144852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953052894306347658}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalTextSpeed: 0.05
+  skipTextSpeed: 0.025
+  runOnColliderEnter: 0
+  runOnce: 0
+  pages: []
+  playerMovementScript: {fileID: 0}
+  playerCamScript: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  TextBackgroundAnimationImage: {fileID: 0}
+  subtitleTextMesh: {fileID: 0}
+  textCollider: {fileID: 0}
+  beginStartDelay: 0
+  textStartDelay: 1
+  CameraHolder: {fileID: 0}
+  Player: {fileID: 0}
+  translatePlayerTo: {fileID: 0}
+  sunSprite: {fileID: 0}
+  charSprite: {fileID: 0}
+  crossfadeDissolve: {fileID: 0}
+  printerToDisable: {fileID: 0}
+  printerToEnable: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  beginAudio: {fileID: 0}
+  isFinished: 0
 --- !u!1 &2063632563681467631
 GameObject:
   m_ObjectHideFlags: 0

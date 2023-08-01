@@ -69,7 +69,7 @@ public class InventoryUIManager : MonoBehaviour
     private bool interactMenuActive = false;
     // Reference to a prefab GameObject menu that appears upon selecting a given UISlot.
     // Contains optains for Examining, Using, and Combining the selected UISlot
-    [SerializeField] private GameObject interactMenuPrefab;
+    [SerializeField] private GameObject interactMenuObject;
 
     // Prefab for creating a UISlot
     [SerializeField] private GameObject uiSlotPrefab;
@@ -230,6 +230,7 @@ public class InventoryUIManager : MonoBehaviour
         // Check if already exists
         if (combinationSlots.Contains(combineSlot))
         {
+            // maybe play unsuccessful usage sound here
             return;
         }
 
@@ -387,10 +388,12 @@ public class InventoryUIManager : MonoBehaviour
             // Play menu opening sound
             UISoundManager.PlayOneShot(openMenu);
 
-            // Instantiate the InteractMenu, set its parent to the InventoryMenu, and properly set the appropriate data
-            InteractMenu interactMenu = Instantiate(interactMenuPrefab).GetComponent<InteractMenu>();
-            interactMenu.transform.SetParent(gameObject.transform, true);
-            interactMenu.Init(slotContainer.GetChild(currentIndex).GetComponent<UISlot>());
+            // Reactivate the InteractMenu
+            interactMenuObject.SetActive(true);
+
+            // Init the InteractMenu
+            InteractMenu interactMenuScript = interactMenuObject.GetComponent<InteractMenu>();
+            interactMenuScript.Init(slotContainer.GetChild(currentIndex).GetComponent<UISlot>());
             interactMenuActive = true;
         }
     }
