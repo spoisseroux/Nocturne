@@ -27,6 +27,13 @@ public class UISpriteAnimate : MonoBehaviour
         
     }
 
+
+    void OnEnable()
+    {
+        //play anim on start
+        Func_PlayUIAnim();
+    }
+
     public void Func_PlayUIAnim()
     {
         if (playOnce)
