@@ -104,6 +104,18 @@ public class DialogueTextPrinter : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        isInCollider = false;
+
+        //switch to charSprite when in collider
+        if ((charSprite != null) && (sunSprite != null))
+        {
+            sunSprite.enabled = true;
+            charSprite.enabled = false;
+        }
+    }
+
     //Start Print
     public void Print()
     {
