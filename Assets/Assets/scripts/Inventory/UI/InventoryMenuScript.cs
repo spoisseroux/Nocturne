@@ -32,6 +32,7 @@ public class InventoryMenuScript : MonoBehaviour
     // Determines whether we can interrupt what is currently going on to open the Inventory UI
     [SerializeField]
     private bool ableToOpen = true;
+    private bool ableToClose = true;
 
     // Reference to the InventoryUIManager script
     [SerializeField]
@@ -59,6 +60,9 @@ public class InventoryMenuScript : MonoBehaviour
 
         // Subscribe to the OnItemUsed Event in the UI Manager
         InventoryUIManager.OnItemUsed += ItemUsed;
+
+        // Subscribe to the HandleInteractMenuActive Event in the UI Manager
+        InventoryUIManager.InteractMenuEvent += ChangeAbleToCloseStatus;
     }
 
     // Sets Inventory Menu UI inactive upon a successful use of an Item in the UI, exclusively used by Event trigger
@@ -77,13 +81,15 @@ public class InventoryMenuScript : MonoBehaviour
         playerMovementScript.isPaused = false; //pause movement
     }
 
+
+
     void Update()
     {
         // React to Player's request to interact with Inventory
-        if (Input.GetKeyDown(KeyCode.Tab) && ableToOpen)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             // If the menu is currently active, then KeyCode.Tab means we are closing it
-            if (active)
+            if (active && ableToClose)
             {
                 active = false;
                 // Tell the Inventory Manager script to rewrite its internal data so that it can be pushed to the Player's Inventory
@@ -97,7 +103,7 @@ public class InventoryMenuScript : MonoBehaviour
                 playerMovementScript.isPaused = false; //pause movement
             }
             // Menu currently inactive, KeyCode.Tab indicates a request to open InventoryUI
-            else
+            else if (!active && ableToOpen)
             {
                 // Set InventoryMenu GameObject active
                 active = true;
@@ -117,5 +123,10 @@ public class InventoryMenuScript : MonoBehaviour
     public void ChangeAbleToOpenStatus()
     {
         ableToOpen = !ableToOpen;
+    }
+
+    void ChangeAbleToCloseStatus(bool status)
+    {
+        ableToClose = status;
     }
 }

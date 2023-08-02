@@ -47,6 +47,10 @@ public class InventoryUIManager : MonoBehaviour
     public static event HandleItemUsed OnItemUsed;
     public delegate void HandleItemUsed();
 
+    // Event for denoting the InteractMenu is open, and thus the Inventory Menu cannot be exited out of
+    public static event HandleInteractMenuActive InteractMenuEvent;
+    public delegate void HandleInteractMenuActive(bool status);
+
     // UI reference to the Player's Inventory data, updated upon open and closure of Inventory UI
     List<InventorySlot> playerSlots;
 
@@ -231,11 +235,14 @@ public class InventoryUIManager : MonoBehaviour
         if (combinationSlots.Contains(combineSlot))
         {
             // maybe play unsuccessful usage sound here
+            combinationSlots[0].FadeStar();
+            combinationSlots.Clear();
             return;
         }
 
         // Add to list
         combinationSlots.Add(combineSlot);
+        
 
         // Check for item count
         if (combinationSlots.Count == 2)
@@ -277,6 +284,8 @@ public class InventoryUIManager : MonoBehaviour
 
                 // Turn of selection for first selected slot
                 // METHOD HERE
+                combinationSlots[0].FadeStar();
+                combinationSlots[1].FadeStar();
             }
 
             // Clear slots, since we either failed and don't want them in our combination list or succeeded and they're gone
@@ -395,6 +404,9 @@ public class InventoryUIManager : MonoBehaviour
             InteractMenu interactMenuScript = interactMenuObject.GetComponent<InteractMenu>();
             interactMenuScript.Init(slotContainer.GetChild(currentIndex).GetComponent<UISlot>());
             interactMenuActive = true;
+
+            // InteractMenu is active so we cannot close the menu, inform the InventoryUI input screener
+            InteractMenuEvent.Invoke(false);
         }
     }
 
@@ -402,7 +414,11 @@ public class InventoryUIManager : MonoBehaviour
     // Handle two different cases for destruction of the InteractMenu
     public void InteractMenuDestroyed(bool exiting)
     {
+        // Interact menu is no longer active, meaning that either we have closed the Inventory due to item usage
+        // or that we should now be able to close it
         interactMenuActive = false;
+        InteractMenuEvent.Invoke(true);
+
 
         // reactivate the carousel buttons ?
         ReenableButtons();
@@ -420,9 +436,7 @@ public class InventoryUIManager : MonoBehaviour
             // Update all slots
             RewriteAllSlots();
             // Push updated List<InventorySlot> back to the Player's Inventory
-            Debug.Log("Calling OnItemUsed");
             OnItemUsed?.Invoke();
-            Debug.Log("Called OnItemUsed");
             // Redissolve UI
             uiDissolve.DissolveIn();
         }

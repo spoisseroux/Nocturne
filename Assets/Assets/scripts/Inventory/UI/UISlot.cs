@@ -18,6 +18,7 @@ using System;
 public class UISlot : MonoBehaviour
 {
     [SerializeField] Image image;
+    [SerializeField] Image combineStar;
     [SerializeField] TextMeshProUGUI itemAmount;
     [SerializeField] TextMeshProUGUI itemName;
     // [SerializeField] Sprite selectionHighlight;
@@ -55,6 +56,13 @@ public class UISlot : MonoBehaviour
         if (image == null)
         {
             Debug.Log("UISlot::Awake() --> image is null");
+        }
+
+        if (combineStar != null)
+        {
+            Color color = combineStar.color;
+            color.a = 0f;
+            combineStar.color = color;
         }
     }
 
@@ -115,6 +123,10 @@ public class UISlot : MonoBehaviour
     // Send information up to the InventoryUIManager script that the given UISlot has been designated as a Combination ingredient
     public void OnSlotSelect()
     {
+        Color color = combineStar.color;
+        color.a = 1f;
+        combineStar.color = color;
+
         UISlot combineSlot = this;
         parentDisplay?.SlotSelected(combineSlot);
     }
@@ -123,7 +135,8 @@ public class UISlot : MonoBehaviour
     public void BlackOut()
     {
         // revert to a transparent image
-        StartCoroutine(FadeToTransparent());
+        StartCoroutine(FadeItemToTransparent());
+        StartCoroutine(FadeStarToTransparent());
 
         itemAmount.text = "";
         itemName.text = "";
@@ -136,7 +149,13 @@ public class UISlot : MonoBehaviour
         return blackedOut;
     }
 
-    IEnumerator FadeToTransparent()
+    // Unsuccessfully attempted to combine this UISlot, so we start the FadeStarToTransparent coroutine here
+    public void FadeStar()
+    {
+        StartCoroutine(FadeStarToTransparent());
+    }
+
+    IEnumerator FadeItemToTransparent()
     {
         Color color = image.color;
         float fadespeed = 5f;
@@ -144,6 +163,18 @@ public class UISlot : MonoBehaviour
         {
             color.a -= (0.01f * fadespeed);
             image.color = color;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    IEnumerator FadeStarToTransparent()
+    {
+        Color starColor = combineStar.color;
+        float fadespeed = 10f;
+        while (starColor.a > 0f)
+        {
+            starColor.a -= (0.01f * fadespeed);
+            combineStar.color = starColor;
             yield return new WaitForSeconds(0.01f);
         }
     }
