@@ -63,6 +63,9 @@ public class InventoryMenuScript : MonoBehaviour
 
         // Subscribe to the HandleInteractMenuActive Event in the UI Manager
         InventoryUIManager.InteractMenuEvent += ChangeAbleToCloseStatus;
+
+        // Subscribe to the PauseMenuStatusChanged event in the PauseMenu
+        PauseMenuScript.PauseStatus += ChangeAbleToOpen;
     }
 
     // Sets Inventory Menu UI inactive upon a successful use of an Item in the UI, exclusively used by Event trigger
@@ -118,6 +121,11 @@ public class InventoryMenuScript : MonoBehaviour
                 playerMovementScript.isPaused = true; //pause movement
             }
         }
+    }
+
+    private void ChangeAbleToOpen(bool status)
+    {
+        ableToOpen = status;
     }
 
     public void ChangeAbleToOpenStatus()

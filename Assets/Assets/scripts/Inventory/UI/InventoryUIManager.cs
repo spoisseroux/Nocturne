@@ -176,6 +176,7 @@ public class InventoryUIManager : MonoBehaviour
     {
         // Visually and progammatically denote that this UI Slot is no longer available for interaction
         blackedOutSlot.BlackOut();
+        blackedOutSlot.FadeStar();
     }
 
 
@@ -254,6 +255,8 @@ public class InventoryUIManager : MonoBehaviour
 
             // Check for recipe fulfillment
             ItemData recipe = combineSystem.GetRecipeOutput(recipeComponents);
+
+            // If the recipe output is not null, we have created a new item
             if (recipe != null)
             {
                 // Create tuple
@@ -271,19 +274,17 @@ public class InventoryUIManager : MonoBehaviour
                 {
                     combinationSlots[0].BlackOut();
                 }
+                combinationSlots[0].FadeStar();
                 if (item2.blackoutInRecipe == true)
                 {
                     combinationSlots[1].BlackOut();
                 }
-
+                combinationSlots[1].FadeStar();
             }
+            // Recipe is null, display feedback that combination was unsuccessful
             else
             {
-                // Display textbox saying something about how the items won't go together
-                // METHOD HERE
-
-                // Turn of selection for first selected slot
-                // METHOD HERE
+                // Fade our combination slot stars
                 combinationSlots[0].FadeStar();
                 combinationSlots[1].FadeStar();
             }

@@ -9,6 +9,9 @@ public class PauseMenuScript : MonoBehaviour
     private bool isPaused;
     private AudioSource[] allAudioSources;
 
+    public static event PauseMenuStatusChanged PauseStatus;
+    public delegate void PauseMenuStatusChanged(bool status);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +26,17 @@ public class PauseMenuScript : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
+
+                // Tell InventoryMenu that it can be opened again
+                // If isPaused is false, then InventoryMenu ableToOpen should be true
+                PauseStatus.Invoke(!isPaused);
             }
             else {
                 PauseGame();
+
+                // Tell InventoryMenu that it cannot be opened currently
+                // If isPaused is true, the InventoryMenu ableToOpen should be false
+                PauseStatus.Invoke(!isPaused);
             }
         }
     }

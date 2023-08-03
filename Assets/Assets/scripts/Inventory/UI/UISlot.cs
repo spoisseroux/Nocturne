@@ -136,7 +136,6 @@ public class UISlot : MonoBehaviour
     {
         // revert to a transparent image
         StartCoroutine(FadeItemToTransparent());
-        StartCoroutine(FadeStarToTransparent());
 
         itemAmount.text = "";
         itemName.text = "";
