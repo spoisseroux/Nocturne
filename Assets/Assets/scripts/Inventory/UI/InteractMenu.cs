@@ -36,6 +36,9 @@ public class InteractMenu : MonoBehaviour
     [SerializeField] private Button combineButton;
     [SerializeField] private Button closeButton;
 
+    // So no printer bugs happen
+    private bool ableToClose = true;
+
     // Text printer
     [SerializeField] private DialogueTextPrinter printer;
 
@@ -50,7 +53,7 @@ public class InteractMenu : MonoBehaviour
     {
         // TO DO:
         // Figure out if Update() is even needed
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && ableToClose)
         {
             CloseMenu();
         }
@@ -167,11 +170,15 @@ public class InteractMenu : MonoBehaviour
         LockButtons();
         //printer.enabled = true;
 
+        ableToClose = false;
+
         // Set new pages in the printer object
         printer.SetPages(new List<string>() { correspondingSlot.item.examineDescription });
 
         // Printer coroutine
         yield return StartCoroutine(printer.PrintDialogue());
+
+        ableToClose = true;
 
         // Disable printer and unlock the buttons
         //printer.enabled = false;

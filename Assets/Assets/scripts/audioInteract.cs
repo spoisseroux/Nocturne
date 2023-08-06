@@ -41,6 +41,19 @@ public class audioInteract : MonoBehaviour
     [SerializeField] DialogueTextPrinter dialogueToTrigger;
 
 
+    /* Dealing with bug that occurs when these conditions are satisfied:
+    1) Interact Menu is printing text
+    2) We are in a collider that is attached to in InteractScript
+
+
+    SOLUTION:
+    Possible to make an event for when the Inventory is open, call it from InventoryMenuScript, and push the event to all other interactions?
+        - But what about if there's a DialogueTextPrinter collider and the InteractMenu script is using the DialogueTextPrinter??
+          If we try to deny DialogueTextPrinters opening via event when the InteractScript already is using it, could be bad
+    Redo the concept of an Interact
+    */
+
+
     // Telling InventoryMenu it cannot open
     public static event InAudioInteract InteractStatus;
     public delegate void InAudioInteract(bool status);

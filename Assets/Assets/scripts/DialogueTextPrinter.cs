@@ -58,10 +58,6 @@ public class DialogueTextPrinter : MonoBehaviour
     [SerializeField] InventoryMenuScript invMenuScript;
 
 
-    // TESTING SOME STUFF WITH PAUSING COROUTINES OUT
-    private IEnumerator printing;
-
-
     private void Update()
     {
         if ((isInCollider) && (textCollider) && (!ranOnce) && (crossfadeDissolve.inScript == false))
@@ -138,6 +134,7 @@ public class DialogueTextPrinter : MonoBehaviour
                 playerMovementScript.isPaused = true; //pause movement
             }
 
+            // Block to inventory menu
             if (invMenuScript != null)
             {
                 invMenuScript.ChangeInteraction(true);
