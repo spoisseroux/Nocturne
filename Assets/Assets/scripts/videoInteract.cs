@@ -41,6 +41,11 @@ public class videoInteract : MonoBehaviour
     [SerializeField] GameObject gameObjectToDisable;
     [SerializeField] GameObject gameObjectToEnable;
 
+    // Telling InventoryMenu what our status is
+    public static event VideoInteractionStatus InteractStatus;
+    public delegate void VideoInteractionStatus(bool status);
+
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -69,6 +74,9 @@ public class videoInteract : MonoBehaviour
         inScript = true;
         playerCamScript.isPaused = true;
         playerMovementScript.isPaused = true; //pause movement
+
+        // Tell InventoryMenu we are in a video interact
+        InteractStatus?.Invoke(true);
 
         if (crossfadeEnter)
         {    
@@ -163,6 +171,11 @@ public class videoInteract : MonoBehaviour
 
         }
 
+        // Tell InventoryMenu we are no longer in a video interact (PLACEMENT OF THIS MAY BE IFFY)
+        Debug.Log("Invoking Interact Status");
+        InteractStatus?.Invoke(false);
+        Debug.Log("Passed Invokation");
+
         //NEW TO FIX BUG
         StopAllCoroutines();
 
@@ -221,14 +234,17 @@ public class videoInteract : MonoBehaviour
             StartCoroutine(exitingCrossfadeWithoutE());
         }
 
-        
-
     }
 
     IEnumerator exitingCrossfadeWithoutE() {
         crossfadeDissolve.MakeSolid();
         yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
         StopAllCoroutines();
+
+        // Tell InventoryMenu we are no longer in a video interact (PLACEMENT OF THIS MAY BE IFFY)
+        Debug.Log("Invoking Interact Status");
+        InteractStatus?.Invoke(false);
+        Debug.Log("Passed Invokation");
     }
 
     private void OnTriggerEnter(Collider other)

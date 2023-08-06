@@ -12,6 +12,26 @@ public class PauseMenuScript : MonoBehaviour
     public static event PauseMenuStatusChanged PauseStatus;
     public delegate void PauseMenuStatusChanged(bool status);
 
+    // Maybe if we're trying to pause with inventory open, we just close it
+
+    // And then if we're in an interaction, we just pause the coroutines and resume them again
+    // Like this within the InteractMenu script:
+    /*
+     * 
+     * private IEnumerator DialoguePrint1
+     * 
+     * EVENT or something idk --> OnPause += StopPrintCoroutines
+     * 
+     * private void StopPrintCoroutines() {
+     *      StopCoroutine(DialoguePrint1);
+     *     
+     * }
+     * 
+     * private void ResumePrintCoroutines() {
+     *      StartCoroutine(DialoguePrint1);
+     *      
+     */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,17 +46,11 @@ public class PauseMenuScript : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
-
-                // Tell InventoryMenu that it can be opened again
-                // If isPaused is false, then InventoryMenu ableToOpen should be true
-                PauseStatus.Invoke(!isPaused);
+                PauseStatus?.Invoke(isPaused);
             }
             else {
                 PauseGame();
-
-                // Tell InventoryMenu that it cannot be opened currently
-                // If isPaused is true, the InventoryMenu ableToOpen should be false
-                PauseStatus.Invoke(!isPaused);
+                PauseStatus?.Invoke(isPaused);
             }
         }
     }

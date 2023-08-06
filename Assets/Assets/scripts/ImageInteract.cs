@@ -53,6 +53,10 @@ public class ImageInteract : MonoBehaviour
     public AllCardInteractedWith cardCollectedCount;
     private bool cardCollectOnce = false;
 
+    // Telling InventoryMenu it cannot open
+    public static event ImageInteractionChange InteractStatus;
+    public delegate void ImageInteractionChange(bool status);
+
     private void Awake()
     {
         imageCollider = GetComponent<BoxCollider>();
@@ -92,6 +96,9 @@ public class ImageInteract : MonoBehaviour
     IEnumerator PrintImages(List<Texture> imageTextures, Action onFinishedShowing) {
         crossfadeEnterBool = true;
         inScript = true;
+
+        // Update our Interaction status, push to other relevant scripts
+        InteractStatus?.Invoke(true);
 
         if ((playerCamScript != null) && (playerMovementScript != null))
         {
@@ -202,6 +209,10 @@ public class ImageInteract : MonoBehaviour
         imageUI.enabled = false; //enable black background
 
         isFinished = true;
+
+        // Change our interaction status, push to relevant scripts
+        InteractStatus?.Invoke(false);
+
         if (spriteExists) {
             sprite.SetActive(false);
         }

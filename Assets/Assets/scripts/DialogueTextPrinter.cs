@@ -22,7 +22,7 @@ public class DialogueTextPrinter : MonoBehaviour
     public PlayerMovement playerMovementScript;
     public PlayerCam playerCamScript;
     [SerializeField] GameObject PauseMenu;
-    [SerializeField] GameObject InventoryMenu;
+    // [SerializeField] GameObject InventoryMenu;
     private bool inScript = false;
 
     public Image TextBackgroundAnimationImage;
@@ -56,6 +56,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
     // TRYING TO BLOCK CALLS TO INVENTORY MENU DURING PRINT
     [SerializeField] InventoryMenuScript invMenuScript;
+
+
+    // TESTING SOME STUFF WITH PAUSING COROUTINES OUT
+    private IEnumerator printing;
+
 
     private void Update()
     {
@@ -127,13 +132,15 @@ public class DialogueTextPrinter : MonoBehaviour
         {
             inScript = true; //cant interact twice while printing
 
-            if ((playerCamScript != null) && (playerMovementScript != null) && (invMenuScript != null))
+            if ((playerCamScript != null) && (playerMovementScript != null))
             {
                 playerCamScript.isPaused = true; //pause game
                 playerMovementScript.isPaused = true; //pause movement
+            }
 
-                // TRYING TO BLOCK CALLS TO OPEN INVENTORY MENU DURING TEXT PRINTING
-                invMenuScript.ChangeAbleToOpenStatus();
+            if (invMenuScript != null)
+            {
+                invMenuScript.ChangeInteraction(true);
             }
 
             yield return new WaitForSecondsRealtime(beginStartDelay);
@@ -167,7 +174,7 @@ public class DialogueTextPrinter : MonoBehaviour
                     HandleTextSpeed();
                     subtitleTextMesh.text += letter;
                     if (letter == ' ') continue;
-                    yield return new WaitForSecondsRealtime(currentTextSpeed);
+                    yield return new WaitForSeconds(currentTextSpeed); // CHANGED FROM WaitForSecondsRealtime
 
                 }
                 yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
@@ -177,13 +184,15 @@ public class DialogueTextPrinter : MonoBehaviour
             yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
             subtitleTextMesh.text = string.Empty;
 
-            if ((playerCamScript != null) && (playerMovementScript != null) && (invMenuScript != null))
+            if ((playerCamScript != null) && (playerMovementScript != null))
             {
                 playerCamScript.isPaused = false; //unpause game
                 playerMovementScript.isPaused = false; //unpause movement
+            }
 
-                // TRYING TO BLOCK INVENTORY MENU CALLS DURING PRINT
-                invMenuScript.ChangeAbleToOpenStatus();
+            if (invMenuScript != null)
+            {
+                invMenuScript.ChangeInteraction(false);
             }
 
             if (TextBackgroundAnimationImage != null)

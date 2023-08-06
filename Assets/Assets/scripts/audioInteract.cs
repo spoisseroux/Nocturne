@@ -40,6 +40,10 @@ public class audioInteract : MonoBehaviour
     [SerializeField] DialogueTextPrinter dialogueToTrigger;
 
 
+    // Telling InventoryMenu it cannot open
+    public static event InAudioInteract InteractStatus;
+    public delegate void InAudioInteract(bool status);
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -66,6 +70,9 @@ public class audioInteract : MonoBehaviour
 
     IEnumerator startAudio() {
         inScript = true;
+
+        // Push and invoke our status to other relevant scripts
+        InteractStatus?.Invoke(true);
 
         if (audioSourceToDisable) {
             audioSourceToDisable.Stop();
@@ -110,6 +117,9 @@ public class audioInteract : MonoBehaviour
             playerCamScript.isPaused = false;
             playerMovementScript.isPaused = false;
         }
+
+        // Change interaction status to false, MAY BE AN ISSUE IF THERE'S DIALOGUE TO TRIGGER AFTERWARDS
+        InteractStatus?.Invoke(false);
 
         //wait until finish then can play again
         //yield return new WaitWhile(() => audioSource.isPlaying);

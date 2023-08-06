@@ -12,7 +12,7 @@ using UnityEngine;
  *      1) User closes menu with the Inventory KeyCode (Tab)
  *      2) User closes menu because an Item was successfully used, triggering some action in the Scene
  * 
- * IMPORTANT: 
+ * IMPORTANT:
  * This script is attached to the Player, and only locks out movement. It does not pause the game upon Inventory open. 
  * Furthermore, the proper creation of objects and child parent relationships is necessary to properly replicate this system.
  */
@@ -31,7 +31,9 @@ public class InventoryMenuScript : MonoBehaviour
 
     // Determines whether we can interrupt what is currently going on to open the Inventory UI
     [SerializeField]
-    private bool ableToOpen = true;
+    private bool inInteraction = false;
+    [SerializeField]
+    private bool inPause = false;
     private bool ableToClose = true;
 
     // Reference to the InventoryUIManager script
@@ -64,8 +66,11 @@ public class InventoryMenuScript : MonoBehaviour
         // Subscribe to the HandleInteractMenuActive Event in the UI Manager
         InventoryUIManager.InteractMenuEvent += ChangeAbleToCloseStatus;
 
-        // Subscribe to the PauseMenuStatusChanged event in the PauseMenu
-        PauseMenuScript.PauseStatus += ChangeAbleToOpen;
+        // Subscribe to the PauseMenuStatusChanged event in the PauseMenu, AudioInteract, VideoInteract, and ImageInteract
+        PauseMenuScript.PauseStatus += ChangePause;
+        audioInteract.InteractStatus += ChangeInteraction;
+        ImageInteract.InteractStatus += ChangeInteraction;
+        videoInteract.InteractStatus += ChangeInteraction;
     }
 
     // Sets Inventory Menu UI inactive upon a successful use of an Item in the UI, exclusively used by Event trigger
@@ -106,7 +111,7 @@ public class InventoryMenuScript : MonoBehaviour
                 playerMovementScript.isPaused = false; //pause movement
             }
             // Menu currently inactive, KeyCode.Tab indicates a request to open InventoryUI
-            else if (!active && ableToOpen)
+            else if (!active && !inPause && !inInteraction)
             {
                 // Set InventoryMenu GameObject active
                 active = true;
@@ -123,14 +128,14 @@ public class InventoryMenuScript : MonoBehaviour
         }
     }
 
-    private void ChangeAbleToOpen(bool status)
+    private void ChangePause(bool status)
     {
-        ableToOpen = status;
+        inPause = status;
     }
 
-    public void ChangeAbleToOpenStatus()
+    public void ChangeInteraction(bool status)
     {
-        ableToOpen = !ableToOpen;
+        inInteraction = status;
     }
 
     void ChangeAbleToCloseStatus(bool status)

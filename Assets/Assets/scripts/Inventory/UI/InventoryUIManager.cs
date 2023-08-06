@@ -16,12 +16,6 @@ using UnityEngine.UI;
  * 
  * Creates UI objects, maintains UI objects, and ensures proper flow of data back to the Player's Inventory,
  * as well as other relevant GameObjects, upon destruction of UI Carousel and its UI components.
- * 
- * TODO: 
- * 1) Disable buttons upon Button/KeyCode press
- * 2) Re-enable upon exit from InteractMenu
- * 3) Refactor to disable key press input (MAYBE???)
- * 4) Add sounds for interactions (scrolling, opening/closing menus, combining objects)
  */
 public class InventoryUIManager : MonoBehaviour
 {
