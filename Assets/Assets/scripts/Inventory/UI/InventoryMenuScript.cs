@@ -40,6 +40,10 @@ public class InventoryMenuScript : MonoBehaviour
     [SerializeField]
     private InventoryUIManager inventoryManager;
 
+    // Event to say this menu is open
+    public static event InventoryStatusChange InventoryStatus;
+    public delegate void InventoryStatusChange(bool status);
+
     void Awake()
     {
         // Inventory Menu reference set by field serialization, check if null
@@ -88,6 +92,8 @@ public class InventoryMenuScript : MonoBehaviour
 
         playerCamScript.isPaused = false; //pause game
         playerMovementScript.isPaused = false; //pause movement
+
+        InventoryStatus.Invoke(false);
     }
 
 
@@ -100,6 +106,7 @@ public class InventoryMenuScript : MonoBehaviour
             // If the menu is currently active, then KeyCode.Tab means we are closing it
             if (active && ableToClose)
             {
+                /*
                 active = false;
                 // Tell the Inventory Manager script to rewrite its internal data so that it can be pushed to the Player's Inventory
                 inventoryManager.RewriteAllSlots();
@@ -110,10 +117,14 @@ public class InventoryMenuScript : MonoBehaviour
                 //unpause movement
                 playerCamScript.isPaused = false; //pause game
                 playerMovementScript.isPaused = false; //pause movement
+                */
+                CloseInventoryMenu();
+                InventoryStatus.Invoke(false);
             }
             // Menu currently inactive, KeyCode.Tab indicates a request to open InventoryUI
             else if (!active && !inPause && !inInteraction)
             {
+                /*
                 // Set InventoryMenu GameObject active
                 active = true;
                 inventoryMenu.SetActive(true);
@@ -125,9 +136,49 @@ public class InventoryMenuScript : MonoBehaviour
                 //pause movement
                 playerCamScript.isPaused = true; //pause game
                 playerMovementScript.isPaused = true; //pause movement
+                */
+                OpenInventoryMenu();
+                InventoryStatus?.Invoke(true);
             }
         }
+
+        // Esc keybind
+        if (Input.GetKeyDown(KeyCode.Escape) && active && ableToClose)
+        {
+            CloseInventoryMenu();
+            InventoryStatus?.Invoke(false);
+        }
     }
+
+    void OpenInventoryMenu()
+    {
+        // Set InventoryMenu GameObject active
+        active = true;
+        inventoryMenu.SetActive(true);
+        // Tell the Inventory UI Manager to construct UI Carousel
+        inventoryManager.ConstructCarousel();
+        // Unlock cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        //pause movement
+        playerCamScript.isPaused = true; //pause game
+        playerMovementScript.isPaused = true; //pause movement
+    }
+
+    void CloseInventoryMenu()
+    {
+        active = false;
+        // Tell the Inventory Manager script to rewrite its internal data so that it can be pushed to the Player's Inventory
+        inventoryManager.RewriteAllSlots();
+        inventoryMenu.SetActive(false);
+        // Lock cursor for movement
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //unpause movement
+        playerCamScript.isPaused = false; //pause game
+        playerMovementScript.isPaused = false; //pause movement
+    }
+
 
     private void ChangePause(bool status)
     {

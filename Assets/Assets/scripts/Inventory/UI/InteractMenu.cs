@@ -50,6 +50,10 @@ public class InteractMenu : MonoBehaviour
     {
         // TO DO:
         // Figure out if Update() is even needed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseMenu();
+        }
     }
 
     // Function to signal the Player has Examined a UISlot

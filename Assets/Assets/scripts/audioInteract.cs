@@ -18,7 +18,8 @@ public class audioInteract : MonoBehaviour
     [SerializeField] bool AudioOnlyUIDissolve;
     [SerializeField] bool AudioOnlyNoDissolve = false;
 
-    [SerializeField] GameObject CameraHolder;
+    [SerializeField] GameObject CameraHolder; // maybe try using the playercam instead?? PlayerCam Camera
+    // [SerializeField] GameObject PlayerCam; // trying this
     [SerializeField] GameObject Player;
 
     [SerializeField] Transform translatePlayerTo;
@@ -107,6 +108,7 @@ public class audioInteract : MonoBehaviour
 
             Player.transform.rotation = translatePlayerTo.rotation;
             CameraHolder.transform.rotation = translatePlayerTo.rotation;
+            // PlayerCam.transform.rotation = translatePlayerTo.rotation;
 
             crossfadeDissolve.DissolveOut();
             //anim.Play("crossfade_in", -1, 0f);

@@ -8,6 +8,7 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject pauseMenu;
     private bool isPaused;
     private AudioSource[] allAudioSources;
+    private bool cannotPause = false;
 
     public static event PauseMenuStatusChanged PauseStatus;
     public delegate void PauseMenuStatusChanged(bool status);
@@ -37,19 +38,21 @@ public class PauseMenuScript : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         allAudioSources = allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+
+        InventoryMenuScript.InventoryStatus += ChangePauseStatus;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (isPaused)
+            if (!isPaused && !cannotPause)
             {
-                ResumeGame();
+                PauseGame();
                 PauseStatus?.Invoke(isPaused);
             }
             else {
-                PauseGame();
+                ResumeGame();
                 PauseStatus?.Invoke(isPaused);
             }
         }
@@ -94,5 +97,10 @@ public class PauseMenuScript : MonoBehaviour
                 audioSource.UnPause();
             }
         }
+    }
+
+    public void ChangePauseStatus(bool status)
+    {
+        cannotPause = status;
     }
 }
