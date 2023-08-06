@@ -32,6 +32,10 @@ public class SewerComputerPasswordScript : MonoBehaviour
     private bool inScript = false;
     private string inputText;
 
+    // Tell the InventoryMenu that we are in SewerComputer interaction
+    public static event ComputerStatus ComputerInUse;
+    public delegate void ComputerStatus(bool status);
+
 
     // Update is called once per frame
     void Update()
@@ -47,6 +51,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
 
     void openMenu(){
         StartCoroutine(openMenuRoutine());
+        ComputerInUse?.Invoke(true);
     }
 
     IEnumerator openMenuRoutine() {
@@ -116,6 +121,8 @@ public class SewerComputerPasswordScript : MonoBehaviour
             playerCamScript.isPaused = false;
             cameraZoomPause.enabled = true;
             inScript = false;
+
+            ComputerInUse?.Invoke(false);
         }
     }
 
