@@ -8,6 +8,7 @@ using UnityEngine.Video;
 public class videoInteract : MonoBehaviour
 {
     //NEEDS BOX COLLIDER TO PLAY
+    public bool playOnAwake = false;
     BoxCollider boxCollider;
     private bool isInCollider = false;
     private bool inScript = false;
@@ -50,6 +51,9 @@ public class videoInteract : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         videoPlayer = GetComponent<VideoPlayer>();
+        if (playOnAwake) {
+            playVideo();
+        }
         
     }
 
@@ -72,8 +76,13 @@ public class videoInteract : MonoBehaviour
 
     IEnumerator playVideo() {
         inScript = true;
-        playerCamScript.isPaused = true;
-        playerMovementScript.isPaused = true; //pause movement
+
+        if (playerCamScript) {
+            playerCamScript.isPaused = true;
+        }
+        if (playerMovementScript) {
+            playerMovementScript.isPaused = true; //pause movement
+        }
 
         // Tell InventoryMenu we are in a video interact
         InteractStatus?.Invoke(true);
@@ -126,9 +135,14 @@ public class videoInteract : MonoBehaviour
         videoPlayer.Stop();
         inScript = false;
 
-        //resume player controls
-        playerMovementScript.isPaused = false; //unpause movement
-        playerCamScript.isPaused = false;
+        if (playerCamScript)
+        {
+            playerCamScript.isPaused = false;
+        }
+        if (playerMovementScript)
+        {
+            playerMovementScript.isPaused = false; //pause movement
+        }
 
         //go to next scene
         if (sceneName != "")
@@ -199,9 +213,14 @@ public class videoInteract : MonoBehaviour
         videoPlayer.Stop();
         inScript = false;
 
-        //resume player controls
-        playerMovementScript.isPaused = false ; //unpause movement
-        playerCamScript.isPaused = false;
+        if (playerCamScript)
+        {
+            playerCamScript.isPaused = false;
+        }
+        if (playerMovementScript)
+        {
+            playerMovementScript.isPaused = false; //pause movement
+        }
 
         //go to next scene
         if (sceneName != "") {
