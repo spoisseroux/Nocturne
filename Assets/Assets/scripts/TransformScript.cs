@@ -11,6 +11,7 @@ public class TransformScript : MonoBehaviour
     [SerializeField] UIDissolveHandler uiDissolve;
     [SerializeField] PlayerMovement playerMovementScript;
     [SerializeField] PlayerCam playerCamScript;
+    [SerializeField] AudioRearrange audioRearrange;
     private BoxCollider boxCollider;
 
     void Start()
@@ -32,6 +33,10 @@ public class TransformScript : MonoBehaviour
 
         playerCamScript.isPaused = false; //pause game
         playerMovementScript.isPaused = false; //pause movement
+
+        if (audioRearrange) {
+            audioRearrange.rearrangeAudio();
+        }
 
         StartCoroutine(uiDissolve.StartDissolveOut());
     }

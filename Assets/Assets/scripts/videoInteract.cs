@@ -38,8 +38,8 @@ public class videoInteract : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] Transform translatePlayerTo;
 
-    [SerializeField] GameObject gameObjectToDisable;
-    [SerializeField] GameObject gameObjectToEnable;
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
 
     // Telling InventoryMenu what our status is
     public static event VideoInteractionStatus InteractStatus;
@@ -149,13 +149,20 @@ public class videoInteract : MonoBehaviour
         }
 
 
-        if (gameObjectToDisable)
+        if (gameObjectsToDisable.Length != 0)
         {
-            gameObjectToDisable.SetActive(false);
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
         }
-        if (gameObjectToEnable)
+
+        if (gameObjectsToEnable.Length != 0)
         {
-            gameObjectToEnable.SetActive(true);
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
         }
 
         //play naimation if added
@@ -214,13 +221,20 @@ public class videoInteract : MonoBehaviour
         }
 
 
-        if (gameObjectToDisable)
+        if (gameObjectsToDisable.Length != 0)
         {
-            gameObjectToDisable.SetActive(false);
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
         }
-        if (gameObjectToEnable)
+
+        if (gameObjectsToEnable.Length != 0)
         {
-            gameObjectToEnable.SetActive(true);
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
         }
 
         //play naimation if added
