@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00032271133, g: 0.00032224855, b: 0.00032271133, a: 1}
+  m_IndirectSpecularColor: {r: 0.00032117075, g: 0.00032082395, b: 0.00032117075, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -358,6 +358,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!114 &12712764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +438,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 1
   spriteAnimToTriggerOnFinish: {fileID: 12712763}
+  playOnce: 1
 --- !u!114 &12712765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +518,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 12712764}
+  playOnce: 1
 --- !u!114 &12712766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,6 +1097,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!114 &708961708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,6 +1177,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 1
   spriteAnimToTriggerOnFinish: {fileID: 708961707}
+  playOnce: 1
 --- !u!114 &708961709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,6 +1257,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 708961708}
+  playOnce: 1
 --- !u!114 &708961710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2108,6 +2114,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!114 &1520050344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2187,6 +2194,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 1
   spriteAnimToTriggerOnFinish: {fileID: 1520050343}
+  playOnce: 1
 --- !u!114 &1520050345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2266,6 +2274,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 1520050344}
+  playOnce: 1
 --- !u!114 &1520050346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2669,6 +2678,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!114 &1882868213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2748,6 +2758,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 1
   spriteAnimToTriggerOnFinish: {fileID: 1882868212}
+  playOnce: 1
 --- !u!114 &1882868214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2827,6 +2838,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 1882868213}
+  playOnce: 1
 --- !u!114 &1882868215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3286,6 +3298,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!114 &2078558418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3365,6 +3378,7 @@ MonoBehaviour:
   playOnAwake: 0
   triggerNewOnOneShot: 1
   spriteAnimToTriggerOnFinish: {fileID: 2078558417}
+  playOnce: 1
 --- !u!114 &2078558419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3444,6 +3458,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 2078558418}
+  playOnce: 1
 --- !u!114 &2078558420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4262,6 +4277,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!224 &1045570025856130411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4696,8 +4712,16 @@ MonoBehaviour:
   currentIndex: 0
   rightmostSlot: {fileID: 0}
   slotContainer: {fileID: 1045570025605751802}
-  interactMenuPrefab: {fileID: 953052894306347658, guid: 73a026b44f1d14fd38afcca9580ae8b3, type: 3}
+  interactMenuObject: {fileID: 0}
   uiSlotPrefab: {fileID: 4559122359714013485, guid: 11ecea041c49a418dad10ebae79eab3d, type: 3}
+  centerButton: {fileID: 0}
+  rightButton: {fileID: 0}
+  leftButton: {fileID: 0}
+  closeMenu: {fileID: 0}
+  openMenu: {fileID: 0}
+  scroll: {fileID: 0}
+  unsuccessfulUsage: {fileID: 0}
+  uiDissolve: {fileID: 0}
 --- !u!223 &1045570026716065022
 Canvas:
   m_ObjectHideFlags: 0
@@ -5200,6 +5224,7 @@ MonoBehaviour:
   playOnAwake: 1
   triggerNewOnOneShot: 0
   spriteAnimToTriggerOnFinish: {fileID: 0}
+  playOnce: 1
 --- !u!224 &1045570027282664343
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5526,7 +5551,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6b7bd192d6be2429686738c00e8e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inScript: 0
   test: 0
+  fadeFromBlackOnStart: 1
 --- !u!222 &1068063250483406102
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5680,7 +5707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782066cc3766f48e7bd66f6710377ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotIcon: {fileID: 0}
+  image: {fileID: 0}
+  combineStar: {fileID: 0}
   itemAmount: {fileID: 4637467637323205159}
   itemName: {fileID: 5290040545441382108}
   rectTransform: {fileID: 0}

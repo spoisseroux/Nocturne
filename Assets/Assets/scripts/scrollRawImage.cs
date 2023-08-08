@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class scrollRawImage : MonoBehaviour
 {
-    [SerializeField] private RawImage img;
-    [SerializeField] private float x, y;
+    [SerializeField] public RawImage img;
+    [SerializeField] public float x, y;
 
     // Update is called once per frame
     void Update()
