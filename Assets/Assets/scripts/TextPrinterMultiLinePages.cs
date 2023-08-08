@@ -60,12 +60,13 @@ public class TextPrinterMultiLinePages : MonoBehaviour
     private bool cardCollectOnce = false;
 
     public ImageInteract imageToTrigger;
+    public Image TextBackgroundAnimationImage;
 
     private void Awake()
     {
 
         //textCollider = GetComponent<BoxCollider>();
-        anim = crossfadeImage.GetComponent<Animator>();
+        //anim = crossfadeImage.GetComponent<Animator>();
 
         if (spriteExists) {
             sprite = this.transform.GetChild(0).gameObject;
@@ -143,12 +144,19 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             objectToPauseAnim.GetComponent<Animator>().speed = 0;
         }
 
-        yield return new WaitForSecondsRealtime(startDelay);
-        
+        if (TextBackgroundAnimationImage != null)
+        {
+            TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
+        }
 
-        textBackground.texture = backgroundTexture;
-        textBackground.color = new Color32(255, 255, 255, backgroundAlpha);
-        textBackground.enabled = true; //enable black background
+        yield return new WaitForSecondsRealtime(startDelay);
+
+        if (textBackground) {
+            textBackground.texture = backgroundTexture;
+            textBackground.color = new Color32(255, 255, 255, backgroundAlpha);
+            textBackground.enabled = true; //enable black background 
+        }
+        
 
         if (beginAudio != null) {
             beginAudio.Play(0);
@@ -174,8 +182,10 @@ public class TextPrinterMultiLinePages : MonoBehaviour
         //Clear text on press E when finished
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0));
         subtitleTextMesh.text = string.Empty;
-        textBackground.enabled = false;
-
+        if (textBackground) {
+            textBackground.enabled = false;
+        }
+        
         if ((playerCamScript != null) && (playerMovementScript != null)) {
             playerCamScript.isPaused = false; //unpause game
             playerMovementScript.isPaused = false; //unpause movement
@@ -225,6 +235,11 @@ public class TextPrinterMultiLinePages : MonoBehaviour
             cardCollectOnce = true;
         }
 
+        if (TextBackgroundAnimationImage != null)
+        {
+            TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().idleIsDone = true;
+        }
+
         subtitleTextMesh.enabled = false;
         onFinishedPrinting?.Invoke();
     }
@@ -252,5 +267,25 @@ public class TextPrinterMultiLinePages : MonoBehaviour
         var lastCharPos = subtitleTextMesh.textInfo.characterInfo[lastChar].topRight;
         //subtitleTextMesh.rectTransform.anchoredPosition = new Vector2(0, subtitleTextMesh.rectTransform.anchoredPosition.y-15);
         subtitleTextMesh.rectTransform.anchoredPosition = new Vector2(0 - ((firstCharPos.x + lastCharPos.x) / 2), subtitleTextMesh.rectTransform.anchoredPosition.y);
+    }
+
+    IEnumerator WaitAnimation()
+    {
+
+        if (TextBackgroundAnimationImage == null)
+        {
+            Debug.Log("TextBackgroundAnimationImage is null");
+            yield return null;
+        }
+
+        else
+        {
+            Debug.Log("WaitAnimation started");
+            while (TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().isActive == true)
+            {
+                yield return null;
+            }
+            Debug.Log("WaitAnimation complete");
+        }
     }
 }

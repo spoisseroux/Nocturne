@@ -44,6 +44,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
     [SerializeField] UIDissolveHandler crossfadeDissolve;
 
+    public MoveAroundObject moveAroundObjectScript;
+    [SerializeField] GameObject objectToPauseAnim;
+    public AllCardInteractedWith cardCollectedCount;
+    private bool cardCollectOnce = false;
+
     [SerializeField] DialogueTextPrinter printerToDisable;
     [SerializeField] DialogueTextPrinter printerToEnable;
 
@@ -149,6 +154,16 @@ public class DialogueTextPrinter : MonoBehaviour
                 playerMovementScript.isPaused = true; //pause movement
             }
 
+            if (moveAroundObjectScript != null)
+            {
+                moveAroundObjectScript.isPaused = true;
+            }
+
+            if (objectToPauseAnim)
+            {
+                objectToPauseAnim.GetComponent<Animator>().speed = 0;
+            }
+
             // Block to inventory menu
             if (invMenuScript != null)
             {
@@ -214,6 +229,12 @@ public class DialogueTextPrinter : MonoBehaviour
 
             subtitleTextMesh.enabled = false;
 
+            if (objectToPauseAnim)
+            {
+                objectToPauseAnim.GetComponent<Animator>().speed = 1;
+            }
+
+
             isFinished = true;
 
             //translate to gameobject
@@ -236,6 +257,11 @@ public class DialogueTextPrinter : MonoBehaviour
             if (runOnce)
             {
                 ranOnce = true;
+            }
+
+            if (moveAroundObjectScript != null)
+            {
+                moveAroundObjectScript.isPaused = false;
             }
 
             inScript = false;
@@ -261,6 +287,12 @@ public class DialogueTextPrinter : MonoBehaviour
                 {
                     gameObjectsToEnable[j].SetActive(true);
                 }
+            }
+
+            if ((cardCollectOnce == false) && (cardCollectedCount))
+            {
+                cardCollectedCount.collectedCards += 1;
+                cardCollectOnce = true;
             }
 
             subtitleTextMesh.text = string.Empty;

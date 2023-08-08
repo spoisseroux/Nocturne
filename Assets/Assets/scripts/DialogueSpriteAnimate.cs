@@ -47,8 +47,10 @@ public class DialogueSpriteAnimate : MonoBehaviour
 
         isActive = true;
 
-        sunSprite.SetActive(false);
-        charSprite.SetActive(false);
+        if ((sunSprite != null) && (charSprite != null)) {
+            sunSprite.SetActive(false);
+            charSprite.SetActive(false);
+        } 
 
         image.enabled = true;
         spriteIndex = 0;
@@ -74,11 +76,13 @@ public class DialogueSpriteAnimate : MonoBehaviour
             yield return new WaitForSeconds(m_Speed);
         }
 
-        sunSprite.SetActive(true);
-        sunSprite.GetComponent<UISpriteAnimate>().Func_PlayUIAnim();
-        charSprite.SetActive(true);
-        charSprite.GetComponent<UISpriteAnimate>().Func_PlayUIAnim();
-        
+        if ((sunSprite != null) && (charSprite != null))
+        {
+            sunSprite.SetActive(true);
+            sunSprite.GetComponent<UISpriteAnimate>().Func_PlayUIAnim();
+            charSprite.SetActive(true);
+            charSprite.GetComponent<UISpriteAnimate>().Func_PlayUIAnim();
+        }
 
         spriteIndex = 0;
         idleIsDone = false;
