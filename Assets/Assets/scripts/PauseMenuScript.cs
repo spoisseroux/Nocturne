@@ -10,6 +10,8 @@ public class PauseMenuScript : MonoBehaviour
     private AudioSource[] allAudioSources;
     private bool cannotPause = false;
 
+    public bool keepCursorLooseOnResume = false;
+
     public static event PauseMenuStatusChanged PauseStatus;
     public delegate void PauseMenuStatusChanged(bool status);
 
@@ -86,9 +88,12 @@ public class PauseMenuScript : MonoBehaviour
 
         PauseStatus?.Invoke(isPaused);
 
-        //lock cursor for movement
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
+        if (keepCursorLooseOnResume == false) {
+            //lock cursor for movement
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = true;
+        }
+        
 
         foreach (var audioSource in allAudioSources)
         {
