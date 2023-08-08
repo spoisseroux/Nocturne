@@ -16,12 +16,18 @@ public class ItemPickup : MonoBehaviour
 {
     // Radius of Sphere being created upon request to pick up an Item
     private float pickupRange = 2f;
+    [SerializeField] private bool canPickUp = true;
+
+    private void Start()
+    {
+        InventoryMenuScript.InventoryStatus += ChangePickupStatus;
+    }
 
     // Screen for user input, upon key press we Collect the nearest IItem, if there even is any
     private void Update()
     {
         // CHANGE THE KEYCODE ACCORDING TO KEEHAR
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canPickUp)
         {
             // Find the closest IItem
             IItem item = GetClosestItem();
@@ -68,6 +74,11 @@ public class ItemPickup : MonoBehaviour
         }
         // return the closest item
         return closestItem;
+    }
+
+    public void ChangePickupStatus(bool status)
+    {
+        canPickUp = !status;
     }
 }
 

@@ -57,6 +57,8 @@ public class ImageInteract : MonoBehaviour
     public static event ImageInteractionChange InteractStatus;
     public delegate void ImageInteractionChange(bool status);
 
+    [SerializeField] PlayerInteractionStatus canPlayerInteract;
+
     private void Awake()
     {
         imageCollider = GetComponent<BoxCollider>();
@@ -71,7 +73,7 @@ public class ImageInteract : MonoBehaviour
 
     private void Update()
     {
-        if ((isInCollider) && (imageCollider))
+        if ((isInCollider) && (imageCollider) && canPlayerInteract.CheckPlayerInteractionAvailability())
         {
             if (Input.GetKeyUp(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (crossfadeDissolve.inScript == false))
             {

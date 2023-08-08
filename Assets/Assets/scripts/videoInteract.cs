@@ -46,6 +46,8 @@ public class videoInteract : MonoBehaviour
     public static event VideoInteractionStatus InteractStatus;
     public delegate void VideoInteractionStatus(bool status);
 
+    [SerializeField] PlayerInteractionStatus canPlayerInteract;
+
 
     private void Awake()
     {
@@ -62,7 +64,7 @@ public class videoInteract : MonoBehaviour
     void Update()
     {
 
-        if (isInCollider)
+        if (isInCollider && canPlayerInteract.CheckPlayerInteractionAvailability())
         {
             //Make sure pause menu is not on to activate
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (crossfadeDissolve.inScript == false))

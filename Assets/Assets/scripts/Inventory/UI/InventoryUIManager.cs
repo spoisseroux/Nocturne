@@ -90,6 +90,10 @@ public class InventoryUIManager : MonoBehaviour
     // Dissovlve handling
     [SerializeField] UIDissolveHandler uiDissolve;
 
+    // Player interaction Status
+    public static event PlayerInteractionStatus CanPlayerInteract;
+    public delegate void PlayerInteractionStatus(bool status);
+
     #region MonoBehavior Functionality
 
     // Start function... yeah
@@ -126,6 +130,9 @@ public class InventoryUIManager : MonoBehaviour
         // display variables
         currentIndex = 0;
         rightmostSlot = null;
+
+        // We are in inventory menu now, tell Player it cannot interact
+        CanPlayerInteract?.Invoke(false);
     }
 
 
@@ -136,6 +143,9 @@ public class InventoryUIManager : MonoBehaviour
         // Upon disabling of the Inventory UI, we trigger an event to rewrite the Player's Inventory
         // Sends the final List<InventorySlot> created after all user interaction with the Inventory UI has been marked as complete
         OnUIExit?.Invoke(playerSlots);
+
+        // exiting inventory menu, tell Player it can interact now
+        CanPlayerInteract?.Invoke(true);
     }
 
     #endregion MonoBehavior Functionality

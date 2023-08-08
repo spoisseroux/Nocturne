@@ -40,6 +40,7 @@ public class audioInteract : MonoBehaviour
 
     [SerializeField] DialogueTextPrinter dialogueToTrigger;
 
+    [SerializeField] PlayerInteractionStatus playerCanInteract;
 
     /* Dealing with bug that occurs when these conditions are satisfied:
     1) Interact Menu is printing text
@@ -73,7 +74,7 @@ public class audioInteract : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (isInCollider)
+        if (isInCollider && (playerCanInteract.CheckPlayerInteractionAvailability()))
         {
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (onceBool == false) && (crossfadeDissolve.inScript == false))
             {

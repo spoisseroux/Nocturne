@@ -53,7 +53,6 @@ public class PauseMenuScript : MonoBehaviour
             }
             else {
                 ResumeGame();
-                PauseStatus?.Invoke(isPaused);
             }
         }
     }
@@ -84,6 +83,8 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1f;
         //AudioListener.pause = false;
         isPaused = false;
+
+        PauseStatus?.Invoke(isPaused);
 
         //lock cursor for movement
         Cursor.lockState = CursorLockMode.Locked;

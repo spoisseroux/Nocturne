@@ -57,10 +57,13 @@ public class DialogueTextPrinter : MonoBehaviour
     // TRYING TO BLOCK CALLS TO INVENTORY MENU DURING PRINT
     [SerializeField] InventoryMenuScript invMenuScript;
 
+    [SerializeField] PlayerInteractionStatus playerCanInteract;
+
 
     private void Update()
     {
-        if ((isInCollider) && (textCollider) && (!ranOnce) && (crossfadeDissolve.inScript == false))
+        if ((isInCollider) && (textCollider) && (!ranOnce) && (crossfadeDissolve.inScript == false)
+            && CheckPlayerInteractionStatus())
         {
             if (runOnColliderEnter && (!inScript)) {
                 Print();
@@ -70,6 +73,18 @@ public class DialogueTextPrinter : MonoBehaviour
                 Print();
             }
 
+        }
+    }
+
+    private bool CheckPlayerInteractionStatus()
+    {
+        if (playerCanInteract == null)
+        {
+            return true;
+        }
+        else
+        {
+            return playerCanInteract.CheckPlayerInteractionAvailability();
         }
     }
 
