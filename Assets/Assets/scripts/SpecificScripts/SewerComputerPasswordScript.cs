@@ -36,11 +36,13 @@ public class SewerComputerPasswordScript : MonoBehaviour
     public static event ComputerStatus ComputerInUse;
     public delegate void ComputerStatus(bool status);
 
+    [SerializeField] PlayerInteractionStatus playerCanInteract;
+
 
     // Update is called once per frame
     void Update()
     {
-      if ((isInCollider) && (colliderToBeIn))
+      if ((isInCollider) && (colliderToBeIn) && playerCanInteract.CheckPlayerInteractionAvailability())
       {
           if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false) && (crossfade.inScript == false))
           {              
