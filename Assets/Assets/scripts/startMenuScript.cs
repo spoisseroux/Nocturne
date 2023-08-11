@@ -15,6 +15,7 @@ public class startMenuScript : MonoBehaviour
     private float lerpTime = 0f;
     private bool done = false;
     [SerializeField] string sceneName;
+    [SerializeField] AudioFadeManager audioFadeManager;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class startMenuScript : MonoBehaviour
             if ((time > duration / 2) && (videoDissolve.inScript == false) && (done == false)) {
                 done = true;
                 videoGO.SetActive(false);
+                audioFadeManager.FadeOut();
                 yield return StartCoroutine(obiDissolve.StartDissolveIn());
             }
             obiScroll.y = Mathf.Lerp(minimum, maximum, time / duration);
@@ -40,6 +42,9 @@ public class startMenuScript : MonoBehaviour
             yield return null;
         }
         obiScroll.y = endValue;
+
+        
+
         yield return new WaitUntil(() => obiDissolve.inScript == false);
 
         //go to next scene

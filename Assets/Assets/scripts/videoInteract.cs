@@ -29,6 +29,8 @@ public class videoInteract : MonoBehaviour
     [SerializeField] string animationName;
 
     public bool crossfadeEnter = false;
+    public bool crossfadeEnterOut = false;
+    public bool crossfadeExitIn = false;
     public bool crossfadeExit = false;
 
     //[SerializeField] VideoPlayer videoPlayer;
@@ -48,22 +50,32 @@ public class videoInteract : MonoBehaviour
 
     [SerializeField] PlayerInteractionStatus canPlayerInteract;
 
+    [SerializeField] MoveAroundObject moveAroundObjectScript;
+    [SerializeField] GameObject objectToPauseAnim;
+
 
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
         videoPlayer = GetComponent<VideoPlayer>();
         if (playOnAwake) {
-            playVideo();
+            StartCoroutine(playVideo());
         }
         
+    }
+
+    public void playVideoOnClick() {
+        Debug.Log("Video on click");
+
+        if (inScript == false) {
+            StartCoroutine(playVideo());
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
         if (isInCollider && canPlayerInteract.CheckPlayerInteractionAvailability())
         {
             //Make sure pause menu is not on to activate
@@ -71,13 +83,21 @@ public class videoInteract : MonoBehaviour
             {
                 StartCoroutine(playVideo());
             }
-
         }
-
     }
 
     IEnumerator playVideo() {
         inScript = true;
+
+        if (objectToPauseAnim) {
+            objectToPauseAnim.GetComponent<Animator>().speed = 0;
+        }
+
+        if (moveAroundObjectScript) {
+            moveAroundObjectScript.isPaused = true;
+        }
+
+        Debug.Log("Video inscript");
 
         if (playerCamScript) {
             playerCamScript.isPaused = true;
@@ -100,9 +120,19 @@ public class videoInteract : MonoBehaviour
         videoPlayer.Play();
         yield return new WaitForSeconds(0.3f);
 
-        if (crossfadeEnter)
+        if (crossfadeEnter && crossfadeEnterOut) {
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
+        }
+
+        if (crossfadeEnter && (!crossfadeEnterOut))
         {
             crossfadeDissolve.MakeTransparent();
+        }
+
+        if ((!crossfadeEnter) && (crossfadeEnterOut))
+        {
+            crossfadeDissolve.MakeSolid();
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
         }
 
         if (canExit)
@@ -127,7 +157,18 @@ public class videoInteract : MonoBehaviour
         //wait until E is unpressed
         //yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
         //wait until E is pressed
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+        yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
+
+        if (crossfadeExit && crossfadeExitIn)
+        {
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+        }
+
+        if (!crossfadeExit && crossfadeExitIn)
+        {
+            crossfadeDissolve.MakeTransparent();
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+        }
 
         //stop video
         videoImage.enabled = false;
@@ -187,6 +228,16 @@ public class videoInteract : MonoBehaviour
             animatorToAnimate.Play(animationName);
         }
 
+        if (objectToPauseAnim)
+        {
+            objectToPauseAnim.GetComponent<Animator>().speed = 1;
+        }
+
+        if (moveAroundObjectScript)
+        {
+            moveAroundObjectScript.isPaused = false;
+        }
+
         if (crossfadeExit)
         {
             crossfadeDissolve.MakeSolid();
@@ -207,6 +258,11 @@ public class videoInteract : MonoBehaviour
 
     void endReached(UnityEngine.Video.VideoPlayer vp)
     {
+        if (crossfadeExitIn)
+        {
+            StartCoroutine(exitingInCrossfadeWithoutE());
+        }
+
         //stop video
         videoImage.enabled = false;
 
@@ -223,6 +279,16 @@ public class videoInteract : MonoBehaviour
         {
             playerMovementScript.isPaused = false; //pause movement
         }
+        if (objectToPauseAnim)
+        {
+            objectToPauseAnim.GetComponent<Animator>().speed = 1;
+        }
+
+        if (moveAroundObjectScript)
+        {
+            moveAroundObjectScript.isPaused = false;
+        }
+
 
         //go to next scene
         if (sceneName != "") {
@@ -271,7 +337,17 @@ public class videoInteract : MonoBehaviour
 
     }
 
+    IEnumerator exitingInCrossfadeWithoutE() {
+        if (crossfadeExitIn)
+        {
+            crossfadeDissolve.MakeTransparent();
+            yield return StartCoroutine(crossfadeDissolve.StartDissolveIn());
+        }
+    }
+
     IEnumerator exitingCrossfadeWithoutE() {
+
+
         crossfadeDissolve.MakeSolid();
         yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
         StopAllCoroutines();
@@ -287,17 +363,23 @@ public class videoInteract : MonoBehaviour
         isInCollider = true;
 
         //switch to charSprite when in collider
-        sunSprite.enabled = false;
-        charSprite.enabled = true;
+        if (sunSprite && charSprite) {
+            sunSprite.enabled = false;
+            charSprite.enabled = true;
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
         isInCollider = false;
 
+        if (sunSprite && charSprite) {
+            charSprite.enabled = false;
+            sunSprite.enabled = true;
+        }
         //switch to charSprite when in collider
-        charSprite.enabled = false;
-        sunSprite.enabled = true;
+        
     }
 
 }

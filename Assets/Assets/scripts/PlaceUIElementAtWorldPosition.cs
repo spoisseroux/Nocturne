@@ -22,7 +22,7 @@ public class PlaceUIElementAtWorldPosition : MonoBehaviour
     {
 
         var dist = Vector3.Distance(Camera.main.transform.position, objectToFollow.position);
-        Debug.Log("Distance to other: " + dist);
+        //Debug.Log("Distance to other: " + dist);
 
         if (dist <= distanceToDraw)
         {
