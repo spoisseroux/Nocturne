@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DialogueTextPrinter : MonoBehaviour
 {
 
-    [SerializeField] [Range(0, 0.1f)] float normalTextSpeed = 0.05f;
+    [SerializeField] [Range(0, 0.1f)] float normalTextSpeed = 0.06f;
     [SerializeField] [Range(0, 0.05f)] float skipTextSpeed = 0.025f;
     [SerializeField] bool runOnColliderEnter = false;
     [SerializeField] bool runOnce = false;
@@ -41,6 +41,7 @@ public class DialogueTextPrinter : MonoBehaviour
 
     [SerializeField] Image sunSprite;
     [SerializeField] Image charSprite;
+    [SerializeField] bool enableCharSpriteForPrint = false;
 
     [SerializeField] UIDissolveHandler crossfadeDissolve;
 
@@ -64,6 +65,16 @@ public class DialogueTextPrinter : MonoBehaviour
 
     [SerializeField] PlayerInteractionStatus playerCanInteract;
 
+    [SerializeField] videoInteract videoToPlay;
+
+    private CharSpriteFadeManager charSpriteFade;
+
+    private void Start()
+    {
+        if (enableCharSpriteForPrint) {
+            charSpriteFade = charSprite.GetComponent<CharSpriteFadeManager>();
+        }
+    }
 
     private void Update()
     {
@@ -172,6 +183,7 @@ public class DialogueTextPrinter : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(beginStartDelay);
 
+
             if (TextBackgroundAnimationImage != null)
             {
                 TextBackgroundAnimationImage.GetComponent<DialogueSpriteAnimate>().Play();
@@ -182,6 +194,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
 
             yield return new WaitForSecondsRealtime(textStartDelay);
+
+            if (enableCharSpriteForPrint && charSprite)
+            {
+                charSpriteFade.FadeIn();
+            }
 
             if (beginAudio != null)
             {
@@ -249,6 +266,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
             }
 
+            if (enableCharSpriteForPrint && charSprite)
+            {
+                charSpriteFade.FadeOut();
+            }
+
             subtitleTextMesh.enabled = false;
             onFinishedPrinting?.Invoke();
 
@@ -259,7 +281,7 @@ public class DialogueTextPrinter : MonoBehaviour
                 ranOnce = true;
             }
 
-            if (moveAroundObjectScript != null)
+            if (moveAroundObjectScript != null && (!videoToPlay))
             {
                 moveAroundObjectScript.isPaused = false;
             }
@@ -293,6 +315,10 @@ public class DialogueTextPrinter : MonoBehaviour
             {
                 cardCollectedCount.collectedCards += 1;
                 cardCollectOnce = true;
+            }
+
+            if (videoToPlay) {
+                videoToPlay.playVideoOnClick();
             }
 
             subtitleTextMesh.text = string.Empty;
