@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00030242506, g: 0.00030205425, b: 0.00030242506, a: 1}
+  m_IndirectSpecularColor: {r: 0.00032164482, g: 0.00032147288, b: 0.00032164482, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4987,6 +4987,8 @@ GameObject:
   - component: {fileID: 2078558417}
   - component: {fileID: 2078558416}
   - component: {fileID: 2078558424}
+  - component: {fileID: 2078558426}
+  - component: {fileID: 2078558425}
   m_Layer: 5
   m_Name: BedroomCardButton
   m_TagString: Untagged
@@ -5501,8 +5503,8 @@ MonoBehaviour:
   runOnColliderEnter: 0
   runOnce: 0
   pages:
-  - hello
-  - 222222
+  - My bedroom, this is where I received that packet from.
+  - "...and where Ive lived my entire life so far\u2026"
   playerMovementScript: {fileID: 0}
   playerCamScript: {fileID: 0}
   PauseMenu: {fileID: 556030735}
@@ -5529,7 +5531,76 @@ MonoBehaviour:
   isFinished: 0
   invMenuScript: {fileID: 0}
   playerCanInteract: {fileID: 0}
-  videoToPlay: {fileID: 0}
+  videoToPlay: {fileID: 2078558426}
+--- !u!328 &2078558425
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078558412}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 2f5063a17dd8df24ba3b654ca90c54bd, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8600000, guid: aa14a44e348467a41a2ee2e1ccb9ebe0, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!114 &2078558426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078558412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114f846955f90be4a91a8f1d36061a95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnAwake: 0
+  canExit: 1
+  playerMovementScript: {fileID: 0}
+  playerCamScript: {fileID: 0}
+  videoImage: {fileID: 7810681226342616584}
+  crossfadeDissolve: {fileID: 1068063250483406101}
+  sunSprite: {fileID: 0}
+  charSprite: {fileID: 0}
+  animatorToAnimate: {fileID: 0}
+  animationName: 
+  crossfadeEnter: 1
+  crossfadeEnterOut: 1
+  crossfadeExitIn: 1
+  crossfadeExit: 1
+  sceneName: 
+  CameraHolder: {fileID: 0}
+  Player: {fileID: 0}
+  PauseMenu: {fileID: 556030735}
+  translatePlayerTo: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  canPlayerInteract: {fileID: 0}
+  moveAroundObjectScript: {fileID: 4721801236790471648}
+  objectToPauseAnim: {fileID: 919132148356925577}
 --- !u!1 &2122635153
 GameObject:
   m_ObjectHideFlags: 0
