@@ -44,6 +44,10 @@ public class TelescopeScript : MonoBehaviour
     public Camera telescopeCamera;
 
     [SerializeField] DialogueTextPrinter dialogueToTrigger;
+    [SerializeField] PlayerInteractionStatus playerCanInteract;
+
+    public static event TelescopeTriggered InTelescope;
+    public delegate void TelescopeTriggered(bool status);
 
     private void Awake()
     {
@@ -60,7 +64,7 @@ public class TelescopeScript : MonoBehaviour
 
     private void Update()
     {
-        if ((isInCollider) && (imageCollider))
+        if ((isInCollider) && (imageCollider) && (playerCanInteract.CheckPlayerInteractionAvailability()))
         {
             if (Input.GetKeyUp(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false))
             {
@@ -94,6 +98,9 @@ public class TelescopeScript : MonoBehaviour
             playerCamScript.isPaused = true; //pause game
             playerMovementScript.isPaused = true; //pause movement
         }
+
+        // Tell inventory menu we are in telescope view
+        InTelescope?.Invoke(true);
 
         if (moveAroundObjectScript != null)
         {
@@ -173,6 +180,9 @@ public class TelescopeScript : MonoBehaviour
    
 
         isFinished = true;
+
+        // Tell inventory menu we are in telescope view
+        InTelescope?.Invoke(false);
 
         if (spriteExists)
         {

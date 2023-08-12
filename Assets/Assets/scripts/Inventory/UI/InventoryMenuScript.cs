@@ -76,6 +76,7 @@ public class InventoryMenuScript : MonoBehaviour
         ImageInteract.InteractStatus += ChangeInteraction;
         videoInteract.InteractStatus += ChangeInteraction;
         SewerComputerPasswordScript.ComputerInUse += ChangeInteraction;
+        TelescopeScript.InTelescope += ChangeInteraction;
     }
 
     // Sets Inventory Menu UI inactive upon a successful use of an Item in the UI, exclusively used by Event trigger

@@ -12,12 +12,12 @@ public class SewerInteractScript : MonoBehaviour
     public GameObject waterDropAudio;
     public AudioSource purpleLevelAudio;
 
-    BoxCollider boxCollider;
+    //BoxCollider boxCollider;
     private bool isInCollider = false;
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        //boxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
