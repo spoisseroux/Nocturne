@@ -8,7 +8,7 @@ public class AllCardInteractedWith : MonoBehaviour
     [HideInInspector] public int collectedCards = 0;
     [SerializeField] int numOfCardsToCollect;
     [SerializeField] GameObject gameObjectToEnable;
-    [SerializeField] TextPrinterMultiLinePages textToPrint;
+    [SerializeField] DialogueTextPrinter textToPrint;
     private bool isDone = false;
 
     // Update is called once per frame

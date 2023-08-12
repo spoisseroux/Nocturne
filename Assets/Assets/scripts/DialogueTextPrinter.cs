@@ -47,8 +47,6 @@ public class DialogueTextPrinter : MonoBehaviour
 
     public MoveAroundObject moveAroundObjectScript;
     [SerializeField] GameObject objectToPauseAnim;
-    public AllCardInteractedWith cardCollectedCount;
-    private bool cardCollectOnce = false;
 
     [SerializeField] DialogueTextPrinter printerToDisable;
     [SerializeField] DialogueTextPrinter printerToEnable;
@@ -311,11 +309,13 @@ public class DialogueTextPrinter : MonoBehaviour
                 }
             }
 
+            /*
             if ((cardCollectOnce == false) && (cardCollectedCount))
             {
                 cardCollectedCount.collectedCards += 1;
                 cardCollectOnce = true;
             }
+            */
 
             if (videoToPlay) {
                 videoToPlay.playVideoOnClick();
