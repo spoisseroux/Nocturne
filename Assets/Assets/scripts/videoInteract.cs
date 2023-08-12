@@ -52,6 +52,8 @@ public class videoInteract : MonoBehaviour
 
     [SerializeField] MoveAroundObject moveAroundObjectScript;
     [SerializeField] GameObject objectToPauseAnim;
+    [SerializeField] AllCardInteractedWith cardCollectedCount;
+    private bool cardCollectOnce = false;
 
 
     private void Awake()
@@ -253,6 +255,13 @@ public class videoInteract : MonoBehaviour
         //NEW TO FIX BUG
         StopAllCoroutines();
 
+        if ((cardCollectOnce == false) && (cardCollectedCount))
+        {
+            cardCollectedCount.collectedCards += 1;
+            cardCollectOnce = true;
+        }
+
+
     }
 
 
@@ -333,6 +342,12 @@ public class videoInteract : MonoBehaviour
         if (crossfadeExit)
         {
             StartCoroutine(exitingCrossfadeWithoutE());
+        }
+
+        if ((cardCollectOnce == false) && (cardCollectedCount))
+        {
+            cardCollectedCount.collectedCards += 1;
+            cardCollectOnce = true;
         }
 
     }

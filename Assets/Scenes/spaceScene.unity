@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00030696436, g: 0.000306688, b: 0.00030696436, a: 1}
+  m_IndirectSpecularColor: {r: 0.00032359606, g: 0.0003232871, b: 0.00032359606, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -696,7 +696,6 @@ MonoBehaviour:
   crossfadeDissolve: {fileID: 1068063250483406101}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
-  cardCollectedCount: {fileID: 4721801236790471652}
   printerToDisable: {fileID: 0}
   printerToEnable: {fileID: 0}
   gameObjectsToDisable: []
@@ -714,7 +713,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12712760}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 18997fba92d0c7d4593d1f83c5e50f20, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 2f9dd65e73ed2c24b86aaf6343366a5b, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -775,6 +774,7 @@ MonoBehaviour:
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
+  cardCollectedCount: {fileID: 4721801236790471652}
 --- !u!1 &233868097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3221,7 +3221,7 @@ RectTransform:
   m_GameObject: {fileID: 1435306227}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.82, y: 4.82, z: 4.82}
+  m_LocalScale: {x: 4.8199997, y: 4.8199997, z: 4.8199997}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1520050340}
@@ -3234,7 +3234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 476.9, y: 156.6}
+  m_AnchoredPosition: {x: 476.8999, y: 156.60019}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1442193263
@@ -3889,6 +3889,7 @@ MonoBehaviour:
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
+  cardCollectedCount: {fileID: 4721801236790471652}
 --- !u!114 &1520050352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,7 +3928,6 @@ MonoBehaviour:
   crossfadeDissolve: {fileID: 1068063250483406101}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
-  cardCollectedCount: {fileID: 4721801236790471652}
   printerToDisable: {fileID: 0}
   printerToEnable: {fileID: 0}
   gameObjectsToDisable: []
@@ -4229,7 +4229,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28986
+  m_Name: pb_Mesh54708
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5619,7 +5619,6 @@ MonoBehaviour:
   crossfadeDissolve: {fileID: 1068063250483406101}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
-  cardCollectedCount: {fileID: 4721801236790471652}
   printerToDisable: {fileID: 0}
   printerToEnable: {fileID: 0}
   gameObjectsToDisable: []
@@ -5698,6 +5697,7 @@ MonoBehaviour:
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
+  cardCollectedCount: {fileID: 4721801236790471652}
 --- !u!1 &2122635153
 GameObject:
   m_ObjectHideFlags: 0
@@ -7942,6 +7942,8 @@ GameObject:
   - component: {fileID: 4721801236790471651}
   - component: {fileID: 4721801236790471652}
   - component: {fileID: 4721801236790471653}
+  - component: {fileID: 4721801236790471655}
+  - component: {fileID: 4721801236790471654}
   m_Layer: 0
   m_Name: MainCam
   m_TagString: MainCamera
@@ -8025,37 +8027,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 4721801236790471647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2daf3c785cad9b4eb33843b814aa693, type: 3}
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   normalTextSpeed: 0.05
   skipTextSpeed: 0.025
-  backgroundTexture: {fileID: 2800000, guid: 5f62939ca3921d344a7d4dcc0bf74e65, type: 3}
-  backgroundAlpha: 255
+  runOnColliderEnter: 0
+  runOnce: 0
   pages:
-  - time to go
+  - Why do I feel like I know the whole connection address now?
+  - ...I should check the terminal at the bottom of the station, the connection there
+    is a lot stronger.
   playerMovementScript: {fileID: 0}
   playerCamScript: {fileID: 0}
-  moveAroundObjectScript: {fileID: 4721801236790471648}
-  PauseMenu: {fileID: 0}
-  spriteExists: 0
-  subtitleTextMesh: {fileID: 0}
+  PauseMenu: {fileID: 556030735}
+  TextBackgroundAnimationImage: {fileID: 456713209}
+  subtitleTextMesh: {fileID: 879637611}
   textCollider: {fileID: 0}
-  startDelay: 1
+  beginStartDelay: 0
+  textStartDelay: 1
   CameraHolder: {fileID: 0}
   Player: {fileID: 0}
   translatePlayerTo: {fileID: 0}
-  crossfadeImage: {fileID: 0}
-  crossfadeExit: 0
-  objectToPauseAnim: {fileID: 919132148356925577}
   sunSprite: {fileID: 0}
-  charSprite: {fileID: 0}
-  textBackground: {fileID: 0}
+  charSprite: {fileID: 1565630441}
+  enableCharSpriteForPrint: 1
+  crossfadeDissolve: {fileID: 1068063250483406101}
+  moveAroundObjectScript: {fileID: 4721801236790471648}
+  objectToPauseAnim: {fileID: 919132148356925577}
+  printerToDisable: {fileID: 0}
+  printerToEnable: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
   beginAudio: {fileID: 0}
   isFinished: 0
-  cardCollectedCount: {fileID: 0}
-  imageToTrigger: {fileID: 0}
-  TextBackgroundAnimationImage: {fileID: 0}
+  invMenuScript: {fileID: 0}
+  playerCanInteract: {fileID: 0}
+  videoToPlay: {fileID: 0}
+--- !u!114 &4721801236790471654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721801236790471647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalTextSpeed: 0.05
+  skipTextSpeed: 0.025
+  runOnColliderEnter: 0
+  runOnce: 0
+  pages:
+  - '[Y#u d?nt kn<w me, b#t I''m l@ke you; so*n, it w-nt be safe the%e f^r yo-. C$me
+    t& me]'
+  - (192.168.1.#?!)
+  - "Im like you\u2026? Who is this, and what do the they mean?? The signal from
+    this message is so weak its barely readable. "
+  - I cant even read the last 3 digits of the return address. Maybe the lost packets
+    got scattered across other frequencies.
+  playerMovementScript: {fileID: 0}
+  playerCamScript: {fileID: 0}
+  PauseMenu: {fileID: 556030735}
+  TextBackgroundAnimationImage: {fileID: 456713209}
+  subtitleTextMesh: {fileID: 879637611}
+  textCollider: {fileID: 0}
+  beginStartDelay: 0
+  textStartDelay: 1
+  CameraHolder: {fileID: 0}
+  Player: {fileID: 0}
+  translatePlayerTo: {fileID: 0}
+  sunSprite: {fileID: 0}
+  charSprite: {fileID: 1565630441}
+  enableCharSpriteForPrint: 1
+  crossfadeDissolve: {fileID: 1068063250483406101}
+  moveAroundObjectScript: {fileID: 4721801236790471648}
+  objectToPauseAnim: {fileID: 919132148356925577}
+  printerToDisable: {fileID: 0}
+  printerToEnable: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  beginAudio: {fileID: 0}
+  isFinished: 0
+  invMenuScript: {fileID: 0}
+  playerCanInteract: {fileID: 0}
+  videoToPlay: {fileID: 0}
+--- !u!114 &4721801236790471655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721801236790471647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782b72f639792f046845fbe2e2069397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uIDissolveHandler: {fileID: 1068063250483406101}
+  textPrinter: {fileID: 4721801236790471654}
 --- !u!23 &4753987770662869439
 MeshRenderer:
   m_ObjectHideFlags: 0

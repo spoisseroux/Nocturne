@@ -35,7 +35,8 @@ public class MoveAroundObject : MonoBehaviour
 
     void Update()
     {
-        if (isPaused == false) {
+        if (isPaused == false)
+        {
             //float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
             //float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
 
@@ -59,6 +60,9 @@ public class MoveAroundObject : MonoBehaviour
 
             // Substract forward vector of the GameObject to point its forward vector to the target
             transform.position = _target.position - transform.forward * _distanceFromTarget;
+        }
+        else {
+            //Reset velocity
         }
     }
 }
