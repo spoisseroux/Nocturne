@@ -12,6 +12,8 @@ public class TransformScript : MonoBehaviour
     [SerializeField] PlayerMovement playerMovementScript;
     [SerializeField] PlayerCam playerCamScript;
     [SerializeField] AudioRearrange audioRearrange;
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    [SerializeField] GameObject[] gameObjectsToEnable;
     private BoxCollider boxCollider;
 
     void Start()
@@ -36,6 +38,23 @@ public class TransformScript : MonoBehaviour
 
         if (audioRearrange) {
             audioRearrange.rearrangeAudio();
+        }
+
+        //gameobjects
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+
+        if (gameObjectsToEnable.Length != 0)
+        {
+            for (int j = 0; j < gameObjectsToEnable.Length; j++)
+            {
+                gameObjectsToEnable[j].SetActive(true);
+            }
         }
 
         StartCoroutine(uiDissolve.StartDissolveOut());
