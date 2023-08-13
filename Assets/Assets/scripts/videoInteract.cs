@@ -238,6 +238,7 @@ public class videoInteract : MonoBehaviour
         if (moveAroundObjectScript)
         {
             moveAroundObjectScript.isPaused = false;
+            moveAroundObjectScript.justUnPaused = true;
         }
 
         if (crossfadeExit)
@@ -247,10 +248,7 @@ public class videoInteract : MonoBehaviour
 
         }
 
-        // Tell InventoryMenu we are no longer in a video interact (PLACEMENT OF THIS MAY BE IFFY)
-        Debug.Log("Invoking Interact Status");
         InteractStatus?.Invoke(false);
-        Debug.Log("Passed Invokation");
 
         //NEW TO FIX BUG
         StopAllCoroutines();

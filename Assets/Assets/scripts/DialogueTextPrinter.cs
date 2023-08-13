@@ -282,6 +282,7 @@ public class DialogueTextPrinter : MonoBehaviour
             if (moveAroundObjectScript != null && (!videoToPlay))
             {
                 moveAroundObjectScript.isPaused = false;
+                moveAroundObjectScript.justUnPaused = true;
             }
 
             inScript = false;

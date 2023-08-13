@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoveAroundObject : MonoBehaviour
 {
 
-    [HideInInspector] public bool isPaused = false;
+    [SerializeField] public bool isPaused = false; // [HideInInspector]
+    public bool justUnPaused = false;
 
     [SerializeField]
     private float _mouseSensitivity = 3.0f;
@@ -13,8 +14,8 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField]
     private float _zoomSensitivity = 3.0f;
 
-    private float _rotationY;
-    private float _rotationX;
+    [SerializeField] private float _rotationY;
+    [SerializeField] private float _rotationX;
 
     [SerializeField]
     private Transform _target;
@@ -24,7 +25,7 @@ public class MoveAroundObject : MonoBehaviour
 
     [SerializeField] private float _distanceFromTarget;
 
-    private Vector3 _currentRotation;
+    [SerializeField] private Vector3 _currentRotation;
     private Vector3 _smoothVelocity = Vector3.zero;
 
     [SerializeField]
@@ -33,15 +34,26 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField]
     private Vector2 _rotationXMinMax = new Vector2(-40, 40);
 
+    [SerializeField]
+    private Vector3 nextRotation = Vector3.zero;
+
+    float mouseX = 0.0f;
+    float mouseY = 0.0f;
+
+
     void Update()
     {
         if (isPaused == false)
         {
             //float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
             //float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
+            mouseX = Input.GetAxis("Horizontal") * _mouseSensitivity;
+            mouseY = Input.GetAxis("Vertical") * _mouseSensitivity;
 
-            float mouseX = Input.GetAxis("Horizontal") * _mouseSensitivity;
-            float mouseY = Input.GetAxis("Vertical") * _mouseSensitivity;
+            if (justUnPaused)
+            {
+                ResetSmooth();
+            }
 
             _rotationY += mouseX;
             _rotationX += mouseY;
@@ -49,7 +61,7 @@ public class MoveAroundObject : MonoBehaviour
             // Apply clamping for x rotation 
             _rotationX = Mathf.Clamp(_rotationX, _rotationXMinMax.x, _rotationXMinMax.y);
 
-            Vector3 nextRotation = new Vector3(_rotationX, _rotationY);
+            nextRotation = new Vector3(_rotationX, _rotationY); // Vector3 local variable before serializefield addition
 
             // Apply damping between rotation changes
             _currentRotation = Vector3.SmoothDamp(_currentRotation, nextRotation, ref _smoothVelocity, _smoothTime);
@@ -58,11 +70,33 @@ public class MoveAroundObject : MonoBehaviour
             _distanceFromTarget += Input.GetAxis("Mouse ScrollWheel") * _zoomSensitivity;
             _distanceFromTarget = Mathf.Clamp(_distanceFromTarget, _distanceFromTargetMin, _distanceFromTargetMax);
 
-            // Substract forward vector of the GameObject to point its forward vector to the target
+            // Subtract forward vector of the GameObject to point its forward vector to the target
             transform.position = _target.position - transform.forward * _distanceFromTarget;
+
+            // _smoothTime = 0.2f; // this is causing the spin after interacts end, if we do not reset to 0.2f it fixes the issue
+            // maybe we lerp a coroutine to gradually increase it to 0.2f again???
+            justUnPaused = false;
         }
-        else {
-            //Reset velocity
+        else
+        {
+            _smoothTime = 2f;
+            _smoothVelocity = Vector3.zero;
         }
+    }
+
+    // brittle fix
+    public void ResetSmooth()
+    {
+        StartCoroutine(ResetSmoothTime());
+    }
+
+    private IEnumerator ResetSmoothTime()
+    {
+        while (_smoothTime > 0.2f)
+        {
+            _smoothTime -= 0.1f;
+            yield return new WaitForSeconds(0.09f);
+        }
+
     }
 }

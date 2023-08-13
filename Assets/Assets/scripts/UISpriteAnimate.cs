@@ -64,7 +64,7 @@ public class UISpriteAnimate : MonoBehaviour
     IEnumerator Func_PlayAnimUI()
     {
         yield return new WaitForSeconds(m_Speed);
-        if (m_IndexSprite >= m_SpriteArray.Length)
+        if (m_IndexSprite >= (m_SpriteArray.Length - 1))
         {
             //if we trigger new sprite anim on finish switch to that
             if ((triggerNewOnOneShot) && (spriteAnimToTriggerOnFinish != null)) {
