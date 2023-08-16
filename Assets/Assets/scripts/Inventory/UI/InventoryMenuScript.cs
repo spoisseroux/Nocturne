@@ -191,7 +191,7 @@ public class InventoryMenuScript : MonoBehaviour
         inInteraction = status;
     }
 
-    void ChangeAbleToCloseStatus(bool status)
+    public void ChangeAbleToCloseStatus(bool status)
     {
         ableToClose = status;
     }

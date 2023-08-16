@@ -16,6 +16,9 @@ public class SatelliteComputer : MonoBehaviour
     [SerializeField] GameObject passwordTerminal;
     [SerializeField] GameObject controlPad;
 
+    [SerializeField] AudioClip bootUp;
+    [SerializeField] AudioClip bootDown;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -19,6 +19,10 @@ public class PasswordChecker : MonoBehaviour
     [SerializeField] private int addIndex = 10;
     [SerializeField] private int deleteIndex = 9;
 
+    // AudioClips
+    [SerializeField] AudioClip success;
+    [SerializeField] AudioClip failure;
+
     // Start is called before the first frame update
     void Start()
     {

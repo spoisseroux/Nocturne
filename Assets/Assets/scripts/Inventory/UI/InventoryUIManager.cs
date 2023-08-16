@@ -90,6 +90,9 @@ public class InventoryUIManager : MonoBehaviour
     // Dissovlve handling
     [SerializeField] UIDissolveHandler uiDissolve;
 
+    // InventoryMenuScript
+    [SerializeField] InventoryMenuScript menuScript;
+
     // Player interaction Status
     public static event PlayerInteractionStatus CanPlayerInteract;
     public delegate void PlayerInteractionStatus(bool status);
@@ -360,7 +363,13 @@ public class InventoryUIManager : MonoBehaviour
     {
         // Disable buttons
         DisableButtons();
+
+        // time variable
         var t = 0f;
+
+        // Disable closing menu
+        menuScript.ChangeAbleToCloseStatus(false);
+
         while (t < 1f)
         {
             t += 3 * Time.deltaTime;
@@ -369,6 +378,9 @@ public class InventoryUIManager : MonoBehaviour
         }
         // Reenable buttons
         ReenableButtons();
+
+        // Reenable closing menu
+        menuScript.ChangeAbleToCloseStatus(true);
     }
 
 
