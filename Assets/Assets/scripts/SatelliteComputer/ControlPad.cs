@@ -9,11 +9,17 @@ public class ControlPad : MonoBehaviour
     // Buttons
     [SerializeField] Button enterButton;
     [SerializeField] Button deleteButton;
-    [SerializeField] Button exitButton;
 
     // Reference to Password Terminal
     [SerializeField] GameObject passwordTerminal;
     PasswordChecker passwordChecker;
+
+    // Delete digit sound
+    [SerializeField] AudioClip digitDelete;
+
+    // Event for playing audio in SatelliteComputer script
+    public static event HandleAudio PlayAudio;
+    public delegate void HandleAudio(AudioClip clip);
 
     private void Start()
     {
@@ -28,8 +34,11 @@ public class ControlPad : MonoBehaviour
 
     public void DeleteDigit()
     {
+        // Delete digit
         passwordChecker.DeleteDigit();
         Debug.Log("Deleted digit");
+
+        // Play sound
     }
 
     public void ExitMenu()

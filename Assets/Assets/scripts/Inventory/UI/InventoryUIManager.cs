@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 /* SUMMARY:
  * The InventoryUIManager manages the entire UI for interfacing with the Inventory. 
- * Probably the most complex system to try and understand.
  * 
  * This script is placed on a UI Canvas GameObject called "InventoryMenu" that is made as a child of the UI Canvas. 
  * This GameObject has an empty child GameObject called SlotContainer that holds all UISlot in the Carousel

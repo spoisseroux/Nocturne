@@ -12,9 +12,12 @@ public class Keypad : MonoBehaviour
     // Reference to our Password Window
     [SerializeField] GameObject passwordTerminal;
 
-    // All sound bytes for Satellite Computer
+    // All sound bytes for Keypad
     [SerializeField] AudioClip digitEnter;
-    [SerializeField] AudioClip digitDelete;
+
+    // Event for playing audio in SatelliteComputer script
+    public static event HandleAudio PlayAudio;
+    public delegate void HandleAudio(AudioClip clip);
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +28,12 @@ public class Keypad : MonoBehaviour
             int padnumber = i + 1;
             keypadButtons[i].onClick.AddListener(() => SendNumberToPasscode(padnumber.ToString()));
             keypadButtons[i].onClick.AddListener(delegate { ButtonPressed(padnumber.ToString()); });
-
-            Debug.Log("Added listener for button, digit: " + i + (i+1));
         }
     }
 
     public void ButtonPressed(string digit)
     {
-        Debug.Log("Button " + digit + " pressed");
+        // Play sound
     }
 
     public void SendNumberToPasscode(string digit)

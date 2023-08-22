@@ -11,17 +11,25 @@ public class PasswordChecker : MonoBehaviour
     [SerializeField] GameObject passwordWindow;
     TextMeshProUGUI passwordDisplay;
 
-    // Passwords
+    // Storing the correct password and the current entered password
     [SerializeField] private string password;
     [SerializeField] private string digitsEntered;
 
-    // Tracking our place
+    // Tracking our current digit
     [SerializeField] private int addIndex = 10;
     [SerializeField] private int deleteIndex = 9;
 
     // AudioClips
     [SerializeField] AudioClip success;
     [SerializeField] AudioClip failure;
+
+    // Successful password event
+    public static event HandleSuccessfulPassword CorrectPassword;
+    public delegate void HandleSuccessfulPassword();
+
+    // Event for playing audio in SatelliteComputer script
+    public static event HandleAudio PlayAudio;
+    public delegate void HandleAudio(AudioClip clip);
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +43,13 @@ public class PasswordChecker : MonoBehaviour
         passwordDisplay.text = digitsEntered;
     }
 
+    // Deletes a digit from the password, and reflects this in both the backend and frontend, triggered by an OnClick
     public void DeleteDigit()
     {
         // delete digit
         if (deleteIndex >= 10)
         {
-            // Rewriting string because for some reason strings are immutable in c# :///
+            // rewriting string (strings are immutable in c# ???)
             StringBuilder sb = new StringBuilder(digitsEntered);
             sb[deleteIndex] = 'X'; // needs to be char
             digitsEntered = sb.ToString();
@@ -55,12 +64,13 @@ public class PasswordChecker : MonoBehaviour
         }
     }
 
+    // Adds a digit to the password, and reflects this in the backend and frontend, triggered by an OnClick
     public void AddDigit(char digit)
     {
         // add digit
         if (addIndex < 13)
         {
-            // Rewrite our string using StringBuilder
+            // Rrwrite our string using StringBuilder
             StringBuilder sb = new StringBuilder(digitsEntered);
             sb[addIndex] = digit;
             digitsEntered = sb.ToString();
@@ -74,6 +84,7 @@ public class PasswordChecker : MonoBehaviour
         }
     }
 
+    // Checks if our password is correct or not after a request from OnClick event
     public void CheckPassword()
     {
         if (digitsEntered == password)
@@ -86,13 +97,23 @@ public class PasswordChecker : MonoBehaviour
         }
     }
 
+    // Handles a successful password entry
     private void OnSuccessfulPassword()
     {
-        // idk yet, probly dissolve out window and cue cutscene, shift to purple level
+        // play sound
+        PlayAudio?.Invoke(success);
+
+        // trigger some behavior in the SatelliteComputer via CorrectPassword?.Invoke()
     }
 
+    // Handles an incorrect password entry
     private void OnFailedPassword()
     {
-        // play sound, (???) clear the password completely or (???) leave it alone
+        // play sound
+        PlayAudio?.Invoke(failure);
+
+        // lock out buttons for a second (??)
+
+        // leave digits alone
     }
 }
