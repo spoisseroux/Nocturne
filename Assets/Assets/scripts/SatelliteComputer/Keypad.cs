@@ -34,6 +34,7 @@ public class Keypad : MonoBehaviour
     public void ButtonPressed(string digit)
     {
         // Play sound
+        PlayAudio?.Invoke(digitEnter);
     }
 
     public void SendNumberToPasscode(string digit)

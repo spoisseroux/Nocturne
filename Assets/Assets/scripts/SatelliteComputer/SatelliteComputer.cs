@@ -20,8 +20,16 @@ public class SatelliteComputer : MonoBehaviour
     // AudioSource object for the whole computer
     [SerializeField] AudioSource audio;
 
+    // Event to run when successful password is inputted, and necessary components
+    [SerializeField] DialogueTextPrinter printer;
+
     // Activity status
     private bool status = false;
+
+    private void Start()
+    {
+        
+    }
 
     // Activates all the GameObject children of the computer
     public void BootupComputer()
@@ -42,6 +50,9 @@ public class SatelliteComputer : MonoBehaviour
         PasswordChecker.PlayAudio += PlayAudio;
         Keypad.PlayAudio += PlayAudio;
         ControlPad.PlayAudio += PlayAudio;
+
+        // Subscribe to password Event
+        PasswordChecker.CorrectPassword += CorrectPassword;
     }
 
     // Deactivates the Computer
@@ -65,6 +76,15 @@ public class SatelliteComputer : MonoBehaviour
         ControlPad.PlayAudio -= PlayAudio;
     }
 
+    // Routine to use when a password is successfully entered
+    public void CorrectPassword()
+    {
+        // Bootdown the computer
+        BootdownComputer();
+
+        // Trigger dialogue text printer
+        printer.Print();
+    }
 
     // Plays an audio clip passed into the function
     public void PlayAudio(AudioClip clip)

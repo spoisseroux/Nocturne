@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0003202026, g: 0.00031995995, b: 0.0003202026, a: 1}
+  m_IndirectSpecularColor: {r: 0.00032089523, g: 0.0003205246, b: 0.00032089523, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &14338752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -829,8 +829,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enterButton: {fileID: 1807216539}
   deleteButton: {fileID: 1636677208}
+  exitButton: {fileID: 887634525}
   passwordTerminal: {fileID: 1439088168}
-  digitDelete: {fileID: 0}
+  digitDelete: {fileID: 8300000, guid: 46e006a0205de4d7b9f9757f887eb572, type: 3}
 --- !u!1 &68970710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &336063842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1630,7 +1631,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: a786444db51304a3d9f4aa7707f9b761, type: 3}
+  m_Texture: {fileID: 2800000, guid: 216da5e27f1fbfa48a32f6b051974463, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1663,7 +1664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &407007322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1751,7 +1752,7 @@ MonoBehaviour:
   - {fileID: 68970712}
   - {fileID: 1492522718}
   passwordTerminal: {fileID: 1439088168}
-  digitEnter: {fileID: 0}
+  digitEnter: {fileID: 8300000, guid: 46e006a0205de4d7b9f9757f887eb572, type: 3}
 --- !u!1 &420351439
 GameObject:
   m_ObjectHideFlags: 0
@@ -5861,8 +5862,8 @@ MonoBehaviour:
   digitsEntered: 192.168.1.XXX
   addIndex: 10
   deleteIndex: 9
-  success: {fileID: 0}
-  failure: {fileID: 0}
+  success: {fileID: 8300000, guid: b0941c58995a84a24a6f7ed72b186aed, type: 3}
+  failure: {fileID: 8300000, guid: d98b55f227ce54db2851a9f09308df7d, type: 3}
 --- !u!1 &1442193263
 GameObject:
   m_ObjectHideFlags: 0
@@ -7687,6 +7688,9 @@ GameObject:
   - component: {fileID: 1857666888}
   - component: {fileID: 1857666887}
   - component: {fileID: 1857666886}
+  - component: {fileID: 1857666892}
+  - component: {fileID: 1857666891}
+  - component: {fileID: 1857666893}
   m_Layer: 5
   m_Name: SatelliteComputer
   m_TagString: Untagged
@@ -7833,6 +7837,7 @@ MonoBehaviour:
   bootUp: {fileID: 8300000, guid: c7c8bbd5173654530abacdfa272e80c5, type: 3}
   bootDown: {fileID: 8300000, guid: c71cddc430fa14aacbd2e1a46ee0afad, type: 3}
   audio: {fileID: 1857666886}
+  printer: {fileID: 1857666892}
 --- !u!114 &1857666888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7894,6 +7899,122 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1857666891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857666884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114f846955f90be4a91a8f1d36061a95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnAwake: 0
+  canExit: 0
+  playerMovementScript: {fileID: 0}
+  playerCamScript: {fileID: 0}
+  videoImage: {fileID: 7810681226342616584}
+  crossfadeDissolve: {fileID: 1068063250483406101}
+  sunSprite: {fileID: 0}
+  charSprite: {fileID: 0}
+  animatorToAnimate: {fileID: 0}
+  animationName: 
+  crossfadeEnter: 1
+  crossfadeEnterOut: 1
+  crossfadeExitIn: 1
+  crossfadeExit: 1
+  sceneName: PurpleScene
+  CameraHolder: {fileID: 0}
+  Player: {fileID: 0}
+  PauseMenu: {fileID: 556030735}
+  translatePlayerTo: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  canPlayerInteract: {fileID: 0}
+  moveAroundObjectScript: {fileID: 4721801236790471648}
+  objectToPauseAnim: {fileID: 919132148356925577}
+  cardCollectedCount: {fileID: 0}
+--- !u!114 &1857666892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857666884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalTextSpeed: 0.06
+  skipTextSpeed: 0.025
+  runOnColliderEnter: 0
+  runOnce: 0
+  pages:
+  - I think I got the password right...
+  playerMovementScript: {fileID: 0}
+  playerCamScript: {fileID: 0}
+  PauseMenu: {fileID: 556030735}
+  TextBackgroundAnimationImage: {fileID: 456713209}
+  subtitleTextMesh: {fileID: 879637611}
+  textCollider: {fileID: 0}
+  beginStartDelay: 0
+  textStartDelay: 1
+  CameraHolder: {fileID: 0}
+  Player: {fileID: 0}
+  translatePlayerTo: {fileID: 0}
+  sunSprite: {fileID: 0}
+  charSprite: {fileID: 1565630441}
+  enableCharSpriteForPrint: 1
+  crossfadeDissolve: {fileID: 1068063250483406101}
+  moveAroundObjectScript: {fileID: 4721801236790471648}
+  objectToPauseAnim: {fileID: 919132148356925577}
+  printerToDisable: {fileID: 0}
+  printerToEnable: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  beginAudio: {fileID: 0}
+  isFinished: 0
+  invMenuScript: {fileID: 0}
+  playerCanInteract: {fileID: 0}
+  videoToPlay: {fileID: 1857666891}
+--- !u!328 &1857666893
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857666884}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 06d8c222a221c1e4cb3e7ece4c320f3d, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8600000, guid: aa14a44e348467a41a2ee2e1ccb9ebe0, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources:
+  - {fileID: 1857666886}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 00
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &1863237571
 GameObject:
   m_ObjectHideFlags: 0

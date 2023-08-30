@@ -104,6 +104,7 @@ public class PasswordChecker : MonoBehaviour
         PlayAudio?.Invoke(success);
 
         // trigger some behavior in the SatelliteComputer via CorrectPassword?.Invoke()
+        CorrectPassword?.Invoke();
     }
 
     // Handles an incorrect password entry

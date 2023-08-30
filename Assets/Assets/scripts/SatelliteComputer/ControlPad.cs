@@ -9,6 +9,7 @@ public class ControlPad : MonoBehaviour
     // Buttons
     [SerializeField] Button enterButton;
     [SerializeField] Button deleteButton;
+    [SerializeField] Button exitButton;
 
     // Reference to Password Terminal
     [SerializeField] GameObject passwordTerminal;
@@ -36,9 +37,9 @@ public class ControlPad : MonoBehaviour
     {
         // Delete digit
         passwordChecker.DeleteDigit();
-        Debug.Log("Deleted digit");
 
         // Play sound
+        PlayAudio?.Invoke(digitDelete);
     }
 
     public void ExitMenu()
