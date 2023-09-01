@@ -115,6 +115,5 @@ public class PasswordChecker : MonoBehaviour
 
         // lock out buttons for a second (??)
 
-        // leave digits alone
     }
 }
