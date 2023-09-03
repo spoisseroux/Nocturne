@@ -23,13 +23,16 @@ public class Bottle : ItemData
             StrangeFluid f = col.GetComponent<StrangeFluid>();
             if (f != null)
             {
-                InventoryUIManager UI = GameObject.Find("InventoryMenu").GetComponent<InventoryUIManager>();
-                UI.UpdateSlot(new InventorySlot(filledBottle, 1));
+                if (f.isActiveAndEnabled == true)
+                {
+                    InventoryUIManager UI = GameObject.Find("InventoryMenu").GetComponent<InventoryUIManager>();
+                    UI.UpdateSlot(new InventorySlot(filledBottle, 1));
 
-                // disable StrangeFluid object just in case
-                f.DisableCollectionCollider();
-    
-                return true;
+                    // disable StrangeFluid object just in case
+                    f.DisableCollectionCollider();
+
+                    return true;
+                }
             }
         }
         return false;

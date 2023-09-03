@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ecaae0d5b8b412598a55e01a4b8eea, type: 3}
   m_Name: MakeupPenRecipe
   m_EditorClassIdentifier: 
-  output: {fileID: 0}
-  item1: {fileID: 0}
-  item2: {fileID: 0}
+  output: {fileID: 11400000, guid: 4ac5598ab921e44c7b79fcc993315dd8, type: 2}
+  item1: {fileID: 11400000, guid: 15811e770b1b44beb9e976a97bb40f9a, type: 2}
+  item2: {fileID: 11400000, guid: b8dda8d344fc8452b86a95eb76f71579, type: 2}
