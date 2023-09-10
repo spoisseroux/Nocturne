@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Strange Fluid
   examineDescription: Something tells me I should not drink this...
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: 3bb4ef3e688510542b9baadd1b32d449, type: 3}
   blackoutInRecipe: 1

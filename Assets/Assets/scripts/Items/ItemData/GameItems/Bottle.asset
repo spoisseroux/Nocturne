@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Empty Bottle
   examineDescription: A dusty old bottle
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: e7560dd814274cb4ca37639a9ee08bfa, type: 3}
   blackoutInRecipe: 1
   fillBottle: {fileID: 0}
-  filledBottle: {fileID: 0}
+  filledBottle: {fileID: 11400000, guid: 44cf7defa41d24f9ba7e319643039a5e, type: 2}

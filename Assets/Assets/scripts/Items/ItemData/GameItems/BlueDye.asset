@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafff3ae3cdce405cbd541101300e234, type: 3}
   m_Name: BlueDye
   m_EditorClassIdentifier: 
-  itemName: Blue Dye
-  examineDescription: A pretty blue fit for a clown
-  inventoryIcon: {fileID: 0}
+  itemName: Dye
+  examineDescription: A pretty dye for a clown
+  inventoryIcon: {fileID: 21300000, guid: e2db483226b558d4f9c511899340548c, type: 3}
   blackoutInRecipe: 1
