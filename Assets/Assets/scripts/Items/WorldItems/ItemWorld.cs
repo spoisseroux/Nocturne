@@ -34,9 +34,21 @@ public class ItemWorld : MonoBehaviour, IItem
     // SerializeField --> TextPrefab
     // Execute the text script upon collecting, then do last two lines of Collect() functionality ??
 
+    /*
+    public void Start()
+    {
+        if (dialogueToTrigger == null)
+        {
+            Debug.Log("ItemWorld::Start() --> " + data.ToString() + " item's dialogueToTrigger is null");
+        }
+    }
+    */
+
     // Function that determines how the Item GameObject behaves upon Player collection
     public void Collect()
     {
+        Debug.Log("Attempting item collection");
+
         if (inScript == false)
         {
             inScript = true;
