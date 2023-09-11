@@ -11,40 +11,68 @@ public class newFlowerScript : MonoBehaviour
     [SerializeField] string OpenAnimName;
     [SerializeField] string ExitAnimName;
 
-    // State of the flower
+    // Current state of the flower
     [SerializeField] FlowerState currentState;
+
+    // State instances
+    public OpenState Open = new OpenState();
+    public OpeningState Opening = new OpeningState();
+    public ClosingState Closing = new ClosingState();
+    public ClosedState Closed = new ClosedState();
 
     // Start is called before the first frame update
     private void Start()
     {
+        // Set up
         boxCollider = GetComponent<BoxCollider>();
-        currentState = new ClosedState(flowerAnimator, OpenAnimName, ExitAnimName);
-        currentState.InitializeStaticStates();
+        currentState = Closed;
+        flowerAnimator.Play(ExitAnimName, 0);
+
+        // Enter the closed state
+        currentState.EnterState(this, flowerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
     }
 
     private void Update()
     {
-        if (currentState.GetNormalizedTime() == 1)
-        {
-            SwapState();
-        }
+        currentState.UpdateState(this);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        SwapState();
+        SwapState(Opening);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        SwapState();
+        SwapState(Closing);
     }
 
-    private void SwapState()
+    public void SwapState(FlowerState state)
     {
-        Debug.Log("Entered swap point");
-        float currentNormalizedTime = currentState.GetNormalizedTime();
-        FlowerState prev = currentState;
-        currentState = prev.HandleInput(prev, currentNormalizedTime);
+        // Debug Log variable
+        string past = currentState.ToString();
+
+        // Swap to a new current state
+        currentState = state;
+        // Call entry action for our new current state
+        state.EnterState(this, flowerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+        // Debug Log
+        Debug.Log("Swapped from " + past + " to " + currentState.ToString());
+    }
+
+    public void PlayOpening(float normalizedTime)
+    {
+        flowerAnimator.Play(OpenAnimName, 0, 1 - normalizedTime);
+    }
+
+    public void PlayClosing(float normalizedTime)
+    {
+        flowerAnimator.Play(ExitAnimName, 0, 1 - normalizedTime);
+    }
+
+    public float CheckAnimator()
+    {
+        return flowerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
 }

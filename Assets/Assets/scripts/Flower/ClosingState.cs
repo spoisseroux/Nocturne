@@ -4,27 +4,17 @@ using UnityEngine;
 
 public class ClosingState : FlowerState
 {
-    public ClosingState(Animator a, string o, string e) : base(a, o, e) { } 
-
-    public override void EntryAction(FlowerState prev, float normalizedTime)
+    public override void EnterState(newFlowerScript flower, float normalizedTime)
     {
-        if (prev == open)
-        {
-            flowerAnimator.Play(ExitAnimName, 0);
-        }
-        else if (prev == opening)
-        {
-            flowerAnimator.Play(OpenAnimName, 0, GetInvertedTime(normalizedTime));
-        }
+        flower.PlayClosing(normalizedTime);
     }
 
-    public override FlowerState HandleInput(FlowerState prevState, float normalizedTime)
+    public override void UpdateState(newFlowerScript flower)
     {
-        EntryAction(prevState, normalizedTime);
-        if (normalizedTime == 1)
+        // if our flower is in ClosingState and the animator has reached the end, swap to ClosedState
+        if (flower.CheckAnimator() == 1f)
         {
-            return closed;
+            flower.SwapState(flower.Closed);
         }
-        return this;
     }
 }

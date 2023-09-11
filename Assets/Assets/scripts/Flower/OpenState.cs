@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class OpenState : FlowerState
 {
-    public OpenState(Animator a, string o, string e) : base(a, o, e) { }
-
-    public override void EntryAction(FlowerState prev, float normalizedTime)
+    public override void EnterState(newFlowerScript flower, float normalizedTime)
     {
-        return;
+        // play eye animation ?
+        throw new System.NotImplementedException();
     }
 
-    public override FlowerState HandleInput(FlowerState prevState, float normalizedTime)
+    public override void UpdateState(newFlowerScript flower)
     {
-        if (prevState == this)
-        {
-            return closing;
-        }
-        return this;
+        // update eye animation every frame here?
+        throw new System.NotImplementedException();
     }
 }
