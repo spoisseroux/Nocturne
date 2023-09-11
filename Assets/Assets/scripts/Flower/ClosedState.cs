@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class ClosedState : FlowerState
 {
-    public ClosedState(Animator a, string o, string e) : base(a, o, e) { }
-
-    public override void EntryAction(FlowerState prev, float normalizedTime)
+    // no functionality, idle state
+    public override void EnterState(newFlowerScript flower, float normalizedTime)
     {
         return;
     }
 
-    public override FlowerState HandleInput(FlowerState prevState, float normalizedTime)
+    public override void UpdateState(newFlowerScript flower)
     {
-        if (prevState == this)
-        {
-            return opening;
-        }
-        return this;
+        return;
     }
 }
