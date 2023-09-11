@@ -10,6 +10,7 @@ public class UIDissolveHandler : MonoBehaviour
     private float dissolveAmount;
     [SerializeField] bool test = false;
     [SerializeField] bool fadeFromBlackOnStart = false;
+    [SerializeField] bool makeTransparentOnStart = false;
 
     void Start()
     {
@@ -18,6 +19,9 @@ public class UIDissolveHandler : MonoBehaviour
         //Fade in on awake
         if (fadeFromBlackOnStart) {
             DissolveOut();
+        }
+        if (makeTransparentOnStart) {
+            MakeTransparent();
         }
     }
 

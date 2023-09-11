@@ -12,6 +12,8 @@ public class SatelliteComputer : MonoBehaviour
     [SerializeField] GameObject passwordTerminal;
     [SerializeField] GameObject controlPad;
     [SerializeField] GameObject background;
+    private RawImageFadeManager backgroundFade;
+    private RawImageFadeManager keypadFade;
 
     // Audio for the satellite computer
     [SerializeField] AudioClip bootUp;
@@ -28,7 +30,8 @@ public class SatelliteComputer : MonoBehaviour
 
     private void Start()
     {
-        
+        backgroundFade = background.GetComponent<RawImageFadeManager>();
+        keypadFade = keypad.GetComponent<RawImageFadeManager>();
     }
 
     // Activates all the GameObject children of the computer
@@ -36,9 +39,11 @@ public class SatelliteComputer : MonoBehaviour
     {
         // Activate GameObjects
         keypad.SetActive(true);
+        keypadFade.FadeIn();
         passwordTerminal.SetActive(true);
         controlPad.SetActive(true);
         background.SetActive(true);
+        backgroundFade.FadeIn();
 
         // Update active status
         status = true;
@@ -58,6 +63,13 @@ public class SatelliteComputer : MonoBehaviour
     // Deactivates the Computer
     public void BootdownComputer()
     {
+        StartCoroutine(bootdown());
+        /*
+        // Play bootup sound
+        PlayAudio(bootDown);
+
+        keypadFade.FadeOut();
+        backgroundFade.FadeOut();
         // Activate GameObjects
         keypad.SetActive(false);
         passwordTerminal.SetActive(false);
@@ -68,7 +80,36 @@ public class SatelliteComputer : MonoBehaviour
         status = false;
 
         // Play bootup sound
+        //PlayAudio(bootDown);
+
+        // Subscribe to audio Events
+        PasswordChecker.PlayAudio -= PlayAudio;
+        Keypad.PlayAudio -= PlayAudio;
+        ControlPad.PlayAudio -= PlayAudio;
+        */
+    }
+
+    private IEnumerator bootdown() {
+        // Play bootup sound
         PlayAudio(bootDown);
+
+        keypadFade.FadeOut();
+        backgroundFade.FadeOut();
+        passwordTerminal.SetActive(false);
+        controlPad.SetActive(false);
+        while (backgroundFade.FadeOutinScript == true)
+        {
+            yield return null;
+        }
+        // Activate GameObjects
+        keypad.SetActive(false);
+        background.SetActive(false);
+
+        // Update active status
+        status = false;
+
+        // Play bootup sound
+        //PlayAudio(bootDown);
 
         // Subscribe to audio Events
         PasswordChecker.PlayAudio -= PlayAudio;
@@ -97,4 +138,5 @@ public class SatelliteComputer : MonoBehaviour
     {
         return status;
     }
+
 }

@@ -10,6 +10,9 @@ public class DialogueTextPrinter : MonoBehaviour
 
     [SerializeField] [Range(0, 0.1f)] float normalTextSpeed = 0.06f;
     [SerializeField] [Range(0, 0.05f)] float skipTextSpeed = 0.025f;
+    [SerializeField] bool repositionSentence = true;
+    [SerializeField] bool autoPlay = false;
+    [SerializeField] float autoPlayWaitPages = 5f;
     [SerializeField] bool runOnColliderEnter = false;
     [SerializeField] bool runOnce = false;
     private bool ranOnce = false;
@@ -207,7 +210,10 @@ public class DialogueTextPrinter : MonoBehaviour
             foreach (var page in pages)
             {
                 string newPage = page + "\n";
-                RepositionSentence(page);
+                if (repositionSentence) {
+                    RepositionSentence(page);
+                }
+                
                 //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
                 subtitleTextMesh.text = string.Empty;
 
@@ -219,12 +225,32 @@ public class DialogueTextPrinter : MonoBehaviour
                     yield return new WaitForSeconds(currentTextSpeed); // CHANGED FROM WaitForSecondsRealtime
 
                 }
-                yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
+                if (!autoPlay)
+                {
+                    yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
+                }
+                else {
+                    yield return new WaitForSeconds(autoPlayWaitPages);
+                }
+                
             }
 
             //Clear text on press E when finished
-            yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
-            subtitleTextMesh.text = string.Empty;
+            if (!autoPlay)
+            {
+                yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
+                subtitleTextMesh.text = string.Empty;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1f);
+                subtitleTextMesh.text = string.Empty;
+
+                //yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && (crossfadeDissolve.inScript == false));
+                //subtitleTextMesh.text = string.Empty;
+            }
+
+                
 
             if ((playerCamScript != null) && (playerMovementScript != null))
             {
