@@ -128,6 +128,11 @@ public class ImageInteract : MonoBehaviour
 
         }
 
+        if (charSprite)
+        {
+            charSprite.enabled = false;
+        }
+
         yield return new WaitForSecondsRealtime(startDelay);
 
         imageUI.color = new Color32(255, 255, 255, backgroundAlpha);
@@ -228,6 +233,10 @@ public class ImageInteract : MonoBehaviour
         if (sceneName != "")
         {
             SceneManager.LoadScene(sceneName);
+        }
+
+        if (charSprite) {
+            charSprite.enabled = true;
         }
 
         if (crossfadeExit)
