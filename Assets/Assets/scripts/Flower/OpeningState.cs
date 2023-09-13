@@ -12,7 +12,7 @@ public class OpeningState : FlowerState
     public override void UpdateState(newFlowerScript flower)
     {
         // if our flower is in OpeningState and animator is finished, swap to OpenState
-        if (flower.CheckAnimator() == 1f)
+        if (flower.CheckAnimator() > 1.5f)
         {
             flower.SwapState(flower.Open);
         }

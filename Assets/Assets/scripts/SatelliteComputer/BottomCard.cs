@@ -47,14 +47,8 @@ public class BottomCard : MonoBehaviour
         // Tell pause menu pressing Esc is for this menu
         pauseMenu.enabled = false;
 
-        // Dissolve in
-        dissolver.DissolveOut();
-
         // Pause player movement upon entering the computer
         playerMovement.isPaused = true;
-
-        // Dissolve out
-        dissolver.DissolveIn();
 
         // Set all the SatelliteComputer children GameObjects on
         computer.BootupComputer();
@@ -65,14 +59,8 @@ public class BottomCard : MonoBehaviour
         // Allow player to open Pause menu again
         pauseMenu.enabled = true;
 
-        // Dissolve in
-        dissolver.DissolveOut();
-
         // Bootdown the computer
         computer.BootdownComputer();
-
-        // Dissolve out
-        dissolver.DissolveIn();
 
         // Unpause player movement
         playerMovement.isPaused = false;

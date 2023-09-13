@@ -6,13 +6,11 @@ public class OpenState : FlowerState
 {
     public override void EnterState(newFlowerScript flower, float normalizedTime)
     {
-        // play eye animation ?
-        throw new System.NotImplementedException();
+        flower.PlayEye();
     }
 
     public override void UpdateState(newFlowerScript flower)
     {
-        // update eye animation every frame here?
-        throw new System.NotImplementedException();
+        return;
     }
 }

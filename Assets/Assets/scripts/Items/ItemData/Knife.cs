@@ -24,6 +24,8 @@ public class Knife : ItemData
             return true;
         }
 
+        // check if near Balloons
+
         // not in Tether
         return false;
     }
