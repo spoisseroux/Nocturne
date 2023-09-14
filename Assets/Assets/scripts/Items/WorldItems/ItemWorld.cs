@@ -43,8 +43,6 @@ public class ItemWorld : MonoBehaviour, IItem
     // Function that determines how the Item GameObject behaves upon Player collection
     public void Collect()
     {
-        Debug.Log("Attempting item collection");
-
         if (inScript == false)
         {
             inScript = true;

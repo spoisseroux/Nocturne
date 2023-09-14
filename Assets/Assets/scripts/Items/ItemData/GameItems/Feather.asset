@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Feather
   examineDescription: I have never even seen a bird before... except in picture books
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: aef57df9d38b65b44a94fbe52f44cf97, type: 3}
   blackoutInRecipe: 1

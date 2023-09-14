@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Knife")]
 public class Knife : ItemData
 {
+    // Tether stuff
     [SerializeField]
     public AudioClip knifeCuttingTether;
     [SerializeField]
@@ -25,6 +26,13 @@ public class Knife : ItemData
         }
 
         // check if near Balloons
+        Balloons balloons = FindBalloons(playerTransform);
+        if (balloons != null)
+        {
+            // we found Balloons
+            balloons.DestroyBalloons();
+            return true;
+        }
 
         // not in Tether
         return false;
@@ -45,6 +53,24 @@ public class Knife : ItemData
                 InventoryUIManager UI = GameObject.Find("InventoryMenu").GetComponent<InventoryUIManager>();
                 UI.UpdateSlot(new InventorySlot(tetherExample, 1));
                 return tether;
+            }
+        }
+
+        return null;
+    }
+
+    private Balloons FindBalloons(Transform player)
+    {
+        // grab all overlapping colliders
+        Collider[] colliders = Physics.OverlapSphere(player.position, 2.0f);
+
+        // go through all
+        foreach (Collider col in colliders)
+        {
+            // check if there's an ItemWorld nearby
+            if (col.TryGetComponent(out Balloons balloons))
+            {
+                return balloons;
             }
         }
 
