@@ -11,6 +11,6 @@ public class FeatherWorld : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        this.gameObject.transform.Translate(Vector3.up * Time.deltaTime, Space.World);
+        this.gameObject.transform.Translate(-1 * Vector3.up * Time.deltaTime, Space.World);
     }
 }

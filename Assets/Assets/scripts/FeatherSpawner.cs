@@ -5,7 +5,6 @@ using UnityEngine;
 public class FeatherSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject featherPrefab;
-    [SerializeField] private AudioClip feathersFalling;
 
     [SerializeField] private float Xmax;
     [SerializeField] private float Xmin;
@@ -21,8 +20,11 @@ public class FeatherSpawner : MonoBehaviour
 
     IEnumerator FeatherRoutine()
     {
-        Instantiate(featherPrefab, RandomPosition(), Random.rotation);
-        yield return new WaitForSeconds(0.3f);
+        while (true)
+        {
+            Instantiate(featherPrefab, RandomPosition(), Random.rotation);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private Vector3 RandomPosition()
