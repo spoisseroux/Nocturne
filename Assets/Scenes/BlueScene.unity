@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33583534, g: 0.33557162, b: 0.43880334, a: 1}
+  m_IndirectSpecularColor: {r: 0.42631876, g: 0.42610958, b: 0.566394, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4035,6 +4035,7 @@ GameObject:
   - component: {fileID: 615052815}
   - component: {fileID: 615052817}
   - component: {fileID: 615052816}
+  - component: {fileID: 615052818}
   m_Layer: 0
   m_Name: collectioncollider
   m_TagString: Untagged
@@ -4101,6 +4102,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sunSprite: {fileID: 1729383350}
   charSprite: {fileID: 558813924}
+--- !u!114 &615052818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615052813}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalTextSpeed: 0.06
+  skipTextSpeed: 0.025
+  repositionSentence: 1
+  autoPlay: 0
+  autoPlayWaitPages: 5
+  runOnColliderEnter: 0
+  runOnce: 1
+  pages:
+  - Where are these even coming from.... ?
+  - 
+  playerMovementScript: {fileID: 2143162375}
+  playerCamScript: {fileID: 1883079636}
+  PauseMenu: {fileID: 52391391}
+  TextBackgroundAnimationImage: {fileID: 0}
+  subtitleTextMesh: {fileID: 0}
+  textCollider: {fileID: 0}
+  beginStartDelay: 0
+  textStartDelay: 1
+  CameraHolder: {fileID: 262883002}
+  Player: {fileID: 825352402}
+  translatePlayerTo: {fileID: 0}
+  sunSprite: {fileID: 1729383350}
+  charSprite: {fileID: 558813924}
+  enableCharSpriteForPrint: 0
+  crossfadeDissolve: {fileID: 0}
+  moveAroundObjectScript: {fileID: 0}
+  objectToPauseAnim: {fileID: 0}
+  printerToDisable: {fileID: 0}
+  printerToEnable: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  beginAudio: {fileID: 0}
+  isFinished: 0
+  invMenuScript: {fileID: 2143162373}
+  playerCanInteract: {fileID: 2143162370}
+  videoToPlay: {fileID: 0}
 --- !u!1001 &634213409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28323,7 +28372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8a42d4550c10d4f7dad74bf3a90c147c, type: 2}
   amount: 1
-  dialogueToTrigger: {fileID: 0}
+  dialogueToTrigger: {fileID: 919132148280596497}
   gameObjectsToDisable: []
   gameObjectsToEnable: []
 --- !u!4 &1273555510 stripped
@@ -37747,6 +37796,7 @@ GameObject:
   - component: {fileID: 1796846674}
   - component: {fileID: 1796846675}
   - component: {fileID: 1796846676}
+  - component: {fileID: 1796846677}
   m_Layer: 0
   m_Name: FlowerTrigger
   m_TagString: Untagged
@@ -37810,18 +37860,66 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796846672}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09680468dcf21455fb7a359dd84d1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 617e57de4448546099e461969bc7d082, type: 2}
   amount: 1
-  dialogueToTrigger: {fileID: 0}
+  dialogueToTrigger: {fileID: 1796846677}
   gameObjectsToDisable:
   - {fileID: 1818908301}
   - {fileID: 1352813487}
   gameObjectsToEnable: []
+--- !u!114 &1796846677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796846672}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f337ad96ec62428fb6959d7ee6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalTextSpeed: 0.06
+  skipTextSpeed: 0.025
+  repositionSentence: 1
+  autoPlay: 0
+  autoPlayWaitPages: 5
+  runOnColliderEnter: 0
+  runOnce: 1
+  pages:
+  - I do not like how this flower is looking at me...
+  - But what the clown wants, the clown gets.
+  playerMovementScript: {fileID: 2143162375}
+  playerCamScript: {fileID: 1883079636}
+  PauseMenu: {fileID: 52391391}
+  TextBackgroundAnimationImage: {fileID: 1855719166}
+  subtitleTextMesh: {fileID: 1078379808}
+  textCollider: {fileID: 0}
+  beginStartDelay: 0
+  textStartDelay: 1
+  CameraHolder: {fileID: 262883002}
+  Player: {fileID: 825352402}
+  translatePlayerTo: {fileID: 0}
+  sunSprite: {fileID: 1729383350}
+  charSprite: {fileID: 558813924}
+  enableCharSpriteForPrint: 0
+  crossfadeDissolve: {fileID: 1325227741}
+  moveAroundObjectScript: {fileID: 0}
+  objectToPauseAnim: {fileID: 0}
+  printerToDisable: {fileID: 0}
+  printerToEnable: {fileID: 0}
+  gameObjectsToDisable: []
+  gameObjectsToEnable: []
+  beginAudio: {fileID: 0}
+  isFinished: 0
+  invMenuScript: {fileID: 2143162373}
+  playerCanInteract: {fileID: 2143162370}
+  videoToPlay: {fileID: 0}
 --- !u!1 &1818908301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c0eefb34b6f84ff4e827859cbea5e2a9, type: 3}
@@ -45046,13 +45144,14 @@ MonoBehaviour:
   runOnColliderEnter: 0
   runOnce: 1
   pages:
-  - I wonder how long this has been here...
-  - I'll take this in case it comes in handy
+  - I wonder how long this has been here.
+  - I should take this in case it comes in handy.
+  - Maybe I can fill it at the edge with some..... fluid...
   playerMovementScript: {fileID: 2143162375}
   playerCamScript: {fileID: 1883079636}
   PauseMenu: {fileID: 52391391}
-  TextBackgroundAnimationImage: {fileID: 0}
-  subtitleTextMesh: {fileID: 0}
+  TextBackgroundAnimationImage: {fileID: 1855719166}
+  subtitleTextMesh: {fileID: 1078379808}
   textCollider: {fileID: 0}
   beginStartDelay: 0
   textStartDelay: 1
@@ -45062,7 +45161,7 @@ MonoBehaviour:
   sunSprite: {fileID: 1729383350}
   charSprite: {fileID: 558813924}
   enableCharSpriteForPrint: 0
-  crossfadeDissolve: {fileID: 0}
+  crossfadeDissolve: {fileID: 1325227741}
   moveAroundObjectScript: {fileID: 0}
   objectToPauseAnim: {fileID: 0}
   printerToDisable: {fileID: 0}

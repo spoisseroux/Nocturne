@@ -11,6 +11,12 @@ public class Balloons : MonoBehaviour
     // Sprites for UI overlay
     [SerializeField] Image sunSprite; //optional
     [SerializeField] Image charSprite; //optional
+    // Disable these
+    [SerializeField] GameObject[] gameObjectsToDisable;
+    // Printer to play
+    [SerializeField] DialogueTextPrinter printer;
+    
+    private bool inScript = false;
 
     public void DestroyBalloons()
     {
@@ -19,7 +25,38 @@ public class Balloons : MonoBehaviour
         {
             GetComponent<AudioSource>().PlayOneShot(balloonsPopping);
         }
-        Destroy(this.gameObject);
+
+        if (inScript == false)
+        {
+            // this will always have a printer
+            inScript = true;
+
+            if (printer)
+            {
+                StartCoroutine(dialogueOnPickUp());
+            }
+        }
+    }
+
+
+    IEnumerator dialogueOnPickUp()
+    {
+        // gameobjects
+        if (gameObjectsToDisable.Length != 0)
+        {
+            for (int i = 0; i < gameObjectsToDisable.Length; i++)
+            {
+                gameObjectsToDisable[i].SetActive(false);
+            }
+        }
+        // printer
+        printer.enabled = true;
+        yield return StartCoroutine(printer.PrintDialogue());
+        printer.enabled = false;
+
+        // exit
+        inScript = false;
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
