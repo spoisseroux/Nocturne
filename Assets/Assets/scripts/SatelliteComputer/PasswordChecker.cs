@@ -16,7 +16,7 @@ public class PasswordChecker : MonoBehaviour
     [SerializeField] private string digitsEntered;
 
     // Tracking our current digit
-    [SerializeField] private int addIndex = 10;
+    [SerializeField] private int addIndex = 9;
     [SerializeField] private int deleteIndex = 9;
 
     // AudioClips
@@ -47,7 +47,7 @@ public class PasswordChecker : MonoBehaviour
     public void DeleteDigit()
     {
         // delete digit
-        if (deleteIndex >= 10)
+        if (deleteIndex >= 9)
         {
             // rewriting string (strings are immutable in c# ???)
             StringBuilder sb = new StringBuilder(digitsEntered);
@@ -58,6 +58,15 @@ public class PasswordChecker : MonoBehaviour
             // move down our currentIndex pointer
             deleteIndex--;
             addIndex--;
+            if (deleteIndex == 10)
+            {
+                deleteIndex--;
+                addIndex = 11;
+            }
+            else if (addIndex == 10)
+            {
+                addIndex = 9;
+            }
 
             // update our password text
             passwordDisplay.text = digitsEntered;
@@ -77,7 +86,15 @@ public class PasswordChecker : MonoBehaviour
 
             // move up our currentIndex pointer
             addIndex++;
-            deleteIndex++;
+            if (addIndex == 10)
+            {
+                addIndex = 11;
+                deleteIndex = 9;
+            }
+            else if (addIndex >= 12)
+            {
+                deleteIndex = addIndex - 1;
+            }
 
             // update our password text
             passwordDisplay.text = digitsEntered;
