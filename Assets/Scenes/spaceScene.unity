@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.8630271, g: 1.8631213, b: 1.8630271, a: 1}
+  m_IndirectSpecularColor: {r: 1.897702, g: 1.8976848, b: 1.897702, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -626,7 +626,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12712760}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 90ae3bfc3688d82499e4c88dad6de55f, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: e91384102cfc86e41b73e93bd3e01919, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -6438,7 +6438,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520050339}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 5f58f62e0cf268e4f9437263440382ed, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 90c20ea7f7e7f234f9702af77ec7fe79, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -7935,7 +7935,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857666884}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 329175286f4b52f43881967848f7822d, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c1eea378079da304292f4ce4eae1cd23, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -9574,7 +9574,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078558412}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9e2c6cf927f92084b8ba5724144577f9, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: fbae0902ff9cb714fbd9f27c0d3608e7, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -12188,7 +12188,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4721801236790471647}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: cc51528b998530945b165b5fc4a80162, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 92aebbfd2e465794984cb86fbc2a778a, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 4721801236790471645}
