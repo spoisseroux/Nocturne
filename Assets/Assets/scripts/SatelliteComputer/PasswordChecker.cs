@@ -15,9 +15,10 @@ public class PasswordChecker : MonoBehaviour
     [SerializeField] private string password;
     [SerializeField] private string digitsEntered;
 
-    // Tracking our current digit
+    // Tracking our current digit, and hashmap
     [SerializeField] private int addIndex = 9;
     [SerializeField] private int deleteIndex = 9;
+    private Dictionary<int, char> charMap = new Dictionary<int, char>();
 
     // AudioClips
     [SerializeField] AudioClip success;
@@ -41,31 +42,36 @@ public class PasswordChecker : MonoBehaviour
             Debug.Log("PasswordChecker::Start() --> passwordDisplay variable is null");
         }
         passwordDisplay.text = digitsEntered;
+
+        // set up hashmap
+        charMap[8] = '#';
+        charMap[10] = '?';
+        charMap[11] = '!';
     }
 
     // Deletes a digit from the password, and reflects this in both the backend and frontend, triggered by an OnClick
     public void DeleteDigit()
     {
         // delete digit
-        if (deleteIndex >= 9)
+        if (deleteIndex >= 8)
         {
             // rewriting string (strings are immutable in c# ???)
             StringBuilder sb = new StringBuilder(digitsEntered);
-            sb[deleteIndex] = 'X'; // needs to be char
+            sb[deleteIndex] = charMap[deleteIndex];
             digitsEntered = sb.ToString();
             Debug.Log(digitsEntered);
 
             // move down our currentIndex pointer
             deleteIndex--;
             addIndex--;
-            if (deleteIndex == 10)
+            if (deleteIndex == 9)
             {
                 deleteIndex--;
-                addIndex = 11;
+                addIndex = 10;
             }
-            else if (addIndex == 10)
+            else if (addIndex == 9)
             {
-                addIndex = 9;
+                addIndex = 8;
             }
 
             // update our password text
@@ -77,7 +83,7 @@ public class PasswordChecker : MonoBehaviour
     public void AddDigit(char digit)
     {
         // add digit
-        if (addIndex < 13)
+        if (addIndex < 12)
         {
             // Rrwrite our string using StringBuilder
             StringBuilder sb = new StringBuilder(digitsEntered);
@@ -86,12 +92,12 @@ public class PasswordChecker : MonoBehaviour
 
             // move up our currentIndex pointer
             addIndex++;
-            if (addIndex == 10)
+            if (addIndex == 9)
             {
-                addIndex = 11;
-                deleteIndex = 9;
+                addIndex = 10;
+                deleteIndex = 8;
             }
-            else if (addIndex >= 12)
+            else if (addIndex >= 11)
             {
                 deleteIndex = addIndex - 1;
             }
