@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.8785038, g: 1.8784684, b: 1.8785038, a: 1}
+  m_IndirectSpecularColor: {r: 1.8769798, g: 1.8770866, b: 1.8769798, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4907,7 +4907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInOnStart: 1
   audioSource: {fileID: 1293447123}
-  FadeOutTime: 2
+  FadeOutTime: 11
   FadeInTime: 4
   FadeInToVolume: 0.215
 --- !u!1 &1316880051
@@ -6570,7 +6570,7 @@ RectTransform:
   m_GameObject: {fileID: 1565630438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.830691, y: 6.830691, z: 6.830691}
+  m_LocalScale: {x: 3.8124137, y: 3.8124137, z: 3.8124137}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7810681225131581064}
@@ -6578,7 +6578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000015258789}
+  m_AnchoredPosition: {x: -267, y: 224}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1565630440
@@ -6611,7 +6611,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565630438}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -7684,6 +7684,7 @@ MonoBehaviour:
   passwordTerminal: {fileID: 1439088168}
   controlPad: {fileID: 14338751}
   background: {fileID: 336063841}
+  audioFadeManager: {fileID: 1293447125}
   bootUp: {fileID: 8300000, guid: c7c8bbd5173654530abacdfa272e80c5, type: 3}
   bootDown: {fileID: 8300000, guid: c71cddc430fa14aacbd2e1a46ee0afad, type: 3}
   audio: {fileID: 1857666886}
@@ -7856,13 +7857,13 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 0
+  m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 1857666886}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
-  m_EnabledAudioTracks: 00
+  m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
