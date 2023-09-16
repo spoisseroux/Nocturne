@@ -11,13 +11,7 @@ using System;
  * as all combination work is completed within the Inventory UI Manager.
  * 
  * At the moment, the system only supports combinations involving 2 different instances of ItemData. 
- * 3 instances introduces many more cases and checks, which for the scope of the game would not be work implementing.
- * 
- * TODO:
- * 1) Make Recipes scriptable objects
- * 2) Figure out how to load in the list of recipes into this class
- * 3) Test functionality
- * 
+ * 3 instances introduces many more cases and checks, which for the scope of the game would not be worth implementing.
  */
 
 public class CombineSystem
@@ -31,7 +25,9 @@ public class CombineSystem
         // Full list of all the recipe names to be loaded
         List<string> recipeNames = new List<string>()
         {
-            "BatteryRecipe"
+            "BatteryRecipe",
+            "BlueDyeRecipe",
+            "MakeupPenRecipe"
         };
 
         // Create and populate the list of Recipes

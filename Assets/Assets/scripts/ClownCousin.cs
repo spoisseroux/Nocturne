@@ -6,6 +6,12 @@ public class ClownCousin : MonoBehaviour
 {
     [SerializeField] DialogueTextPrinter printer;
 
+    // dialogue text printer strings
+    [SerializeField] private List<string> noItems;
+    [SerializeField] private List<string> needsPen;
+    [SerializeField] private List<string> needsDye;
+    [SerializeField] private List<string> hasBoth;
+
     // flags
     private bool hasDye = false;
     private bool hasPen = false;
@@ -19,10 +25,7 @@ public class ClownCousin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hasDye && hasPen)
-        {
-            // trigger a Dialogue, MAY BE AN ISSUE DOING THIS HERE WHILE THE ITEMUSE BLACKOUT ROUTINE GOES
-        }
+        
     }
 
     public void GiveDye()
@@ -32,6 +35,11 @@ public class ClownCousin : MonoBehaviour
         if (!hasPen)
         {
             // rewrite DialogueTextPrinter pages
+            printer.SetPages(needsPen);
+        }
+        else
+        {
+            printer.SetPages(hasBoth);
         }
     }
 
@@ -42,6 +50,11 @@ public class ClownCousin : MonoBehaviour
         if (!hasDye)
         {
             // rewrite DialogueTextPrinter pages
+            printer.SetPages(needsDye);
+        }
+        else
+        {
+            printer.SetPages(hasBoth);
         }
     }
 }
