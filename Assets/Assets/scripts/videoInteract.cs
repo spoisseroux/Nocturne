@@ -297,10 +297,7 @@ public class videoInteract : MonoBehaviour
         }
 
 
-        //go to next scene
-        if (sceneName != "") {
-            SceneManager.LoadScene(sceneName);
-        }
+
 
         //translate to gameobject
         if ((translatePlayerTo != null) && (CameraHolder != null) && (Player != null))
@@ -346,6 +343,13 @@ public class videoInteract : MonoBehaviour
         {
             cardCollectedCount.collectedCards += 1;
             cardCollectOnce = true;
+        }
+
+        //go to next scene
+        if (sceneName != "")
+        {
+            crossfadeDissolve.MakeSolid();
+            SceneManager.LoadScene(sceneName);
         }
 
     }
