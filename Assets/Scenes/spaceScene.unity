@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.8983235, g: 1.8984407, b: 1.8983235, a: 1}
+  m_IndirectSpecularColor: {r: 1.9288056, g: 1.9287729, b: 1.9288056, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4907,7 +4907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInOnStart: 1
   audioSource: {fileID: 1293447123}
-  FadeOutTime: 2
+  FadeOutTime: 11
   FadeInTime: 4
   FadeInToVolume: 0.215
 --- !u!1 &1316880051
@@ -5712,6 +5712,95 @@ Transform:
   m_Father: {fileID: 543450652358251059}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 24.28, y: -133.821, z: 20.799}
+--- !u!1 &1466675385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466675386}
+  - component: {fileID: 1466675389}
+  - component: {fileID: 1466675388}
+  - component: {fileID: 1466675387}
+  m_Layer: 5
+  m_Name: BlackScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1466675386
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466675385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.3628125, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7810681225131581064}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00001680851, y: 0.000012397766}
+  m_SizeDelta: {x: 1234, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1466675387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466675385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd404aeeace8c804a9a9f6ff22cd576a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 1466675388}
+  x: 0.01
+  y: 0
+--- !u!114 &1466675388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466675385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1466675389
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466675385}
+  m_CullTransparentMesh: 1
 --- !u!1 &1478264364
 GameObject:
   m_ObjectHideFlags: 0
@@ -6570,7 +6659,7 @@ RectTransform:
   m_GameObject: {fileID: 1565630438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.830691, y: 6.830691, z: 6.830691}
+  m_LocalScale: {x: 3.8124137, y: 3.8124137, z: 3.8124137}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7810681225131581064}
@@ -6578,7 +6667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000015258789}
+  m_AnchoredPosition: {x: -267, y: 224}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1565630440
@@ -6611,7 +6700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565630438}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -7684,6 +7773,7 @@ MonoBehaviour:
   passwordTerminal: {fileID: 1439088168}
   controlPad: {fileID: 14338751}
   background: {fileID: 336063841}
+  audioFadeManager: {fileID: 1293447125}
   bootUp: {fileID: 8300000, guid: c7c8bbd5173654530abacdfa272e80c5, type: 3}
   bootDown: {fileID: 8300000, guid: c71cddc430fa14aacbd2e1a46ee0afad, type: 3}
   audio: {fileID: 1857666886}
@@ -7772,16 +7862,17 @@ MonoBehaviour:
   animatorToAnimate: {fileID: 0}
   animationName: 
   crossfadeEnter: 1
-  crossfadeEnterOut: 1
+  crossfadeEnterOut: 0
   crossfadeExitIn: 1
-  crossfadeExit: 1
+  crossfadeExit: 0
   sceneName: PurpleScene
   CameraHolder: {fileID: 0}
   Player: {fileID: 0}
   PauseMenu: {fileID: 556030735}
   translatePlayerTo: {fileID: 0}
   gameObjectsToDisable: []
-  gameObjectsToEnable: []
+  gameObjectsToEnable:
+  - {fileID: 1466675385}
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
@@ -7800,16 +7891,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalTextSpeed: 0.06
   skipTextSpeed: 0.025
-  repositionSentence: 1
+  repositionSentence: 0
   autoPlay: 0
   autoPlayWaitPages: 5
   runOnColliderEnter: 0
   runOnce: 0
   pages:
   - It says it was a distress signal...
-  - From the moon?????
-  - It can't be as bad as they said it is
-  - I should go check...
+  - FROM THE MOON?
+  - Moon clowns can't be as bad as they say.
+  - Why even send them there anyways...?
   playerMovementScript: {fileID: 0}
   playerCamScript: {fileID: 0}
   PauseMenu: {fileID: 556030735}
@@ -7856,17 +7947,17 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 0
+  m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 1857666886}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
-  m_EnabledAudioTracks: 00
+  m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
+  m_SkipOnDrop: 0
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
@@ -13073,6 +13164,7 @@ RectTransform:
   - {fileID: 1045570026716065018}
   - {fileID: 556030736}
   - {fileID: 1857666885}
+  - {fileID: 1466675386}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

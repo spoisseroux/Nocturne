@@ -11,16 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/spaceScene.unity
     guid: 78c3f27e6f2ae6147aa6b2a5745b9de9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RedScene.unity
     guid: 3198e02e65e138940b6d08efeaca5835
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BlueScene.unity
     guid: 4888e4490520ba04cb4966d02069e13a
   - enabled: 1
     path: Assets/Scenes/PurpleScene.unity
     guid: 0679e417eb6d34941b4e5f881ca1d9b5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SewerScene.unity
     guid: 9da52f1419f5aa0488cf93f1cc0fb986
   m_configObjects:

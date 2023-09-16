@@ -15,6 +15,8 @@ public class SatelliteComputer : MonoBehaviour
     private RawImageFadeManager backgroundFade;
     private RawImageFadeManager keypadFade;
 
+    [SerializeField] AudioFadeManager audioFadeManager;
+
     // Audio for the satellite computer
     [SerializeField] AudioClip bootUp;
     [SerializeField] AudioClip bootDown;
@@ -125,6 +127,9 @@ public class SatelliteComputer : MonoBehaviour
 
         // Trigger dialogue text printer
         printer.Print();
+
+        //fade out audio
+        audioFadeManager.FadeOut();
     }
 
     // Plays an audio clip passed into the function
