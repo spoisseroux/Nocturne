@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class startMenuScript : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class startMenuScript : MonoBehaviour
     private bool done = false;
     [SerializeField] string sceneName;
     [SerializeField] AudioFadeManager audioFadeManager;
+    [SerializeField] GameObject settingsButton;
+    [SerializeField] VideoPlayer videoPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +38,9 @@ public class startMenuScript : MonoBehaviour
                 done = true;
                 videoGO.SetActive(false);
                 audioFadeManager.FadeOut();
+                settingsButton.SetActive(false);
+                videoPlayer.Stop();
+                videoPlayer.targetTexture.Release();
                 yield return StartCoroutine(obiDissolve.StartDissolveIn());
             }
             obiScroll.y = Mathf.Lerp(minimum, maximum, time / duration);

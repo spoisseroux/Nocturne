@@ -55,7 +55,6 @@ public class videoInteract : MonoBehaviour
     [SerializeField] AllCardInteractedWith cardCollectedCount;
     private bool cardCollectOnce = false;
 
-
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -63,7 +62,7 @@ public class videoInteract : MonoBehaviour
         if (playOnAwake) {
             StartCoroutine(playVideo());
         }
-        
+
     }
 
     public void playVideoOnClick() {
@@ -176,8 +175,8 @@ public class videoInteract : MonoBehaviour
         videoImage.enabled = false;
 
         //set frame to zero, fixed retaining last frame thing
-        videoPlayer.targetTexture.Release();
         videoPlayer.Stop();
+        videoPlayer.targetTexture.Release();
         inScript = false;
 
         if (playerCamScript)
@@ -274,8 +273,9 @@ public class videoInteract : MonoBehaviour
         videoImage.enabled = false;
 
         //set frame to zero, fixed retaining last frame thing
-        videoPlayer.targetTexture.Release();
         videoPlayer.Stop();
+        videoPlayer.targetTexture.Release();
+        
         inScript = false;
 
         if (playerCamScript)
