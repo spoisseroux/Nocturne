@@ -43,6 +43,7 @@ public class videoInteract : MonoBehaviour
 
     [SerializeField] GameObject[] gameObjectsToDisable;
     [SerializeField] GameObject[] gameObjectsToEnable;
+    [SerializeField] BoxCollider boxColliderToDisable;
 
     // Telling InventoryMenu what our status is
     public static event VideoInteractionStatus InteractStatus;
@@ -54,6 +55,12 @@ public class videoInteract : MonoBehaviour
     [SerializeField] GameObject objectToPauseAnim;
     [SerializeField] AllCardInteractedWith cardCollectedCount;
     private bool cardCollectOnce = false;
+
+    private bool ranOnce = false;
+    [SerializeField]
+    private bool runsOnlyOnce = false;
+
+    [SerializeField] bool turnOffCharSpriteAfter = false;
 
     private void Awake()
     {
@@ -77,7 +84,7 @@ public class videoInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isInCollider && canPlayerInteract.CheckPlayerInteractionAvailability())
+        if (isInCollider && canPlayerInteract.CheckPlayerInteractionAvailability() && !(ranOnce))
         {
             //Make sure pause menu is not on to activate
             if (Input.GetKeyDown(KeyCode.E) && (inScript == false) && (PauseMenu.activeSelf == false) && (crossfadeDissolve.inScript == false))
@@ -223,6 +230,14 @@ public class videoInteract : MonoBehaviour
             }
         }
 
+        if (turnOffCharSpriteAfter) {
+            if (sunSprite && charSprite)
+            {
+                charSprite.enabled = false;
+                sunSprite.enabled = true;
+            }
+        }
+
         //play naimation if added
         if ((animatorToAnimate != null) && (animationName != null))
         {
@@ -247,6 +262,10 @@ public class videoInteract : MonoBehaviour
 
         }
 
+        if (runsOnlyOnce)
+        {
+            ranOnce = true;
+        }
         InteractStatus?.Invoke(false);
 
         //NEW TO FIX BUG
@@ -256,6 +275,11 @@ public class videoInteract : MonoBehaviour
         {
             cardCollectedCount.collectedCards += 1;
             cardCollectOnce = true;
+        }
+
+        if (boxColliderToDisable)
+        {
+            boxColliderToDisable.enabled = false;
         }
 
 
@@ -311,7 +335,6 @@ public class videoInteract : MonoBehaviour
 
         }
 
-
         if (gameObjectsToDisable.Length != 0)
         {
             for (int i = 0; i < gameObjectsToDisable.Length; i++)
@@ -328,6 +351,15 @@ public class videoInteract : MonoBehaviour
             }
         }
 
+        if (turnOffCharSpriteAfter)
+        {
+            if (sunSprite && charSprite)
+            {
+                charSprite.enabled = false;
+                sunSprite.enabled = true;
+            }
+        }
+
         //play naimation if added
         if ((animatorToAnimate != null) && (animationName != null))
         {
@@ -337,6 +369,11 @@ public class videoInteract : MonoBehaviour
         if (crossfadeExit)
         {
             StartCoroutine(exitingCrossfadeWithoutE());
+        }
+
+        if (runsOnlyOnce)
+        {
+            ranOnce = true;
         }
 
         if ((cardCollectOnce == false) && (cardCollectedCount))
@@ -350,6 +387,11 @@ public class videoInteract : MonoBehaviour
         {
             crossfadeDissolve.MakeSolid();
             SceneManager.LoadScene(sceneName);
+        }
+
+        if (boxColliderToDisable)
+        {
+            boxColliderToDisable.enabled = false;
         }
 
     }
