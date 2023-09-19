@@ -8,6 +8,7 @@ public class ClownCousin : MonoBehaviour
     [SerializeField] DialogueTextPrinter printer;
 
     // dialogue text printer strings
+    [SerializeField] private List<string> firstDialogue;
     [SerializeField] private List<string> noItems;
     [SerializeField] private List<string> needsPen;
     [SerializeField] private List<string> needsDye;
@@ -24,13 +25,12 @@ public class ClownCousin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        printer.SetPages(noItems);
+        printer.SetPages(firstDialogue);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MovePastFirstDialogue()
     {
-        
+        printer.SetPages(noItems);
     }
 
     public void GiveDye()
@@ -70,5 +70,11 @@ public class ClownCousin : MonoBehaviour
     public void Print()
     {
         printer.Print();
+    }
+
+    // Trigger the end of the game
+    public void TriggerEndingVideo()
+    {
+        Apply?.Invoke();
     }
 }

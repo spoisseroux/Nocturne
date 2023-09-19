@@ -7,8 +7,6 @@ public class Knife : ItemData
 {
     // Tether stuff
     [SerializeField]
-    public AudioClip knifeCuttingTether;
-    [SerializeField]
     public ItemData tetherExample;
 
     public override bool Use()

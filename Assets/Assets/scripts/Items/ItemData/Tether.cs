@@ -5,15 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Tether")]
 public class Tether : ItemData
 {
-    [SerializeField]
-    GameObject CameraHolder;
-    [SerializeField]
-    GameObject Player;
-    [SerializeField]
-    public Vector3 spawnLocation;
-    [SerializeField]
-    Transform translatePlayerTo;
-
     public override bool Use()
     {
         // move player to spawn location

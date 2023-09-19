@@ -7,6 +7,8 @@ public class TetherCollector : MonoBehaviour
     [SerializeField] GameObject[] gameObjectsToDisable;
     [SerializeField] GameObject[] gameObjectsToEnable;
 
+    [SerializeField] AudioClip knifeCuttingTether;
+
     private void Start()
     {
 
@@ -15,6 +17,7 @@ public class TetherCollector : MonoBehaviour
     // Knife has been used successfully, destroy the Tether and enable the Boat interaction
     public void DestroyTether()
     {
+        GetComponent<AudioSource>().PlayOneShot(knifeCuttingTether);
 
         if (gameObjectsToDisable.Length != 0)
         {

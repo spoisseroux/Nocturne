@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39044446, g: 0.39024374, b: 0.51649165, a: 1}
+  m_IndirectSpecularColor: {r: 0.39032507, g: 0.39009246, b: 0.5164969, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -169,7 +169,7 @@ AudioSource:
   m_GameObject: {fileID: 22771538}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7ccbd22a4294fad46811410d5cc80ec1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.33
@@ -2880,7 +2880,7 @@ AudioSource:
   m_GameObject: {fileID: 410207815}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8c2e0f20e677b2842a0594354fd47a00, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.533
@@ -3168,7 +3168,7 @@ AudioSource:
   m_GameObject: {fileID: 419783587}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
   m_audioClip: {fileID: 8300000, guid: a4e3e2a67bf9d49748ba4fa84bfc79e0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4953,7 +4953,7 @@ AudioSource:
   m_GameObject: {fileID: 769751605}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -44504,6 +44504,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.724
       objectReference: {fileID: 0}
+    - target: {fileID: 8940842847584370101, guid: 1fd2648a7e060004ba6a0b70d9e91dd5, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
     - target: {fileID: 8940842847584370110, guid: 1fd2648a7e060004ba6a0b70d9e91dd5, type: 3}
       propertyPath: m_Name
       value: lantern
@@ -44551,7 +44555,7 @@ AudioSource:
   m_GameObject: {fileID: 2103031021}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 818db5e69d95e9b40b0bf08c2be8e867, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.341
@@ -45879,6 +45883,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6490616820501235892, guid: ca7271d7733b146468b8309eef55dcfe, type: 3}
   m_PrefabInstance: {fileID: 8021419616614032532}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4470196003604510372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4470196003604510362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8413b7ed3c64ddaabb03d90f74068c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  printer: {fileID: 0}
+  firstDialogue:
+  - You have found your way to me... quite quickly I might add.
+  - How does it feel to be free?
+  - Right on time too... I can see your horns.
+  - Who am I? I'm not surprised you don't know.
+  - I am your cousin, actually...
+  - But enough with the sad stuff, I need your help.
+  - Please help me reapply my makeup, it has been so long since the last time...
+  noItems:
+  - Some dye and a makeup pen will do, please help me be a real clown.
+  needsPen:
+  - The dye... thank you. All I need is an applier.
+  needsDye:
+  - The pen... thank you. Now I just need some dye.
+  hasBoth:
+  - Thank you, little jester... you have no idea what you have done.
 --- !u!1001 &4596049018676631842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45942,6 +45975,10 @@ PrefabInstance:
       propertyPath: playerMovementScript
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4596049019126763363, guid: fb39d2faed0274c4986acdc8f26a404a, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb39d2faed0274c4986acdc8f26a404a, type: 3}
 --- !u!1001 &4840710839245988473
