@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.9287579, g: 1.9288707, b: 1.9287579, a: 1}
+  m_IndirectSpecularColor: {r: 1.8983536, g: 1.8984655, b: 1.8983536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -686,10 +686,13 @@ MonoBehaviour:
   translatePlayerTo: {fileID: 0}
   gameObjectsToDisable: []
   gameObjectsToEnable: []
+  boxColliderToDisable: {fileID: 0}
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
   cardCollectedCount: {fileID: 4721801236790471652}
+  runsOnlyOnce: 0
+  turnOffCharSpriteAfter: 0
 --- !u!1 &14338751
 GameObject:
   m_ObjectHideFlags: 0
@@ -4291,7 +4294,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 31e3e4d1040d54a29bb48da37847caa5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 08f116ca84163463cad29bd581ea7a69, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -5981,10 +5984,13 @@ MonoBehaviour:
   translatePlayerTo: {fileID: 0}
   gameObjectsToDisable: []
   gameObjectsToEnable: []
+  boxColliderToDisable: {fileID: 0}
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
   cardCollectedCount: {fileID: 4721801236790471652}
+  runsOnlyOnce: 0
+  turnOffCharSpriteAfter: 0
 --- !u!114 &1520050352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7192,6 +7198,7 @@ MonoBehaviour:
   passwordTerminal: {fileID: 1439088168}
   controlPad: {fileID: 14338751}
   background: {fileID: 336063841}
+  bottomCard: {fileID: 708961714}
   audioFadeManager: {fileID: 1293447125}
   bootUp: {fileID: 8300000, guid: c7c8bbd5173654530abacdfa272e80c5, type: 3}
   bootDown: {fileID: 8300000, guid: c71cddc430fa14aacbd2e1a46ee0afad, type: 3}
@@ -7269,10 +7276,13 @@ MonoBehaviour:
   gameObjectsToDisable: []
   gameObjectsToEnable:
   - {fileID: 1466675385}
+  boxColliderToDisable: {fileID: 0}
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
   cardCollectedCount: {fileID: 0}
+  runsOnlyOnce: 0
+  turnOffCharSpriteAfter: 0
 --- !u!114 &1857666892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8957,10 +8967,13 @@ MonoBehaviour:
   translatePlayerTo: {fileID: 0}
   gameObjectsToDisable: []
   gameObjectsToEnable: []
+  boxColliderToDisable: {fileID: 0}
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 4721801236790471648}
   objectToPauseAnim: {fileID: 919132148356925577}
   cardCollectedCount: {fileID: 4721801236790471652}
+  runsOnlyOnce: 0
+  turnOffCharSpriteAfter: 0
 --- !u!1 &2122635153
 GameObject:
   m_ObjectHideFlags: 0
@@ -11233,10 +11246,13 @@ MonoBehaviour:
   - {fileID: 2137072051}
   gameObjectsToEnable:
   - {fileID: 2130002111}
+  boxColliderToDisable: {fileID: 0}
   canPlayerInteract: {fileID: 0}
   moveAroundObjectScript: {fileID: 0}
   objectToPauseAnim: {fileID: 0}
   cardCollectedCount: {fileID: 0}
+  runsOnlyOnce: 0
+  turnOffCharSpriteAfter: 0
 --- !u!23 &4753987770662869439
 MeshRenderer:
   m_ObjectHideFlags: 0

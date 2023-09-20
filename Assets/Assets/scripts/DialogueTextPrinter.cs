@@ -70,6 +70,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
     private CharSpriteFadeManager charSpriteFade;
 
+
+    // One time event for clown cousin :/
+    public static event ClownCousinFirstDialogue FirstDialogue;
+    public delegate void ClownCousinFirstDialogue(bool attachedToClown);
+
     private void Start()
     {
         if (enableCharSpriteForPrint) {
@@ -297,6 +302,7 @@ public class DialogueTextPrinter : MonoBehaviour
 
             subtitleTextMesh.enabled = false;
             onFinishedPrinting?.Invoke();
+            FirstDialogue?.Invoke(TryGetComponent<ClownCousin>(out ClownCousin clown));
 
             yield return StartCoroutine(WaitAnimation());
 

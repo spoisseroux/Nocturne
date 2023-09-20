@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ClownCousin : MonoBehaviour
 {
+    // Player object (ugh)
+    [SerializeField] PlayerInteractionStatus player;
+
     // Dialogue printer
     [SerializeField] DialogueTextPrinter printer;
 
@@ -17,6 +20,9 @@ public class ClownCousin : MonoBehaviour
     // flags
     private bool hasDye = false;
     private bool hasPen = false;
+    private bool ranOnce = false;
+    private bool canTalk = true;
+    private bool isInCollider = false;
 
     // Event to trigger upon getting makeup supplies? Maybe a cutscene? Game ending dialogue?
     public static event ApplyMakeup Apply;
@@ -26,11 +32,34 @@ public class ClownCousin : MonoBehaviour
     void Start()
     {
         printer.SetPages(firstDialogue);
+        DialogueTextPrinter.FirstDialogue += MovePastFirstDialogue;
     }
 
-    public void MovePastFirstDialogue()
+    private void Update()
     {
-        printer.SetPages(noItems);
+        if (Input.GetKeyDown(KeyCode.E) && player.CheckPlayerInteractionAvailability() && canTalk && isInCollider)
+        {
+            Print();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        isInCollider = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isInCollider = false;
+    }
+
+    public void MovePastFirstDialogue(bool clownDialogue)
+    {
+        if (ranOnce == false && clownDialogue == true)
+        {
+            ranOnce = true;
+            printer.SetPages(noItems);
+        }
     }
 
     public void GiveDye()
@@ -75,6 +104,7 @@ public class ClownCousin : MonoBehaviour
     // Trigger the end of the game
     public void TriggerEndingVideo()
     {
+        canTalk = false;
         Apply?.Invoke();
     }
 }

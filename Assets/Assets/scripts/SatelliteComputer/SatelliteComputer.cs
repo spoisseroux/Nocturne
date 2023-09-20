@@ -12,6 +12,7 @@ public class SatelliteComputer : MonoBehaviour
     [SerializeField] GameObject passwordTerminal;
     [SerializeField] GameObject controlPad;
     [SerializeField] GameObject background;
+    [SerializeField] BottomCard bottomCard;
     private RawImageFadeManager backgroundFade;
     private RawImageFadeManager keypadFade;
 
@@ -109,6 +110,7 @@ public class SatelliteComputer : MonoBehaviour
 
         // Update active status
         status = false;
+        bottomCard.BootdownComputer();
 
         // Play bootup sound
         //PlayAudio(bootDown);

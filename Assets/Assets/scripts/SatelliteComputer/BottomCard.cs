@@ -48,7 +48,7 @@ public class BottomCard : MonoBehaviour
         pauseMenu.enabled = false;
 
         // Pause player movement upon entering the computer
-        playerMovement.isPaused = true;
+        //playerMovement.isPaused = true;
 
         // Set all the SatelliteComputer children GameObjects on
         computer.BootupComputer();
@@ -58,9 +58,6 @@ public class BottomCard : MonoBehaviour
     {
         // Allow player to open Pause menu again
         pauseMenu.enabled = true;
-
-        // Bootdown the computer
-        computer.BootdownComputer();
 
         // Unpause player movement
         playerMovement.isPaused = false;
