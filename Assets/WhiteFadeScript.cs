@@ -47,13 +47,13 @@ public class WhiteFadeScript : MonoBehaviour
         whiteScreen.SetActive(true);
         whiteScreenAnimator = whiteScreen.GetComponent<Animator>();
         whiteScreenAnimator.Play(animationName);
+        audioToFade.FadeOut();
         yield return new WaitForSeconds(whiteScreenAnimator.GetCurrentAnimatorStateInfo(0).length + whiteScreenAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
         //go to next scene
         if (sceneName != "")
         {
             SceneManager.LoadScene(sceneName);
         }
-        audioToFade.FadeOut();
         inScript = false;
     }
 
