@@ -48,6 +48,9 @@ public class InventoryHolder : MonoBehaviour
 
         // When the InventoryUI is closed, it will trigger via an Event the SetInventory() function
         InventoryUIManager.OnUIExit += SetInventory;
+
+        // Lighthouse special inventory update
+        ReplaceInventory.Push += SetInventory;
     }
 
     public void OnDisable()

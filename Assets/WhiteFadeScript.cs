@@ -42,6 +42,13 @@ public class WhiteFadeScript : MonoBehaviour
         }
     }
 
+
+    public void FadeToWhite()
+    {
+        StartCoroutine(playFadeToWhite());
+    }
+
+
     IEnumerator playFadeToWhite() {
         inScript = true;
         whiteScreen.SetActive(true);
