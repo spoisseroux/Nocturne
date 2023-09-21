@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.8784945, g: 1.8784591, b: 1.8784945, a: 1}
+  m_IndirectSpecularColor: {r: 1.881155, g: 1.8811214, b: 1.881155, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5367,7 +5367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passwordWindow: {fileID: 1805399432}
-  password: 192.168.5.96
+  password: 192.168.9.45
   digitsEntered: 192.168.#.?!
   addIndex: 8
   deleteIndex: 7
