@@ -12,7 +12,7 @@ public class PlayerCam : MonoBehaviour
 
     public Transform orientation;
 
-    [HideInInspector] public bool isPaused = false;
+    [SerializeField] public bool isPaused = false;
 
     float xRotation;
     float yRotation;

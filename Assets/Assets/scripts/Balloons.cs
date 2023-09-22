@@ -51,6 +51,7 @@ public class Balloons : MonoBehaviour
         }
         // printer
         printer.enabled = true;
+        yield return new WaitUntil(() => (GameObject.Find("Player").GetComponent<PlayerMovement>().isPaused == false));
         yield return StartCoroutine(printer.PrintDialogue());
         printer.enabled = false;
 

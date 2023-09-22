@@ -91,6 +91,7 @@ public class InventoryMenuScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
 
+        Debug.Log("Unpause movement from InventoryMenuScript");
         playerCamScript.isPaused = false; //pause game
         playerMovementScript.isPaused = false; //pause movement
 
@@ -120,7 +121,7 @@ public class InventoryMenuScript : MonoBehaviour
                 playerMovementScript.isPaused = false; //pause movement
                 */
                 CloseInventoryMenu();
-                InventoryStatus.Invoke(false);
+                InventoryStatus?.Invoke(false);
             }
             // Menu currently inactive, KeyCode.Tab indicates a request to open InventoryUI
             else if (!active && !inPause && !inInteraction)

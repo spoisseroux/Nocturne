@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Knife
   examineDescription: Not the kind you butter your bread with
-  inventoryIcon: {fileID: 21300000, guid: ef6d969fd95254b4597e051c6cad28fb, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: e85e77fae674b824aaac1891b6487e85, type: 3}
   blackoutInRecipe: 0
-  knifeCuttingTether: {fileID: 0}
   tetherExample: {fileID: 11400000, guid: b16410a9979bd4bc290a50f1682691c4, type: 2}

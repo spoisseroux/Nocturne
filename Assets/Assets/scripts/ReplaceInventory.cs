@@ -14,15 +14,15 @@ public class ReplaceInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("ReplaceInventory::Start() --> called");
+        //Debug.Log("ReplaceInventory::Start() --> called");
         clownHat = new InventorySlot(clownhatCopy, 1);
         replacement.Add(clownHat);
     }
 
     void OnEnable()
     {
-        Debug.Log("ReplaceInventory::OnEnable --> called");
+        //Debug.Log("ReplaceInventory::OnEnable --> called");
         Push?.Invoke(replacement);
-        Debug.Log("ReplaceInventory::OnEnable --> Pushing new inventory...");
+        //Debug.Log("ReplaceInventory::OnEnable --> Pushing new inventory...");
     }
 }

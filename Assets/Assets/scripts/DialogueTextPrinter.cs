@@ -165,6 +165,7 @@ public class DialogueTextPrinter : MonoBehaviour
         {
             inScript = true; //cant interact twice while printing
 
+            Debug.Log("Pause movement from DialogueTextPrinter");
             if ((playerCamScript != null) && (playerMovementScript != null))
             {
                 playerCamScript.isPaused = true; //pause game

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Screwdriver
   examineDescription: This could be useful for taking things apart
-  inventoryIcon: {fileID: 21300000, guid: 7455682a61b5b4ce4a1131e0ec34adea, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: 4261035026515104fb06d97e18305399, type: 3}
   blackoutInRecipe: 0

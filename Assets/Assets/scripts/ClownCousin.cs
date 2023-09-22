@@ -9,6 +9,7 @@ public class ClownCousin : MonoBehaviour
 
     // Dialogue printer
     [SerializeField] DialogueTextPrinter printer;
+    private bool inScript = false;
 
     // dialogue text printer strings
     [SerializeField] private List<string> firstDialogue;
@@ -18,8 +19,8 @@ public class ClownCousin : MonoBehaviour
     [SerializeField] private List<string> hasBoth;
 
     // flags
-    private bool hasDye = false;
-    private bool hasPen = false;
+    [SerializeField] private bool hasDye = false;
+    [SerializeField] private bool hasPen = false;
     private bool ranOnce = false;
     private bool canTalk = true;
     private bool isInCollider = false;
@@ -75,7 +76,8 @@ public class ClownCousin : MonoBehaviour
         {
             printer.SetPages(hasBoth);
         }
-        Print();
+        ranOnce = true;
+        StartCoroutine(dialogueOnPickUp());
     }
 
     public void GivePen()
@@ -91,14 +93,27 @@ public class ClownCousin : MonoBehaviour
         {
             printer.SetPages(hasBoth);
         }
-
-        Print();
+        ranOnce = true;
+        StartCoroutine(dialogueOnPickUp());
     }
 
 
     public void Print()
     {
         printer.Print();
+    }
+
+
+    IEnumerator dialogueOnPickUp()
+    {
+        // printer
+        printer.enabled = true;
+        yield return new WaitUntil(() => (GameObject.Find("Player").GetComponent<PlayerMovement>().isPaused == false));
+        yield return StartCoroutine(printer.PrintDialogue());
+        printer.enabled = false;
+
+        // exit
+        inScript = false;
     }
 
     // Trigger the end of the game

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [HideInInspector] public bool isPaused = false;
+    [SerializeField] public bool isPaused = false;
 
     [Header("Movement")]
     public float moveSpeed;
