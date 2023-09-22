@@ -192,7 +192,8 @@ public class InventoryUIManager : MonoBehaviour
     {
         // Instantiate a new UISlot, set the UI Manager as its parent, and then fill the UISlot with data
         UISlot uiSlot = Instantiate(uiSlotPrefab).GetComponent<UISlot>();
-        uiSlot.transform.SetParent(GameObject.Find("slotContainer").transform, true);
+        //uiSlot.transform.SetParent(GameObject.Find("slotContainer").transform, true);
+        uiSlot.transform.SetParent(GameObject.Find("slotContainer").transform, false);
         uiSlot.Init(newSlot);
 
         // Add to dictionary

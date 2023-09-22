@@ -45,6 +45,7 @@ public class SewerComputerPasswordScript : MonoBehaviour
       if ((isInCollider) && (colliderToBeIn) && playerCanInteract.CheckPlayerInteractionAvailability())
       {
           if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false) && (crossfade.inScript == false))
+          //if (Input.GetKeyDown(KeyCode.E) && (!passwordUI.activeSelf) && (inScript == false) && (completed == false) && (PauseMenu.activeSelf == false))
           {              
                 openMenu();
           }

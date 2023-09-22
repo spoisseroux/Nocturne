@@ -269,7 +269,8 @@ public class videoInteract : MonoBehaviour
         InteractStatus?.Invoke(false);
 
         //NEW TO FIX BUG
-        StopAllCoroutines();
+        //TODO: evaluate if this was necessary
+        //StopAllCoroutines();
 
         if ((cardCollectOnce == false) && (cardCollectedCount))
         {
@@ -368,6 +369,7 @@ public class videoInteract : MonoBehaviour
 
         if (crossfadeExit)
         {
+            crossfadeDissolve.MakeSolid();
             StartCoroutine(exitingCrossfadeWithoutE());
         }
 
@@ -409,7 +411,7 @@ public class videoInteract : MonoBehaviour
 
         crossfadeDissolve.MakeSolid();
         yield return StartCoroutine(crossfadeDissolve.StartDissolveOut());
-        StopAllCoroutines();
+        //StopAllCoroutines();
 
         // Tell InventoryMenu we are no longer in a video interact (PLACEMENT OF THIS MAY BE IFFY)
         Debug.Log("Invoking Interact Status");
