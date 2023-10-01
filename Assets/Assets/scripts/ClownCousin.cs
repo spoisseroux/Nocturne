@@ -114,6 +114,12 @@ public class ClownCousin : MonoBehaviour
 
         // exit
         inScript = false;
+
+        // may have to offload to a WaitUntil for final printer
+        if (hasDye && hasPen)
+        {
+            TriggerEndingVideo();
+        }
     }
 
     // Trigger the end of the game
