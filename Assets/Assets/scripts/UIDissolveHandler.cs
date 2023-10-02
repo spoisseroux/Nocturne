@@ -27,11 +27,13 @@ public class UIDissolveHandler : MonoBehaviour
 
     public void DissolveOut()
     {
+        MakeTransparent();
         StartCoroutine(StartDissolveOut());
     }
 
     public void DissolveIn()
     {
+        MakeSolid();
         StartCoroutine(StartDissolveIn());
     }
 

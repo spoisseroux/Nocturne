@@ -112,14 +112,14 @@ public class ClownCousin : MonoBehaviour
         yield return StartCoroutine(printer.PrintDialogue());
         printer.enabled = false;
 
-        // exit
-        inScript = false;
-
         // may have to offload to a WaitUntil for final printer
         if (hasDye && hasPen)
         {
             TriggerEndingVideo();
         }
+
+        // exit
+        inScript = false;
     }
 
     // Trigger the end of the game

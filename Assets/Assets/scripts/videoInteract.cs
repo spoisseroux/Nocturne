@@ -124,6 +124,7 @@ public class videoInteract : MonoBehaviour
         }
 
         //play video
+        Debug.Log("Enabling videoImage");
         videoImage.enabled = true;
         videoPlayer.Play();
         yield return new WaitForSeconds(0.3f);
