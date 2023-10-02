@@ -83,6 +83,13 @@ public class audioInteract : MonoBehaviour
         }
     }
 
+    public void startAudioPublic() {
+        if ((inScript == false) && (PauseMenu.activeSelf == false) && (onceBool == false) && (crossfadeDissolve.inScript == false))
+        {
+            StartCoroutine(startAudio());
+        }
+    }
+
     IEnumerator startAudio() {
         inScript = true;
 

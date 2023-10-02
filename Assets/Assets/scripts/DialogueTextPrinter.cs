@@ -68,6 +68,8 @@ public class DialogueTextPrinter : MonoBehaviour
 
     [SerializeField] videoInteract videoToPlay;
 
+    [SerializeField] audioInteract audioInteractToPlay;
+
     private CharSpriteFadeManager charSpriteFade;
 
 
@@ -353,6 +355,11 @@ public class DialogueTextPrinter : MonoBehaviour
 
             if (videoToPlay) {
                 videoToPlay.playVideoOnClick();
+            }
+
+            if (audioInteractToPlay) {
+                audioInteractToPlay.enabled = true;
+                audioInteractToPlay.startAudioPublic();
             }
 
             subtitleTextMesh.text = string.Empty;

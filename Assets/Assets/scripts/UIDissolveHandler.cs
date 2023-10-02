@@ -27,29 +27,32 @@ public class UIDissolveHandler : MonoBehaviour
 
     public void DissolveOut()
     {
-        MakeTransparent();
         StartCoroutine(StartDissolveOut());
     }
 
     public void DissolveIn()
     {
-        MakeSolid();
         StartCoroutine(StartDissolveIn());
     }
 
     public void MakeTransparent()
     {
-        img.color = new Color32(255, 255, 225, 0);
+        //img.color = new Color32(255, 255, 225, 0);
+        img.materialForRendering.SetFloat("_Dissolve", 1f);
+
     }
 
     public void MakeSolid()
     {
-        img.color = new Color32(255, 255, 225, 100);
+        //img.color = new Color32(255, 255, 225, 100);
+        img.materialForRendering.SetFloat("_Dissolve", 0f);
     }
     public IEnumerator StartDissolveOut()
     {
         img = GetComponent<Image>();
         if (inScript == false) {
+            //MakeTransparent();
+            MakeSolid();
             img.enabled = true;
             inScript = true;
             dissolveAmount = 0f;
@@ -71,9 +74,11 @@ public class UIDissolveHandler : MonoBehaviour
 
     public IEnumerator StartDissolveIn()
     {
-        //img = GetComponent<Image>();
+        img = GetComponent<Image>();
         if (inScript == false)
         {
+            //MakeSolid();
+            MakeTransparent();
             img.enabled = true;
             inScript = true;
             dissolveAmount = 1f;
