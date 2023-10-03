@@ -25,6 +25,10 @@ public class ClownCousin : MonoBehaviour
     private bool canTalk = true;
     private bool isInCollider = false;
 
+    //flower to enabled after first dialogue
+    [SerializeField] GameObject flowerToEnable;
+    [SerializeField] GameObject flowerTriggerToEnable;
+
     // Event to trigger upon getting makeup supplies? Maybe a cutscene? Game ending dialogue?
     public static event ApplyMakeup Apply;
     public delegate void ApplyMakeup();
@@ -58,6 +62,8 @@ public class ClownCousin : MonoBehaviour
     {
         if (ranOnce == false && clownDialogue == true)
         {
+            flowerToEnable.SetActive(true);
+            flowerTriggerToEnable.SetActive(true);
             ranOnce = true;
             printer.SetPages(noItems);
         }
