@@ -12,7 +12,9 @@ public class Bottle : ItemData
 
     public override bool Use()
     {
-        return GetWater(GameObject.Find("PlayerObj").transform);
+        Debug.Log("Bottle::Use() --> Using Bottle");
+        Transform playerTransform = GameObject.Find("PlayerObj").transform;
+        return GetWater(playerTransform);
     }
 
     private bool GetWater(Transform player)
@@ -23,16 +25,9 @@ public class Bottle : ItemData
             StrangeFluid f = col.GetComponent<StrangeFluid>();
             if (f != null)
             {
-                if (f.isActiveAndEnabled == true)
-                {
-                    InventoryUIManager UI = GameObject.Find("InventoryMenu").GetComponent<InventoryUIManager>();
-                    UI.UpdateSlot(new InventorySlot(filledBottle, 1));
-
-                    // disable StrangeFluid object just in case
-                    f.DisableCollectionCollider();
-
-                    return true;
-                }
+                InventoryUIManager UI = GameObject.Find("InventoryMenu").GetComponent<InventoryUIManager>();
+                UI.UpdateSlot(new InventorySlot(filledBottle, 1));
+                return true;
             }
         }
         return false;

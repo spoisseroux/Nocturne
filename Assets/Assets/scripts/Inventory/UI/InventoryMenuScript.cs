@@ -82,8 +82,10 @@ public class InventoryMenuScript : MonoBehaviour
     // Sets Inventory Menu UI inactive upon a successful use of an Item in the UI, exclusively used by Event trigger
     void ItemUsed()
     {
-        // Dissolve the 
-
+        if (inventoryMenu == null)
+        {
+            inventoryMenu = GameObject.Find("InventoryMenu");
+        }
         active = false;
         inventoryMenu.SetActive(false);
 

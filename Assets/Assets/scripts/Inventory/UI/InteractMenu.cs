@@ -9,10 +9,6 @@ using UnityEngine.UI;
  * Functions designed to be easily plugged into the on-click events module in a Button.
  * 
  * Has functionality for sending signals upon Item Use, Examine, and Combine to the UI Manager as well as the Environment 
- * 
- * 
- * 
- * 
  */
 // Instantiated upon Space button press on a UISlot in InventoryUIManager
 public class InteractMenu : MonoBehaviour
@@ -45,7 +41,7 @@ public class InteractMenu : MonoBehaviour
     void Awake()
     {
         rect = GetComponent<RectTransform>();
-
+        inventoryMenu = GetComponentInParent<InventoryUIManager>();
     }
 
     // CLEAN THIS UP LATER I GUESS
@@ -75,15 +71,21 @@ public class InteractMenu : MonoBehaviour
 
         if (correspondingSlot.item.Use())
         {
+            Debug.Log("InteractMenu::UseUISlot() --> Using Bottle");
             // check if this UISlot is to be destroyed
             if (correspondingSlot.item.blackoutInRecipe == true)
             {
+                Debug.Log("InteractMenu::UseUISlot() --> Blackout Bottle");
                 slot.BlackOut();
             }
             // send signal that interact menu is being destroyed
+            Debug.Log("InteractMenu::UseUISlot() --> Signalling to UI Manager we are exiting InteractMenu off item usage");
             inventoryMenu.InteractMenuDestroyed(true);
+            Debug.Log("InteractMenu::UseUISlot() --> Signal sent");
+
             // deactivate the menu
             this.gameObject.SetActive(false);
+            Debug.Log("InteractMenu::UseUISlot() --> InteractMenu active set False");
         }
         else
         {
