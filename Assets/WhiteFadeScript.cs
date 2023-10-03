@@ -30,7 +30,7 @@ public class WhiteFadeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (isInCollider && canPlayerInteract.CheckPlayerInteractionAvailability())
         {
             //Make sure pause menu is not on to activate
@@ -40,6 +40,7 @@ public class WhiteFadeScript : MonoBehaviour
                 StartCoroutine(playFadeToWhite());
             }
         }
+        */
     }
 
 
