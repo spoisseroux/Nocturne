@@ -44,8 +44,9 @@ public class SettingsMenu : MonoBehaviour
     public void SetVolume(float volume) {
         //Debug.Log(volume);
         //audioMixer.SetFloat("volume", volume);
-        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
-        
+        audioMixer.SetFloat("volume", volume/2);
+        //audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+
     }
 
     public void SetFullscreen(bool isFullscreen) {
