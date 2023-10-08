@@ -11,7 +11,7 @@ public class AudioFadeManager : MonoBehaviour
     [SerializeField] public float FadeInTime = 3f;
     [SerializeField] public float FadeInToVolume = 0.5f;
     private bool FadeIninScript = false;
-    private bool FadeOutinScript = false;
+    public bool FadeOutinScript = false;
     private IEnumerator fadeinRoutine;
 
     public void FadeIn() {

@@ -29,6 +29,8 @@ public class ClownCousin : MonoBehaviour
     [SerializeField] GameObject flowerToEnable;
     [SerializeField] GameObject flowerTriggerToEnable;
 
+    [SerializeField] AudioFadeManager audioFade;
+
     // Event to trigger upon getting makeup supplies? Maybe a cutscene? Game ending dialogue?
     public static event ApplyMakeup Apply;
     public delegate void ApplyMakeup();
@@ -121,6 +123,8 @@ public class ClownCousin : MonoBehaviour
         // may have to offload to a WaitUntil for final printer
         if (hasDye && hasPen)
         {
+            audioFade.FadeOut();
+            yield return new WaitUntil(() => (audioFade.FadeOutinScript == false));
             TriggerEndingVideo();
         }
 

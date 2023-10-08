@@ -55,8 +55,12 @@ public class PauseMenuScript : MonoBehaviour
         foreach (var audioSource in allAudioSources)
         {
             //IF IT IS MIXED 2D, ASSUME IT IS LEVEL AUDIO
-            if (audioSource.spatialBlend != 0f) {
-                audioSource.Pause();
+            if (audioSource != null)
+            {
+                if (audioSource.spatialBlend != 0f)
+                {
+                    audioSource.Pause();
+                }
             }
         }
     }
