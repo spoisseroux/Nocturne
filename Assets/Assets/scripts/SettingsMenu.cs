@@ -11,9 +11,21 @@ public class SettingsMenu : MonoBehaviour
     //Resolution[] resolutions;
     (int width, int height)[] resolutions;
     public Dropdown resolutionDropdown;
+    public Toggle fullscrenToggle;
 
     void Start()
     {
+        //Handle fullscren preference saved
+        
+        if (Screen.fullScreen)
+        {
+            fullscrenToggle.isOn = true;
+        }
+        if (!Screen.fullScreen) {
+            fullscrenToggle.isOn = false;
+        }
+        
+
         //resolutions = Screen.resolutions;
         resolutions = new (int width, int height)[] {(854, 480), (1024, 576), (1366, 768), (1920, 1080)};
         resolutionDropdown.ClearOptions();

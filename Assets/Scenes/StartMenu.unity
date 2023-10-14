@@ -458,6 +458,7 @@ MonoBehaviour:
   FadeOutTime: 3.5
   FadeInTime: 20
   FadeInToVolume: 0.5
+  FadeOutinScript: 0
 --- !u!82 &970687170
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2926,6 +2927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 6dada292068c5a643ad03f301f54d27c, type: 2}
   resolutionDropdown: {fileID: 6090485355952811711}
+  fullscrenToggle: {fileID: 6090485356268549680}
 --- !u!1 &6090485356863644828
 GameObject:
   m_ObjectHideFlags: 0
