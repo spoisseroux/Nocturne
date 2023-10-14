@@ -1122,6 +1122,8 @@ MonoBehaviour:
   audioFadeManager: {fileID: 970687169}
   settingsButton: {fileID: 6090485356431807591}
   videoPlayer: {fileID: 923848802}
+  cursor: {fileID: 2800000, guid: c4cb9916e3e3fcd4a8d0ebcb66801a65, type: 3}
+  positionOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1801348833
 GameObject:
   m_ObjectHideFlags: 0
