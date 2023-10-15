@@ -71,21 +71,16 @@ public class InteractMenu : MonoBehaviour
 
         if (correspondingSlot.item.Use())
         {
-            Debug.Log("InteractMenu::UseUISlot() --> Using Bottle");
             // check if this UISlot is to be destroyed
             if (correspondingSlot.item.blackoutInRecipe == true)
             {
-                Debug.Log("InteractMenu::UseUISlot() --> Blackout Bottle");
                 slot.BlackOut();
             }
             // send signal that interact menu is being destroyed
-            Debug.Log("InteractMenu::UseUISlot() --> Signalling to UI Manager we are exiting InteractMenu off item usage");
             inventoryMenu.InteractMenuDestroyed(true);
-            Debug.Log("InteractMenu::UseUISlot() --> Signal sent");
 
             // deactivate the menu
             this.gameObject.SetActive(false);
-            Debug.Log("InteractMenu::UseUISlot() --> InteractMenu active set False");
         }
         else
         {

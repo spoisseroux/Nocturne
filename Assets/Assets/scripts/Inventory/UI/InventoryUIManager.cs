@@ -63,7 +63,7 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private RectTransform slotContainer;
 
     // Activity status of the interaction menu, false by default
-    private bool interactMenuActive = false;
+    public bool interactMenuActive = false;
     // Reference to a prefab GameObject menu that appears upon selecting a given UISlot.
     // Contains optains for Examining, Using, and Combining the selected UISlot
     [SerializeField] private GameObject interactMenuObject;
@@ -396,9 +396,9 @@ public class InventoryUIManager : MonoBehaviour
     // Function to re-enable button input
     public void ReenableButtons()
     {
-        centerButton.interactable = true;
         rightButton.interactable = true;
         leftButton.interactable = true;
+        centerButton.interactable = true;
     }
 
 

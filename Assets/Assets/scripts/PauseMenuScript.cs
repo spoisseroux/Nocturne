@@ -28,13 +28,14 @@ public class PauseMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (!isPaused && !cannotPause)
+        if (Input.GetKeyDown(KeyCode.Escape) && !cannotPause) {
+            if (!isPaused)
             {
                 PauseGame();
                 PauseStatus?.Invoke(isPaused);
             }
             else {
+                Debug.Log("ESC from PauseMenuScript");
                 ResumeGame();
             }
         }
@@ -83,9 +84,12 @@ public class PauseMenuScript : MonoBehaviour
         foreach (var audioSource in allAudioSources)
         {
             //IF IT IS MIXED 2D, ASSUME IT IS LEVEL AUDIO
-            if (audioSource.spatialBlend != 0f)
+            if (audioSource != null)
             {
-                audioSource.UnPause();
+                if (audioSource.spatialBlend != 0f)
+                {
+                    audioSource.UnPause();
+                }
             }
         }
     }

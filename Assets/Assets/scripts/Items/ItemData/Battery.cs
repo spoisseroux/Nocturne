@@ -21,7 +21,7 @@ public class Battery : ItemData
         if (fusebox != null)
         {
             // do some stuff in the world ?
-            OnBatteryUse.Invoke();
+            OnBatteryUse?.Invoke();
 
             return true;
         }

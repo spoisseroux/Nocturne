@@ -110,37 +110,12 @@ public class InventoryMenuScript : MonoBehaviour
             // If the menu is currently active, then KeyCode.Tab means we are closing it
             if (active && ableToClose)
             {
-                /*
-                active = false;
-                // Tell the Inventory Manager script to rewrite its internal data so that it can be pushed to the Player's Inventory
-                inventoryManager.RewriteAllSlots();
-                inventoryMenu.SetActive(false);
-                // Lock cursor for movement
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                //unpause movement
-                playerCamScript.isPaused = false; //pause game
-                playerMovementScript.isPaused = false; //pause movement
-                */
                 CloseInventoryMenu();
                 InventoryStatus?.Invoke(false);
             }
             // Menu currently inactive, KeyCode.Tab indicates a request to open InventoryUI
             else if (!active && !inPause && !inInteraction)
             {
-                /*
-                // Set InventoryMenu GameObject active
-                active = true;
-                inventoryMenu.SetActive(true);
-                // Tell the Inventory UI Manager to construct UI Carousel
-                inventoryManager.ConstructCarousel();
-                // Unlock cursor
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                //pause movement
-                playerCamScript.isPaused = true; //pause game
-                playerMovementScript.isPaused = true; //pause movement
-                */
                 OpenInventoryMenu();
                 InventoryStatus?.Invoke(true);
             }
