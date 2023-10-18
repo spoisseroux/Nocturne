@@ -12,10 +12,13 @@ public class FeatherSpawner : MonoBehaviour
     [SerializeField] private float Zmin;
     [SerializeField] private float y;
 
+    public BoxCollider collectionBoxCollider;
+
     // Start is called before the first frame update
     void Awake()
     {
         StartCoroutine(FeatherRoutine());
+        StartCoroutine(CountToFourSecondsThenEnableBoxCollider());
     }
 
     IEnumerator FeatherRoutine()
@@ -25,6 +28,12 @@ public class FeatherSpawner : MonoBehaviour
             Instantiate(featherPrefab, RandomPosition(), Random.rotation);
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    IEnumerator CountToFourSecondsThenEnableBoxCollider()
+    {
+        yield return new WaitForSeconds(8.0f); // Wait for 4 second
+        collectionBoxCollider.enabled = true;
     }
 
     private Vector3 RandomPosition()

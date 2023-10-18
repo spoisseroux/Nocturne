@@ -8,6 +8,7 @@ public class UIDissolveHandler : MonoBehaviour
     private Image img;
     public bool inScript = false;
     private float dissolveAmount;
+    public bool forceOverlayDissolve = true;
     [SerializeField] bool test = false;
     [SerializeField] bool fadeFromBlackOnStart = false;
     [SerializeField] bool makeTransparentOnStart = false;
@@ -27,12 +28,16 @@ public class UIDissolveHandler : MonoBehaviour
 
     public void DissolveOut()
     {
+        Debug.Log("UI DISSOLVE INSCRIPT");
         StartCoroutine(StartDissolveOut());
+        Debug.Log("UI DISSOLVE OUTSCRIPT");
     }
 
     public void DissolveIn()
     {
+        Debug.Log("UI DISSOLVE INSCRIPT");
         StartCoroutine(StartDissolveIn());
+        Debug.Log("UI DISSOLVE OUTSCRIPT");
     }
 
     public void MakeTransparent()
@@ -101,6 +106,21 @@ public class UIDissolveHandler : MonoBehaviour
         {
             dissolveAmount = Mathf.PingPong(Time.time, 1.0f);
             img.materialForRendering.SetFloat("_Dissolve", dissolveAmount);
+        }
+
+        //catcg all to make sure it always fades back out
+        if ((img.materialForRendering.GetFloat("_Dissolve") == 0f) && forceOverlayDissolve)
+        {
+            //count for two seconds and if still Dissolve == 0f , fade out
+            StartCoroutine(CountToTwoSeconds());
+        }
+    }
+
+    IEnumerator CountToTwoSeconds()
+    {
+        yield return new WaitForSeconds(6.0f); // Wait for 2 second
+        if ((img.materialForRendering.GetFloat("_Dissolve") == 0f)) {
+            DissolveOut();
         }
     }
 }
